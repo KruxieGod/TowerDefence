@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -25,7 +26,6 @@ public class GameManager : MonoBehaviour
             SetTile(TypeOfTile.Wall);
         else if(Input.GetKeyDown(KeyCode.LeftShift))
             SetTile(TypeOfTile.SpawnerEnemy);
-        Debug.Log(_enemyFactory.EnemySpawners.Count);
         foreach (var spawner in _enemyFactory.EnemySpawners)
             spawner.UpdateSpawner();
     }
@@ -40,7 +40,9 @@ public class GameManager : MonoBehaviour
     private bool TryGetTile(TypeOfTile type)
     {
         var tile = _gameBoard.GetTile(_ray);
-        if (tile == null)
+        if (tile == null ||
+            Physics.OverlapBox(tile.transform.position,new Vector3(Enemy.RADIUS,Enemy.RADIUS,Enemy.RADIUS))
+                .FirstOrDefault(x => x.CompareTag("Enemy")) != null)
             return false;
         _gameBoard.SetType(tile,type == tile.Content.TileType ? TypeOfTile.Empty : type);
         return true;

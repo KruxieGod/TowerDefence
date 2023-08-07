@@ -33,7 +33,6 @@ public class Tile : MonoBehaviour,ISetterTile
                 {
                     _checkOn = (original, next) => next.IsHasPath;
                     tile._distance = int.MaxValue;
-                    tile._nextTile = null;
                     tile._isWall = true;
                 }
             },

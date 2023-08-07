@@ -11,7 +11,7 @@ public class GameBoard : MonoBehaviour
     [SerializeField] private Tile _prefabTile;
     public Vector2Int Size { get; private set; }
     private Tile[,] _board;
-    private const int POSITIONMULTIPLIER = 10;
+    public const int POSITIONMULTIPLIER = 10;
     private GameTileFactory _factory;
     private HashSet<ISetterTile> _destinations = new HashSet<ISetterTile>();
     private Func<Tile, Tile, bool> _checkOnType;
