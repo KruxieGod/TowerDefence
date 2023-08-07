@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefabEnemy: {fileID: 4420508057894298517, guid: 44ea4e5ea29a98b40b6cb93e695b8b68, type: 3}
   _waves:
-  - _waveEnemy: 000000000200000001000000010000000100000002000000
-    _recoverTimeWave: 10
-    _recoverTimeEnemies: 1
-  - _waveEnemy: 02000000020000000100000000000000
+  - _waveEnemy: 01000000010000000100000002000000
+    _recoverTimeWave: 15
+    _recoverTimeEnemies: 0.5
+  - _waveEnemy: 00000000000000000000000000000000
     _recoverTimeWave: 3
-    _recoverTimeEnemies: 0.1
+    _recoverTimeEnemies: 3
   SpeedRotation: 0.6

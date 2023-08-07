@@ -9,7 +9,6 @@ public class Enemy : MonoBehaviour
     public const float RADIUS = GameBoard.POSITIONMULTIPLIER/2;
     private GameEnemyFactory _factory;
     private Direction _previousDirection;
-    private float _timeToRotate = 0f;
     public void Initialize(BehaviourEnemy behaviour,Tile currentTile,GameEnemyFactory factory)
     {
         _previousDirection = currentTile.Direction;
@@ -37,17 +36,16 @@ public class Enemy : MonoBehaviour
         }
         
         float speedRotation = _factory.SpeedRotation/2f;
+        
         if (distance <= RADIUS / 2f)
             speedRotation *= 8f;
-        transform.rotation = Quaternion.Lerp(transform.rotation,_currentTile.Direction.GetDirection(),speedRotation*Time.deltaTime*_behaviour.Speed);
-        
+
         if (_previousDirection != _currentTile.Direction)
-            _timeToRotate = 0.5f;
+            speedRotation = 100f;
+
+        transform.position += transform.forward* _behaviour.Speed*Time.deltaTime;
         
-        if (_timeToRotate <= 0)
-            transform.position += transform.forward* _behaviour.Speed*Time.deltaTime;
-        else
-            _timeToRotate -= Time.deltaTime;
+        transform.rotation = Quaternion.Lerp(transform.rotation,_currentTile.Direction.GetDirection(),speedRotation*Time.deltaTime*_behaviour.Speed);
         _previousDirection = _currentTile.Direction;
     }
 }

@@ -35,15 +35,24 @@ public class GameManager : MonoBehaviour
         if (!TryGetTile(type)) 
             return;
         _gameBoard.PathUpdate();
+        if (_enemyFactory.CountSpawners != 0 && !_enemyFactory.EnemySpawners.All(x => x.SpawnerTile.HasPath()))
+        {
+            TryGetTile(TypeOfTile.Empty);
+            _gameBoard.PathUpdate();
+        }
     }
     
     private bool TryGetTile(TypeOfTile type)
     {
         var tile = _gameBoard.GetTile(_ray);
+        if (tile != null && tile.Content.TileType == TypeOfTile.Destination && _gameBoard.CountDestinations == 1)
+            return false;
         if (tile == null ||
             Physics.OverlapBox(tile.transform.position,new Vector3(Enemy.RADIUS,Enemy.RADIUS,Enemy.RADIUS))
-                .FirstOrDefault(x => x.CompareTag("Enemy")) != null)
+                .Any(x => x.CompareTag("Enemy")))
             return false;
+        if (tile.Content.TileType == TypeOfTile.SpawnerEnemy)
+            _enemyFactory.RemoveSpawner(tile);
         _gameBoard.SetType(tile,type == tile.Content.TileType ? TypeOfTile.Empty : type);
         return true;
     }

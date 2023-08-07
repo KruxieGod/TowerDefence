@@ -16,6 +16,13 @@ public static class EnemiesExtension
     {
         return _behaviours[enemy];
     }
+
+    public static bool HasPath(this Tile tile)
+    {
+        while (tile.NextTile != null)
+            tile = tile.NextTile;
+        return tile.Content.TileType == TypeOfTile.Destination;
+    }
 }
 
 public enum EnemyType

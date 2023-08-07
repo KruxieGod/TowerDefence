@@ -6,7 +6,7 @@ using Object = UnityEngine.Object;
 
 public class EnemySpawner
 {
-    private Tile _spawnerTile;
+    public readonly Tile SpawnerTile;
     private Enemy _prefab;
     private List<Enemy> _enemies = new List<Enemy>();
     public IReadOnlyList<Enemy> Enemies => _enemies;
@@ -25,7 +25,7 @@ public class EnemySpawner
         _moveOnEnemy = new UnityEvent();
         _waves = waves.ToList();
         _prefab = prefab;
-        _spawnerTile = spawnerTile;
+        SpawnerTile = spawnerTile;
     }
 
     public void UpdateSpawner()
@@ -49,7 +49,7 @@ public class EnemySpawner
             var enemyBehaviour = _currentWave[_currentWave.Count - _countEnemiesWave--].GetBehaviour();
             _timeToEnemy = _waves[_indexWave - 1].RecoverTimeEnemies;
             var enemy = Object.Instantiate(_prefab);
-            enemy.Initialize(enemyBehaviour,_spawnerTile,_factory);
+            enemy.Initialize(enemyBehaviour,SpawnerTile,_factory);
             _moveOnEnemy.AddListener(enemy.UpdatePos);
             _enemies.Add(enemy);
         }

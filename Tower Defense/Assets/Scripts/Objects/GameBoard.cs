@@ -16,6 +16,7 @@ public class GameBoard : MonoBehaviour
     private HashSet<ISetterTile> _destinations = new HashSet<ISetterTile>();
     private Func<Tile, Tile, bool> _checkOnType;
     private GameEnemyFactory _enemyFactory;
+    public int CountDestinations => _destinations.Count;
 
     public void Initialize(Vector2Int size,GameTileFactory factory,GameEnemyFactory enemyFactory)
     {
@@ -93,14 +94,14 @@ public class GameBoard : MonoBehaviour
 
     public void SetType(ISetterTile tileDestination,TypeOfTile type)
     {
-        var typeTile = _factory.GetContent(type);
-        typeTile.transform.parent = transform;
         if (type != TypeOfTile.Destination)
             _destinations.Remove(tileDestination);
         else
             _destinations.Add(tileDestination);
         if (type == TypeOfTile.SpawnerEnemy)
             _enemyFactory.GetEnemySpawner((Tile)tileDestination);
+        var typeTile = _factory.GetContent(type);
+        typeTile.transform.parent = transform;
         tileDestination.SetTypeTile(typeTile);
     }
 

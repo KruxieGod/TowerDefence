@@ -6,7 +6,7 @@ public class Tile : MonoBehaviour,ISetterTile
 {
     [SerializeField] private GameObject _arrow;
     public TileContent Content { get; private set; }
-    private Tile _up, _down, _right, _left,_nextTile;
+    public Tile _up, _down, _right, _left,_nextTile;
     public Tile NextTile => _nextTile;
     private int _distance = int.MaxValue;
     public bool IsHasPath => _distance != int.MaxValue;
@@ -32,6 +32,7 @@ public class Tile : MonoBehaviour,ISetterTile
             { TypeOfTile.Wall , tile =>
                 {
                     _checkOn = (original, next) => next.IsHasPath;
+                    tile._nextTile = null;
                     tile._distance = int.MaxValue;
                     tile._isWall = true;
                 }
