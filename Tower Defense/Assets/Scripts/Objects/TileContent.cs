@@ -12,5 +12,6 @@ public enum TypeOfTile
 {
     Empty,
     Destination,
-    Wall
+    Wall,
+    SpawnerEnemy
 }

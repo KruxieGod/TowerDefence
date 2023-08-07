@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Schema;
@@ -12,15 +13,19 @@ public class GameBoard : MonoBehaviour
     private Tile[,] _board;
     private const int POSITIONMULTIPLIER = 10;
     private GameTileFactory _factory;
-    
-    public void Initialize(Vector2Int size,GameTileFactory factory)
+    private HashSet<ISetterTile> _destinations = new HashSet<ISetterTile>();
+    private Func<Tile, Tile, bool> _checkOnType;
+    private GameEnemyFactory _enemyFactory;
+
+    public void Initialize(Vector2Int size,GameTileFactory factory,GameEnemyFactory enemyFactory)
     {
+        _enemyFactory = enemyFactory;
         _factory = factory;
         Size = size;
         _plane.localScale = new Vector3(Size.x, 1, Size.y);
         _board = new Tile[Size.x, Size.y];
         FillBoard();
-        SetCorrectDirectionTo(_board[(Size.x-1)/2,(Size.y-1)/2]);
+        AddDestination(_board[(Size.x-1)/2,(Size.y-1)/2]);
     }
 
     private void FillBoard()
@@ -45,7 +50,25 @@ public class GameBoard : MonoBehaviour
         }
     }
 
-    public void SetCorrectDirectionTo(ISetterTile tileDestination)
+    public void PathUpdate()
+    {
+        if (_destinations.Count == 0)
+            throw new ArgumentException("No one destination Exception");
+        ResetAllPaths();
+        foreach (var destination in _destinations)
+            SetCorrectDirectionTo(destination);
+            
+    }
+
+    public void AddDestination(ISetterTile tileDestination)
+    {
+        if (_destinations.Contains(tileDestination))
+            return;
+        _destinations.Add(tileDestination);
+        SetCorrectDirectionTo(tileDestination);
+    }
+    
+    private void SetCorrectDirectionTo(ISetterTile tileDestination)
     {
         SetType(tileDestination,TypeOfTile.Destination);
         Queue<ISetterTile> queue = new Queue<ISetterTile>();
@@ -62,10 +85,22 @@ public class GameBoard : MonoBehaviour
         }
     }
 
-    private void SetType(ISetterTile tileDestination,TypeOfTile type)
+    private void ResetAllPaths()
+    {
+        foreach (var tile in _board)
+            tile.ResetDistance();
+    }
+
+    public void SetType(ISetterTile tileDestination,TypeOfTile type)
     {
         var typeTile = _factory.GetContent(type);
         typeTile.transform.parent = transform;
+        if (type != TypeOfTile.Destination)
+            _destinations.Remove(tileDestination);
+        else
+            _destinations.Add(tileDestination);
+        if (type == TypeOfTile.SpawnerEnemy)
+            _enemyFactory.GetEnemySpawner((Tile)tileDestination);
         tileDestination.SetTypeTile(typeTile);
     }
 

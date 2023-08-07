@@ -153,6 +153,7 @@ MonoBehaviour:
   _gameBoard: {fileID: 50896280}
   _size: {x: 11, y: 11}
   _camera: {fileID: 963194227}
+  _enemyFactory: {fileID: 11400000, guid: 3ea81be6d1e49144da4f9e0a498e165b, type: 2}
 --- !u!4 &37892555
 Transform:
   m_ObjectHideFlags: 0
@@ -162,7 +163,7 @@ Transform:
   m_GameObject: {fileID: 37892553}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.3044806, y: 8.645913, z: -0.34024116}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
