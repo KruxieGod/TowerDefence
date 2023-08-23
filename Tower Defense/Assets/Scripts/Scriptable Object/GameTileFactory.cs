@@ -9,20 +9,25 @@ public class GameTileFactory : ScriptableObject
     [SerializeField] private TileContent _destinationPrefab;
     [SerializeField] private TileContent _emptyPrefab;
     [SerializeField] private TileContent _wallPrefab;
-    [SerializeField] private TileContent _spawnerEnemyPrefab;
+    [SerializeField] private EnemySpawner _spawnerEnemyPrefab;
+    private GameEnemyFactory _enemyFactory;
+    private Dictionary<TypeOfTile, Func<TileContent>> _prefabs;
 
-    private Dictionary<TypeOfTile, TileContent> _prefabs = new Dictionary<TypeOfTile, TileContent>();
+    public void Initialize(GameEnemyFactory enemyFactory) => _enemyFactory = enemyFactory;
 
     private void OnEnable()
     {
-        _prefabs.Add(TypeOfTile.Destination,_destinationPrefab);
-        _prefabs.Add(TypeOfTile.Empty,_emptyPrefab);
-        _prefabs.Add(TypeOfTile.Wall,_wallPrefab);
-        _prefabs.Add(TypeOfTile.SpawnerEnemy,_spawnerEnemyPrefab);
+        _prefabs = new()
+        {
+            { TypeOfTile.Destination, () => Instantiate(_destinationPrefab) },
+            { TypeOfTile.Empty, () => Instantiate(_emptyPrefab) },
+            { TypeOfTile.Wall, () => Instantiate(_wallPrefab) },
+            { TypeOfTile.SpawnerEnemy, () => _enemyFactory.GetEnemySpawner(_spawnerEnemyPrefab) }
+        };
     }
 
     public TileContent GetContent(TypeOfTile typeOfTile)
     {
-        return Instantiate(_prefabs[typeOfTile]);
+        return _prefabs[typeOfTile]?.Invoke();
     }
 }

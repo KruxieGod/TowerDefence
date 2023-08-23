@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,31 +7,41 @@ using UnityEngine;
 public class GameEnemyFactory : ScriptableObject
 {
     [SerializeField] private Enemy _prefabEnemy;
-    private Dictionary<Tile, EnemySpawner> _dataSpawners = new Dictionary<Tile, EnemySpawner>();
+    private HashSet<EnemySpawner> _dataSpawners = new HashSet<EnemySpawner>();
     public int CountSpawners => _dataSpawners.Count;
+    [SerializeField] private LayerMask _layerFloor;
+    public LayerMask LayerFloor => _layerFloor;
+
     public IEnumerable<EnemySpawner> EnemySpawners
     {
         get
         {
             foreach (var spawner in _dataSpawners)
-                yield return spawner.Value;
+                yield return spawner;
         }
     }
 
     [SerializeField] private List<Wave> _waves;
     public float SpeedRotation;
 
-    public EnemySpawner GetEnemySpawner(Tile enemySpawnerTile)
+    public bool CanRemoveSpawner(Tile tile)
     {
-        if (_dataSpawners.ContainsKey(enemySpawnerTile))
-            return _dataSpawners[enemySpawnerTile];
-        var enemySpawner = new EnemySpawner(enemySpawnerTile,_prefabEnemy,_waves,this);
-        _dataSpawners.Add(enemySpawnerTile,enemySpawner);
+        return tile.Content.IsEnded;
+    }
+
+    public void RemoveSpawner(EnemySpawner spawner) => _dataSpawners.Remove(spawner);
+
+    public EnemySpawner GetEnemySpawner(EnemySpawner prefab)
+    {
+        if (_dataSpawners.TryGetValue(prefab, out var spawner))
+            return spawner;
+        var enemySpawner = Instantiate(prefab).InitializeWave(_prefabEnemy,_waves,this);
+        _dataSpawners.Add(enemySpawner);
         return enemySpawner;
     }
 
-    public void RemoveSpawner(Tile spawner)
+    public void ResetSpawners()
     {
-        _dataSpawners.Remove(spawner);
+        _dataSpawners.Clear();
     }
 }

@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
+[SelectionBase]
 public class Enemy : MonoBehaviour
 {
     private BehaviourEnemy _behaviour;
@@ -9,8 +12,11 @@ public class Enemy : MonoBehaviour
     public const float RADIUS = GameBoard.POSITIONMULTIPLIER/2;
     private GameEnemyFactory _factory;
     private Direction _previousDirection;
-    public void Initialize(BehaviourEnemy behaviour,Tile currentTile,GameEnemyFactory factory)
+    private const float _distance = 1f;
+    private Action<Enemy> _onDestroy;
+    public void Initialize(BehaviourEnemy behaviour,Tile currentTile,GameEnemyFactory factory,Action<Enemy> onDestroy)
     {
+        _onDestroy = onDestroy;
         _previousDirection = currentTile.Direction;
         _factory = factory;
         transform.position = currentTile.transform.position;
@@ -21,24 +27,22 @@ public class Enemy : MonoBehaviour
 
     public void UpdatePos()
     {
+        Debug.Log("Start");
         if (_currentTile.NextTile == null)
         {
             Destroy(gameObject);
             return;
         }
 
-        var distance = Vector3.Distance(transform.position, _currentTile.NextTile.transform.position);
-        
-        if (distance <= RADIUS)
+        if (Physics.Raycast (new Vector3(transform.position.x,transform.position.y+1f,transform.position.z),
+                Vector3.down, out var hit,_distance,_factory.LayerFloor)
+            && _currentTile.transform != hit.transform
+            && hit.transform.TryGetComponent(out Tile tile))
         {
-            _currentTile = _currentTile.NextTile;
+            _currentTile = tile;
             _previousDirection = _currentTile.Direction;
         }
-        
         float speedRotation = _factory.SpeedRotation/2f;
-        
-        if (distance <= RADIUS / 2f)
-            speedRotation *= 8f;
 
         if (_previousDirection != _currentTile.Direction)
             speedRotation = 100f;
@@ -47,5 +51,10 @@ public class Enemy : MonoBehaviour
         
         transform.rotation = Quaternion.Lerp(transform.rotation,_currentTile.Direction.GetDirection(),speedRotation*Time.deltaTime*_behaviour.Speed);
         _previousDirection = _currentTile.Direction;
+    }
+
+    private void OnDestroy()
+    {
+        _onDestroy(this);
     }
 }

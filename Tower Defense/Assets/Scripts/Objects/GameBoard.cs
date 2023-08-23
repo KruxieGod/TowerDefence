@@ -98,8 +98,6 @@ public class GameBoard : MonoBehaviour
             _destinations.Remove(tileDestination);
         else
             _destinations.Add(tileDestination);
-        if (type == TypeOfTile.SpawnerEnemy)
-            _enemyFactory.GetEnemySpawner((Tile)tileDestination);
         var typeTile = _factory.GetContent(type);
         typeTile.transform.parent = transform;
         tileDestination.SetTypeTile(typeTile);
@@ -109,7 +107,6 @@ public class GameBoard : MonoBehaviour
     {
         if (Physics.Raycast(ray, out var hit))
         {
-            Debug.Log(hit.point);
             int x = (int)(hit.point.x/POSITIONMULTIPLIER + Size.x * 0.5f);
             int y = (int)(hit.point.z/POSITIONMULTIPLIER + Size.y * 0.5f);
             Debug.Log((x,y).ToString());

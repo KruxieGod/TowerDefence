@@ -16,43 +16,42 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _gameBoard.Initialize(_size,_factory,_enemyFactory);
+        _factory.Initialize(_enemyFactory);
     }
 
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
-            SetTile(TypeOfTile.Destination);
+            SetTileOnPath(TypeOfTile.Destination);
         else if (Input.GetMouseButtonDown(1))
-            SetTile(TypeOfTile.Wall);
+            SetTileOnPath(TypeOfTile.Wall);
         else if(Input.GetKeyDown(KeyCode.LeftShift))
-            SetTile(TypeOfTile.SpawnerEnemy);
+            SetTileOnPath(TypeOfTile.SpawnerEnemy);
         foreach (var spawner in _enemyFactory.EnemySpawners)
             spawner.UpdateSpawner();
     }
 
-    private void SetTile(TypeOfTile type)
+    private void SetTileOnPath(TypeOfTile type)
     {
-        if (!TryGetTile(type)) 
+        if (!TrySetTile(type)) 
             return;
         _gameBoard.PathUpdate();
-        if (_enemyFactory.CountSpawners != 0 && !_enemyFactory.EnemySpawners.All(x => x.SpawnerTile.HasPath()))
+        if (_enemyFactory.CountSpawners != 0 &&
+            !_enemyFactory.EnemySpawners.All(x => x.SpawnerTile.HasPath()))
         {
-            TryGetTile(TypeOfTile.Empty);
+            TrySetTile(TypeOfTile.Empty);
             _gameBoard.PathUpdate();
         }
     }
     
-    private bool TryGetTile(TypeOfTile type)
+    private bool TrySetTile(TypeOfTile type)
     {
         var tile = _gameBoard.GetTile(_ray);
-        if (tile != null && tile.Content.TileType == TypeOfTile.Destination && _gameBoard.CountDestinations == 1)
-            return false;
         if (tile == null ||
             Physics.OverlapBox(tile.transform.position,new Vector3(Enemy.RADIUS,Enemy.RADIUS,Enemy.RADIUS))
-                .Any(x => x.CompareTag("Enemy")))
+                .Any(x => x.CompareTag("Enemy")) || 
+            !tile.CanBeSet(_gameBoard,_enemyFactory))
             return false;
-        if (tile.Content.TileType == TypeOfTile.SpawnerEnemy)
-            _enemyFactory.RemoveSpawner(tile);
         _gameBoard.SetType(tile,type == tile.Content.TileType ? TypeOfTile.Empty : type);
         return true;
     }

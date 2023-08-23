@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7769147912193937135}
   - component: {fileID: 114104979254139833}
   - component: {fileID: 2615186705349631715}
-  - component: {fileID: 8661498251477852110}
-  m_Layer: 0
+  - component: {fileID: 8040985825557022208}
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8661498251477852110
+--- !u!65 &8040985825557022208
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2454470456468371919}
   - component: {fileID: 4420508057894298517}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -159,7 +159,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7971687887555501999}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Model
   m_TagString: Enemy
   m_Icon: {fileID: 0}

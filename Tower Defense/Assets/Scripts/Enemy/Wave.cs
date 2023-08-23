@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class Wave
+public struct Wave
 {
     [SerializeField] private List<EnemyType> _waveEnemy;
     public IReadOnlyList<EnemyType> WaveEnemy => _waveEnemy;
