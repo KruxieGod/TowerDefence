@@ -21,9 +21,8 @@ public class Tourrel : TileContent
     public void TowerUpdate()
     {
         if (_lastToShoot <= 0)
-            _lastToShoot = BehaviourTower.SpeedFire;
-        else
-            _turret.Shoot();
+            _lastToShoot = _turret.Shoot() ? BehaviourTower.SpeedFire : 0;
+
         _lastToShoot -= Time.deltaTime;
         _turret.PursueTarget();
     }

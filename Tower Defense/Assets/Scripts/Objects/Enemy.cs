@@ -5,7 +5,7 @@ using UnityEditor.PackageManager;
 using UnityEngine;
 
 [SelectionBase]
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour,IDamagable
 {
     private BehaviourEnemy _behaviour;
     private Tile _currentTile;
@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour
     private Direction _previousDirection;
     private const float _distance = 1f;
     private Action<Enemy> _onDestroy;
+    public int HealthPoints { get; private set; }
+
     public void Initialize(BehaviourEnemy behaviour,Tile currentTile,GameEnemyFactory factory,Action<Enemy> onDestroy)
     {
         _onDestroy = onDestroy;
@@ -23,6 +25,7 @@ public class Enemy : MonoBehaviour
         _behaviour = behaviour;
         _currentTile = currentTile;
         transform.rotation = currentTile.Direction.GetDirection();
+        HealthPoints = behaviour.HP;
     }
 
     public void UpdatePos()
@@ -56,5 +59,11 @@ public class Enemy : MonoBehaviour
     private void OnDestroy()
     {
         _onDestroy(this);
+    }
+
+    void IDamagable.TakeDamage(int damage)
+    {
+        if ((HealthPoints -= damage) <= 0)
+            Destroy(gameObject);
     }
 }

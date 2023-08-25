@@ -27,9 +27,9 @@ public static class EnemiesExtension
     private static Dictionary<EnemyType, BehaviourEnemy> _behaviours =
         new ()
         {
-            { EnemyType.Human, new BehaviourEnemy(9) },
-            { EnemyType.Elf, new BehaviourEnemy(14) },
-            { EnemyType.Orc, new BehaviourEnemy(5) }
+            { EnemyType.Human, new BehaviourEnemy(9,30) },
+            { EnemyType.Elf, new BehaviourEnemy(14,15) },
+            { EnemyType.Orc, new BehaviourEnemy(5,45) }
         };
 
     public static BehaviourEnemy GetBehaviour(this EnemyType enemy)

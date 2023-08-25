@@ -6,9 +6,11 @@ using UnityEngine;
 public struct BehaviourEnemy
 {
     public readonly float Speed;
-    public BehaviourEnemy(float speed)
+    public readonly int HP;
+    public BehaviourEnemy(float speed,int hp)
     {
         Speed = speed;
+        HP = hp;
     }
 }
 

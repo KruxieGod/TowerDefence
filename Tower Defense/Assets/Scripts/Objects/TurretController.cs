@@ -7,6 +7,7 @@ public class TurretController : MonoBehaviour
     private float _radius;
     private float _damage;
     private Tourrel _tourrel;
+    [SerializeField] private Laser _laser;
     
     public void Initialize(Tourrel tourrel)
     {
@@ -26,13 +27,21 @@ public class TurretController : MonoBehaviour
 
     private void FindTarget()
     {
+        if (_tourrel == null)
+            return;
         _currentTarget = Physics.OverlapSphere(_tourrel.transform.position, _radius,_tourrel.EnemyLayer)
             .Select(x => x.transform.root.GetComponent<Enemy>())
             .FirstOrDefault(enemy => enemy != null);
     }
 
-    public void Shoot()
+    public bool Shoot()
     {
+        if (_currentTarget != null)
+        {
+            _laser.StrenchTo(_currentTarget.transform,0.2f);
+            ((IDamagable)_currentTarget).TakeDamage((int)_damage);
+        }
         
+        return _currentTarget != null;
     }
 }

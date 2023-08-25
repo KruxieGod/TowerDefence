@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: GameTowerFactory
   m_EditorClassIdentifier: 
   _behaviourTower:
-    _speedFire: 1
-    _damage: 1
+    _speedFire: 0.4
+    _damage: 15
     _radius: 15
   _layerEnemy:
     serializedVersion: 2
