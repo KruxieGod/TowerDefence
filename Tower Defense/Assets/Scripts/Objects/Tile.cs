@@ -43,7 +43,7 @@ public class Tile : MonoBehaviour,ISetterTile
                 tile._isWall = false;
                 tile._arrow.SetActive(true);
             } },
-            { TypeOfTile.Tourrel , tile =>
+            { TypeOfTile.Turret , tile =>
             {
                 _checkOn = (original, next) => next.IsHasPath;
                 tile._nextTile = null;

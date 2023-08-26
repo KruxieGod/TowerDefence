@@ -12,11 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3494e81c79772584498b95a8db1df3ea, type: 3}
   m_Name: GameTowerFactory
   m_EditorClassIdentifier: 
-  _turretPrefab: {fileID: 7803718847904924053, guid: d1a733b8ecccd7645ab6f3763e300600, type: 3}
+  _laserTurretPrefab: {fileID: 4033138660180835146, guid: d1a733b8ecccd7645ab6f3763e300600, type: 3}
+  _ballistaPrefab: {fileID: 6422567995290623807, guid: 97f5ea6736c310849be3d070d4e25847, type: 3}
   _behaviourTower:
     _speedFire: 0.4
     _damage: 15
     _radius: 15
+  _behaviourBallistics:
+    _speedFire: 0.4
+    _damage: 15
+    _radius: 30
+    _radiusDamage: 2
   _layerEnemy:
     serializedVersion: 2
     m_Bits: 8

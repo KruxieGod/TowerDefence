@@ -14,23 +14,11 @@ public class GameEnemyFactory : BaseFactoryCollection<EnemySpawner>
 
     [SerializeField] private List<Wave> _waves;
     public float SpeedRotation;
-    
-    protected override EnemySpawner Initialization(EnemySpawner prefab)
-    {
-        return prefab.InitializeWave(_prefabEnemy,_waves,this);
-    }
 
-    public EnemySpawner GetSpawner() => GetPrefab(_spawnerPrefab);
-    
-    public bool CanRemoveSpawner(Tile tile)
+    public EnemySpawner GetSpawner()
     {
-        return tile.Content.IsEnded;
-    }
-    
-    public void RemoveSpawner(EnemySpawner spawner) => _data.Remove(spawner);
-
-    public void ResetSpawners()
-    {
-        _data.Clear();
+        var enemySpawner = Instantiate(_spawnerPrefab).InitializeWave(_prefabEnemy,_waves,this);
+        _data.Add(enemySpawner);
+        return enemySpawner;
     }
 }

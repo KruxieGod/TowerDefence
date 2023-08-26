@@ -7,6 +7,7 @@ using Object = UnityEngine.Object;
 
 public class EnemySpawner : TileContent
 {
+    public override TypeOfTile TileType => TypeOfTile.SpawnerEnemy;
     private Enemy _prefab;
     private HashSet<Enemy> _enemies = new HashSet<Enemy>();
     private List<Wave> _waves;
@@ -52,11 +53,6 @@ public class EnemySpawner : TileContent
         else
             _timeToEnemy -= Time.deltaTime;
         _moveOnEnemy.Invoke();
-    }
-
-    private void OnDestroy()
-    {
-        _factory.RemoveSpawner(this);
     }
 
     private void OnEnemyDestroy(Enemy enemy)

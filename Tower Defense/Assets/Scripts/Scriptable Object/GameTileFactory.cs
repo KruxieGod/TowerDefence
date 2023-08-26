@@ -17,9 +17,9 @@ public class GameTileFactory : ScriptableObject
     {
         _prefabs = new()
         {
-            { TypeOfTile.Destination, _destinationPrefab},
-            { TypeOfTile.Empty, _emptyPrefab },
-            { TypeOfTile.Wall, _wallPrefab }
+            { _destinationPrefab.TileType, _destinationPrefab},
+            { _emptyPrefab.TileType, _emptyPrefab },
+            { _wallPrefab.TileType, _wallPrefab }
         };
     }
 

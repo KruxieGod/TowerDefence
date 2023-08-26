@@ -1,15 +1,16 @@
 using System;
 using UnityEngine;
 
-public class Turret : TileContent
+public abstract class Turret<BehaviourT> : TileContent,IUpdatable
+    where BehaviourT : BehaviourTower
 {
+    public override TypeOfTile TileType => TypeOfTile.Turret;
     public LayerMask EnemyLayer { get; private set; }
-    public override bool IsEnded => true;
     private BehaviourTower _behaviourTower;
-    [SerializeField] private TurretController _turret;
+    [SerializeField] private TurretController<BehaviourT> _turret;
     private float _lastToShoot;
     
-    public Turret Initialize(BehaviourTower behaviourTower,LayerMask layerEnemy)
+    public Turret<BehaviourT> Initialize(BehaviourT behaviourTower,LayerMask layerEnemy)
     {
         _behaviourTower = behaviourTower;
         _turret.Initialize(this,behaviourTower);
@@ -18,7 +19,7 @@ public class Turret : TileContent
         return this;
     }
 
-    public void TowerUpdate()
+    void IUpdatable.UpdateEntity()
     {
         if (_lastToShoot <= 0)
             _lastToShoot = _turret.Shoot() ? _behaviourTower.SpeedFire : 0;

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LaserController : TurretController
+public class LaserController : TurretController<BehaviourTower>
 {
     [SerializeField] private Laser _laser;
     protected override void LookAt()

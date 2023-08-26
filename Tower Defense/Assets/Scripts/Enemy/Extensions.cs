@@ -17,7 +17,7 @@ public static class TileExtension
         if (tile.Content.TileType == TypeOfTile.Destination && gameBoard.CountDestinations == 1)
             return false;
         else if (tile.Content.TileType == TypeOfTile.SpawnerEnemy)
-            return enemyFactory.CanRemoveSpawner(tile);
+            return tile.Content.IsEnded;
         return true;
     }
 }

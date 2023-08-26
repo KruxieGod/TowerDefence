@@ -5,9 +5,9 @@ using UnityEngine;
 [SelectionBase]
 public class TileContent : MonoBehaviour
 {
-    [SerializeField] protected TypeOfTile _tileType;
-    public TypeOfTile TileType => _tileType;
-    public Tile SpawnerTile;
+    [SerializeField] private TypeOfTile _tileType;
+    public virtual TypeOfTile TileType => _tileType;
+    public Tile SpawnerTile { get; private set; }
     public virtual bool IsEnded { get; } = true;
     public void InitializeTile(Tile spawnerTile) => SpawnerTile = spawnerTile;
 }

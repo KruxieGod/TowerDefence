@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Camera _camera;
     [SerializeField] private GameEnemyFactory _enemyFactory;
     [SerializeField] private GameTowerFactory _towerFactory;
-    
     private Ray _ray => _camera.ScreenPointToRay(Input.mousePosition);
     void Start()
     {
@@ -31,15 +30,18 @@ public class GameManager : MonoBehaviour
         else if(Input.GetKeyDown(KeyCode.LeftShift))
             SetTileOnPath(TypeOfTile.SpawnerEnemy,
                 _enemyFactory.GetSpawner);
-        else if(Input.GetKeyDown(KeyCode.T))
-            SetTileOnPath(TypeOfTile.Tourrel,
-                _towerFactory.GetTurret);
+        else if(Input.GetKeyDown(KeyCode.E))
+            SetTileOnPath(TypeOfTile.Turret,
+                _towerFactory.GetBallista);
+        else if(Input.GetKeyDown(KeyCode.R))
+            SetTileOnPath(TypeOfTile.Turret,
+                _towerFactory.GetLaserTurret);
         
         foreach (var spawner in _enemyFactory.Data)
             spawner.UpdateSpawner();
         
         foreach (var tower in _towerFactory.Data)
-            tower.TowerUpdate();
+            tower.UpdateEntity();
     }
 
     private void SetTileOnPath(TypeOfTile type,Func<TileContent> content)

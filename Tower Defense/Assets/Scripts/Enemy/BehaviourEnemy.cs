@@ -32,3 +32,14 @@ public class BehaviourTower
         _radius = radius;
     }
 }
+
+[Serializable]
+public class BehaviourBallistics : BehaviourTower
+{
+    [SerializeField] private float _radiusDamage;
+    public float RadiusDamage => _radiusDamage;
+    public BehaviourBallistics(float speedFire, float damage, float radius,float radiusDamage) : base(speedFire, damage, radius)
+    {
+        _radiusDamage = radiusDamage;
+    }
+}

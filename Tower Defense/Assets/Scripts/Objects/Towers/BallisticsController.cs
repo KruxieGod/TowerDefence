@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BallisticsController : TurretController
+public class BallisticsController : TurretController<BehaviourBallistics>
 {
     protected override void LookAt()
     {

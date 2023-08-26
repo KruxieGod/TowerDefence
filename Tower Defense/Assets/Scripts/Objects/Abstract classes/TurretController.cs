@@ -1,14 +1,15 @@
 using System.Linq;
 using UnityEngine;
 
-public abstract class TurretController : MonoBehaviour
+public abstract class TurretController<Behaviour> : MonoBehaviour
+where Behaviour : BehaviourTower
 {
     protected Enemy _currentTarget;
     private float _radius;
     protected float _damage;
-    protected Turret _turret;
-    protected BehaviourTower _behaviourTower;
-    public void Initialize(Turret turret, BehaviourTower behaviourTower) 
+    protected Turret<Behaviour> _turret;
+    protected Behaviour _behaviourTower;
+    public void Initialize(Turret<Behaviour> turret, Behaviour behaviourTower) 
     {
         _radius = behaviourTower.Radius;
         _damage = behaviourTower.Damage;

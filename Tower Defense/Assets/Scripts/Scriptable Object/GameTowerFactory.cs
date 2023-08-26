@@ -3,15 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class GameTowerFactory : BaseFactoryCollection<Turret>
+public class GameTowerFactory : BaseFactoryCollection<IUpdatable>
 {
-    [SerializeField] private Turret _turretPrefab;
+    [SerializeField] private LaserTurret _laserTurretPrefab;
+    [SerializeField] private Ballista _ballistaPrefab;
     [SerializeField] private BehaviourTower _behaviourTower;
+    [SerializeField] private BehaviourBallistics _behaviourBallistics;
     [SerializeField] private LayerMask _layerEnemy;
-    protected override Turret Initialization(Turret prefab)
-    {
-        return prefab.Initialize(_behaviourTower,_layerEnemy);
-    }
 
-    public Turret GetTurret() => GetPrefab(_turretPrefab);
+    public Turret<BehaviourBallistics> GetBallista() => GetPrefab(_ballistaPrefab,_behaviourBallistics);
+    public Turret<BehaviourTower> GetLaserTurret() => GetPrefab(_laserTurretPrefab,_behaviourTower);
+
+    private Turret<T> GetPrefab<T>(Turret<T> prefab,T behaviourTower)
+        where T : BehaviourTower
+    {
+        var pref = Instantiate(prefab);
+        pref.Initialize(behaviourTower, _layerEnemy);
+        _data.Add(pref);
+        return pref;
+    }
 }
