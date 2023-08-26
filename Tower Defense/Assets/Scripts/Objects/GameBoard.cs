@@ -43,6 +43,7 @@ public class GameBoard : MonoBehaviour
                 tile.transform.position = new Vector3(POSITIONMULTIPLIER*(x-offcetSize.x),0.1f,POSITIONMULTIPLIER*(y - offcetSize.y));
                 tile.transform.parent = this.transform;
                 SetType(tile, TypeOfTile.Empty);
+                SetContent(tile,_factory.GetContent(TypeOfTile.Empty));
                 if (x > 0)
                     tile.SetRightToLeft(_board[x-1,y]);
                 if (y > 0)
@@ -72,6 +73,7 @@ public class GameBoard : MonoBehaviour
     private void SetCorrectDirectionTo(ISetterTile tileDestination)
     {
         SetType(tileDestination,TypeOfTile.Destination);
+        SetContent(tileDestination,_factory.GetContent(TypeOfTile.Destination));
         Queue<ISetterTile> queue = new Queue<ISetterTile>();
         queue.Enqueue(tileDestination);
         while (queue.Count > 0)
@@ -98,9 +100,13 @@ public class GameBoard : MonoBehaviour
             _destinations.Remove(tileDestination);
         else
             _destinations.Add(tileDestination);
-        var typeTile = _factory.GetContent(type);
-        typeTile.transform.parent = transform;
-        tileDestination.SetTypeTile(typeTile);
+        tileDestination.SetTypeTile(type);
+    }
+
+    public void SetContent(ISetterTile tileDestination,TileContent tileContent)
+    {
+        tileContent.transform.parent = transform;
+        tileDestination.SetContentTile(tileContent);
     }
 
     public Tile GetTile(Ray ray)

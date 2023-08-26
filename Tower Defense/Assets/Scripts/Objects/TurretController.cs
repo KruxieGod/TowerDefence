@@ -1,47 +1,40 @@
 using System.Linq;
 using UnityEngine;
 
-public class TurretController : MonoBehaviour
+public abstract class TurretController : MonoBehaviour
 {
-    private Enemy _currentTarget;
+    protected Enemy _currentTarget;
     private float _radius;
-    private float _damage;
-    private Tourrel _tourrel;
-    [SerializeField] private Laser _laser;
-    
-    public void Initialize(Tourrel tourrel)
+    protected float _damage;
+    protected Turret _turret;
+    protected BehaviourTower _behaviourTower;
+    public void Initialize(Turret turret, BehaviourTower behaviourTower) 
     {
-        _radius = tourrel.BehaviourTower.Radius;
-        _damage = tourrel.BehaviourTower.Damage;
-        _tourrel = tourrel;
+        _radius = behaviourTower.Radius;
+        _damage = behaviourTower.Damage;
+        _turret = turret;
+        _behaviourTower = behaviourTower;
     }
     
     public void PursueTarget()
     {
         if (_currentTarget != null &&
-            Vector3.Distance(_currentTarget.transform.position, _tourrel.transform.position) <= _radius)
-            transform.LookAt(_currentTarget.transform);
+            Vector3.Distance(_currentTarget.transform.position, _turret.transform.position) <= _radius)
+            LookAt();
         else
             FindTarget();
     }
 
+    protected abstract void LookAt();
+    
     private void FindTarget()
     {
-        if (_tourrel == null)
+        if (_turret == null)
             return;
-        _currentTarget = Physics.OverlapSphere(_tourrel.transform.position, _radius,_tourrel.EnemyLayer)
+        _currentTarget = Physics.OverlapSphere(_turret.transform.position, _radius,_turret.EnemyLayer)
             .Select(x => x.transform.root.GetComponent<Enemy>())
             .FirstOrDefault(enemy => enemy != null);
     }
 
-    public bool Shoot()
-    {
-        if (_currentTarget != null)
-        {
-            _laser.StrenchTo(_currentTarget.transform,0.2f);
-            ((IDamagable)_currentTarget).TakeDamage((int)_damage);
-        }
-        
-        return _currentTarget != null;
-    }
+    public abstract bool Shoot();
 }

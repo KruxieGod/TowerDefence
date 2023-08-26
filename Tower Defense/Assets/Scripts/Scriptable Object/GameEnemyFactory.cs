@@ -6,6 +6,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class GameEnemyFactory : BaseFactoryCollection<EnemySpawner>
 {
+    [SerializeField] private EnemySpawner _spawnerPrefab;
     [SerializeField] private Enemy _prefabEnemy;
     public int CountSpawners => _data.Count;
     [SerializeField] private LayerMask _layerFloor;
@@ -18,6 +19,8 @@ public class GameEnemyFactory : BaseFactoryCollection<EnemySpawner>
     {
         return prefab.InitializeWave(_prefabEnemy,_waves,this);
     }
+
+    public EnemySpawner GetSpawner() => GetPrefab(_spawnerPrefab);
     
     public bool CanRemoveSpawner(Tile tile)
     {

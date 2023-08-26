@@ -18,19 +18,22 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _gameBoard.Initialize(_size,_factory,_enemyFactory);
-        _factory.Initialize(_enemyFactory,_towerFactory);
     }
 
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
-            SetTileOnPath(TypeOfTile.Destination);
+            SetTileOnPath(TypeOfTile.Destination,
+                () => _factory.GetContent(TypeOfTile.Destination));
         else if (Input.GetMouseButtonDown(1))
-            SetTileOnPath(TypeOfTile.Wall);
+            SetTileOnPath(TypeOfTile.Wall,
+                () => _factory.GetContent(TypeOfTile.Wall));
         else if(Input.GetKeyDown(KeyCode.LeftShift))
-            SetTileOnPath(TypeOfTile.SpawnerEnemy);
+            SetTileOnPath(TypeOfTile.SpawnerEnemy,
+                _enemyFactory.GetSpawner);
         else if(Input.GetKeyDown(KeyCode.T))
-            SetTileOnPath(TypeOfTile.Tourrel);
+            SetTileOnPath(TypeOfTile.Tourrel,
+                _towerFactory.GetTurret);
         
         foreach (var spawner in _enemyFactory.Data)
             spawner.UpdateSpawner();
@@ -39,20 +42,20 @@ public class GameManager : MonoBehaviour
             tower.TowerUpdate();
     }
 
-    private void SetTileOnPath(TypeOfTile type)
+    private void SetTileOnPath(TypeOfTile type,Func<TileContent> content)
     {
-        if (!TrySetTile(type)) 
+        if (!TrySetTile(type,content)) 
             return;
         _gameBoard.PathUpdate();
         if (_enemyFactory.CountSpawners != 0 &&
             !_enemyFactory.Data.All(x => x.SpawnerTile.HasPath()))
         {
-            TrySetTile(TypeOfTile.Empty);
+            TrySetTile(TypeOfTile.Empty,content);
             _gameBoard.PathUpdate();
         }
     }
     
-    private bool TrySetTile(TypeOfTile type)
+    private bool TrySetTile(TypeOfTile type,Func<TileContent> content)
     {
         var tile = _gameBoard.GetTile(_ray);
         if (tile == null ||
@@ -60,7 +63,9 @@ public class GameManager : MonoBehaviour
                 .Any(x => x.CompareTag("Enemy")) || 
             !tile.CanBeSet(_gameBoard,_enemyFactory))
             return false;
-        _gameBoard.SetType(tile,type == tile.Content.TileType ? TypeOfTile.Empty : type);
+        var typeOf = type == tile.Content.TileType ? TypeOfTile.Empty : type;
+        _gameBoard.SetType(tile,typeOf);
+        _gameBoard.SetContent(tile, typeOf == TypeOfTile.Empty ? _factory.GetContent(TypeOfTile.Empty) : content());
         return true;
     }
 }

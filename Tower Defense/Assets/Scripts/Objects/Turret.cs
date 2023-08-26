@@ -1,19 +1,19 @@
 using System;
 using UnityEngine;
 
-public class Tourrel : TileContent
+public class Turret : TileContent
 {
     public LayerMask EnemyLayer { get; private set; }
     public override bool IsEnded => true;
-    public BehaviourTower BehaviourTower { get; private set; }
+    private BehaviourTower _behaviourTower;
     [SerializeField] private TurretController _turret;
     private float _lastToShoot;
     
-    public Tourrel Initialize(BehaviourTower behaviourTower,LayerMask layerEnemy)
+    public Turret Initialize(BehaviourTower behaviourTower,LayerMask layerEnemy)
     {
-        BehaviourTower = behaviourTower;
-        _turret.Initialize(this);
-        _lastToShoot = BehaviourTower.SpeedFire;
+        _behaviourTower = behaviourTower;
+        _turret.Initialize(this,behaviourTower);
+        _lastToShoot = _behaviourTower.SpeedFire;
         EnemyLayer = layerEnemy;
         return this;
     }
@@ -21,8 +21,7 @@ public class Tourrel : TileContent
     public void TowerUpdate()
     {
         if (_lastToShoot <= 0)
-            _lastToShoot = _turret.Shoot() ? BehaviourTower.SpeedFire : 0;
-
+            _lastToShoot = _turret.Shoot() ? _behaviourTower.SpeedFire : 0;
         _lastToShoot -= Time.deltaTime;
         _turret.PursueTarget();
     }
@@ -30,6 +29,6 @@ public class Tourrel : TileContent
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawSphere(transform.position,BehaviourTower.Radius);
+        Gizmos.DrawSphere(transform.position,_behaviourTower.Radius);
     }
 }

@@ -16,7 +16,7 @@ public abstract class BaseFactoryCollection<T> : ScriptableObject
         }
     }
 
-    public T GetPrefab(T prefab)
+    protected T GetPrefab(T prefab)
     {
         if (_data.TryGetValue(prefab, out var spawner))
             return spawner;

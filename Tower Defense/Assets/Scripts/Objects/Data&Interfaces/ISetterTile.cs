@@ -8,5 +8,6 @@ public interface ISetterTile
     Tile SetDownTile();
     Tile SetRightTile();
     Tile SetLeftTile();
-    void SetTypeTile(TileContent tileContent);
+    void SetTypeTile(TypeOfTile tileContent);
+    void SetContentTile(TileContent tileContent);
 }

@@ -86,7 +86,12 @@ public class Tile : MonoBehaviour,ISetterTile
 
     Tile ISetterTile.SetLeftTile() => SetPath(_left);
 
-    void ISetterTile.SetTypeTile(TileContent tileContent)
+    void ISetterTile.SetTypeTile(TypeOfTile tileType)
+    {
+        _actions[tileType](this);
+    }
+    
+    void ISetterTile.SetContentTile(TileContent tileContent)
     {
         if (Content != null)
             Destroy(Content.gameObject);
@@ -94,7 +99,6 @@ public class Tile : MonoBehaviour,ISetterTile
         tileContent.transform.parent = transform;
         Content = tileContent;
         Content.InitializeTile(this);
-        _actions[Content.TileType](this);
     }
 
     private Tile SetPath(Tile tile)

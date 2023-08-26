@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3494e81c79772584498b95a8db1df3ea, type: 3}
   m_Name: GameTowerFactory
   m_EditorClassIdentifier: 
+  _turretPrefab: {fileID: 7803718847904924053, guid: d1a733b8ecccd7645ab6f3763e300600, type: 3}
   _behaviourTower:
     _speedFire: 0.4
     _damage: 15
