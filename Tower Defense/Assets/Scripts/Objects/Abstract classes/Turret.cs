@@ -24,7 +24,7 @@ public abstract class Turret<BehaviourT> : TileContent,IUpdatable
         if (_lastToShoot <= 0)
             _lastToShoot = _turret.Shoot() ? _behaviourTower.SpeedFire : 0;
         _lastToShoot -= Time.deltaTime;
-        _turret.PursueTarget();
+        _turret?.PursueTarget();
     }
 
     private void OnDrawGizmos()

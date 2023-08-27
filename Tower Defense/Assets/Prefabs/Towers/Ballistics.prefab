@@ -249,6 +249,38 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &2469068786627445719
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2248417738155652960}
+  m_Layer: 0
+  m_Name: Root
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2248417738155652960
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2469068786627445719}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 906057977581230661}
+  m_Father: {fileID: 4550146779829164943}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2655127384710515828
 GameObject:
   m_ObjectHideFlags: 0
@@ -616,7 +648,7 @@ Transform:
   m_Children:
   - {fileID: 7085994772307995605}
   - {fileID: 2621419215469531744}
-  - {fileID: 906057977581230661}
+  - {fileID: 2248417738155652960}
   m_Father: {fileID: 6993511194147105669}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8585018197575633110
@@ -695,11 +727,11 @@ Transform:
   m_GameObject: {fileID: 8803692520257442005}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4550146779829164943}
+  m_Father: {fileID: 2248417738155652960}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &499855415659662378
 MeshFilter:
@@ -763,3 +795,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f0ea3963a4a74748998efcc3eb6106f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _prefabBullet: {fileID: 7251890491724530806, guid: c3938279c5ed55f41bf08c79b815443a, type: 3}
+  _root: {fileID: 2248417738155652960}

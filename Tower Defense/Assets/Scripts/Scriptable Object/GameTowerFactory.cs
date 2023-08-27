@@ -17,8 +17,7 @@ public class GameTowerFactory : BaseFactoryCollection<IUpdatable>
     private Turret<T> GetPrefab<T>(Turret<T> prefab,T behaviourTower)
         where T : BehaviourTower
     {
-        var pref = Instantiate(prefab);
-        pref.Initialize(behaviourTower, _layerEnemy);
+        var pref = Instantiate(prefab).Initialize(behaviourTower, _layerEnemy);
         _data.Add(pref);
         return pref;
     }

@@ -10,11 +10,11 @@ public class LaserController : TurretController<BehaviourTower>
 
     public override bool Shoot()
     {
-        if (_currentTarget != null)
+        if (_currentTarget is not null)
         {
             _laser.StrenchTo(_currentTarget.transform,0.2f);
             ((IDamagable)_currentTarget).TakeDamage((int)_damage);
         }
-        return _currentTarget != null;
+        return _currentTarget is not null;
     }
 }

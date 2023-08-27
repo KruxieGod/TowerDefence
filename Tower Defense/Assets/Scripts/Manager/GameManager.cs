@@ -38,10 +38,10 @@ public class GameManager : MonoBehaviour
                 _towerFactory.GetLaserTurret);
         
         foreach (var spawner in _enemyFactory.Data)
-            spawner.UpdateSpawner();
+            spawner?.UpdateSpawner();
         
         foreach (var tower in _towerFactory.Data)
-            tower.UpdateEntity();
+            tower?.UpdateEntity();
     }
 
     private void SetTileOnPath(TypeOfTile type,Func<TileContent> content)
