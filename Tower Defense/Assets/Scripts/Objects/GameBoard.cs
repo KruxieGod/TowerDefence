@@ -58,19 +58,19 @@ public class GameBoard : MonoBehaviour
             throw new ArgumentException("No one destination Exception");
         ResetAllPaths();
         foreach (var destination in _destinations)
-            SetCorrectDirectionTo(destination);
-            
+            SetCorrectDirectionTo(destination,(original, next) => original.Distance+1 > next.Distance);
     }
 
     public void AddDestination(ISetterTile tileDestination)
     {
         if (_destinations.Contains(tileDestination))
             return;
+        ResetAllPaths();
         _destinations.Add(tileDestination);
-        SetCorrectDirectionTo(tileDestination);
+        SetCorrectDirectionTo(tileDestination, (original,next) => next.IsHasPath);
     }
     
-    private void SetCorrectDirectionTo(ISetterTile tileDestination)
+    private void SetCorrectDirectionTo(ISetterTile tileDestination,Func<Tile,Tile,bool> checkOnPath)
     {
         SetType(tileDestination,TypeOfTile.Destination);
         SetContent(tileDestination,_factory.GetContent(TypeOfTile.Destination));
@@ -81,10 +81,10 @@ public class GameBoard : MonoBehaviour
             ISetterTile tile = queue.Dequeue();
             if (tile == null)
                 continue;
-            queue.Enqueue(tile.SetRightTile());
-            queue.Enqueue(tile.SetLeftTile());
-            queue.Enqueue(tile.SetDownTile());
-            queue.Enqueue(tile.SetUpTile());
+            queue.Enqueue(tile.SetRightTile(checkOnPath));
+            queue.Enqueue(tile.SetLeftTile(checkOnPath));
+            queue.Enqueue(tile.SetDownTile(checkOnPath));
+            queue.Enqueue(tile.SetUpTile(checkOnPath));
         }
     }
 
@@ -115,7 +115,6 @@ public class GameBoard : MonoBehaviour
         {
             int x = (int)(hit.point.x/POSITIONMULTIPLIER + Size.x * 0.5f);
             int y = (int)(hit.point.z/POSITIONMULTIPLIER + Size.y * 0.5f);
-            Debug.Log((x,y).ToString());
             if (x >= 0 && x < Size.x && y >= 0 && y < Size.y)
                 return _board[x, y];
         }

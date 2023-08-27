@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Tile : MonoBehaviour,ISetterTile
 {
@@ -8,54 +9,49 @@ public class Tile : MonoBehaviour,ISetterTile
     public TileContent Content { get; private set; }
     private Tile _up, _down, _right, _left,_nextTile;
     public Tile NextTile => _nextTile;
-    private int _distance = int.MaxValue;
-    public bool IsHasPath => _distance != int.MaxValue;
+    public int Distance { get; private set; }
+    public bool IsHasPath => Distance != int.MaxValue;
     private bool _isWall;
     public Direction Direction { get; private set; }
     private static Dictionary<TypeOfTile, Action<Tile>> _actions;
-    private static Func<Tile, Tile, bool> _checkOn;
     static Tile()
     {
         _actions = new Dictionary<TypeOfTile, Action<Tile>>()
         {
-            { TypeOfTile.Destination, tile =>
-            {
-                _checkOn = (original, next) => original._distance+1 > next._distance;
-                SetPosDestination(tile);
-            }},
-            { TypeOfTile.Empty, tile =>
-                {
-                    tile._isWall = false;
-                    tile._arrow.SetActive(true);
-                }
-            },
-            { TypeOfTile.Wall , tile =>
-                {
-                    
-                    _checkOn = (original, next) => next.IsHasPath;
-                    tile._nextTile = null;
-                    tile._distance = int.MaxValue;
-                    tile._isWall = true;
-                }
-            },
-            { TypeOfTile.SpawnerEnemy , tile =>
-            {
-                tile._isWall = false;
-                tile._arrow.SetActive(true);
-            } },
-            { TypeOfTile.Turret , tile =>
-            {
-                _checkOn = (original, next) => next.IsHasPath;
-                tile._nextTile = null;
-                tile._distance = int.MaxValue;
-                tile._isWall = true;
-            } }
+            { TypeOfTile.Destination, SetPosDestination},
+            { TypeOfTile.Empty, SetWithoutInteraction},
+            { TypeOfTile.Wall , SetWithInteraction},
+            { TypeOfTile.SpawnerEnemy ,SetWithoutInteraction},
+            { TypeOfTile.Turret , SetWithInteraction}
         };
     }
 
+    #region Interaction With Tile
+    private static void SetWithInteraction(Tile tile)
+    {
+        tile._nextTile = null;
+        tile.Distance = int.MaxValue;
+        tile._isWall = true;
+    }
+
+    private static void SetWithoutInteraction(Tile tile)
+    {
+        tile._isWall = false;
+        tile._arrow.SetActive(true);
+    }
+    
+    private static void SetPosDestination(Tile tile)
+    {
+        tile._isWall = false;
+        tile.Distance = 0;
+        tile._nextTile = null;
+        tile._arrow.SetActive(false);
+    }
+    #endregion
+
     public void ResetDistance()
     {
-        _distance = int.MaxValue;
+        Distance = int.MaxValue;
     }
     
     public void SetUpToDown(Tile down)
@@ -70,21 +66,13 @@ public class Tile : MonoBehaviour,ISetterTile
         _left = left;
     }
 
-    private static void SetPosDestination(Tile tile)
-    {
-        tile._isWall = false;
-        tile._distance = 0;
-        tile._nextTile = null;
-        tile._arrow.SetActive(false);
-    }
+    Tile ISetterTile.SetUpTile(Func<Tile,Tile,bool> checkOnPath) => SetPath(_up,checkOnPath);
 
-    Tile ISetterTile.SetUpTile() => SetPath(_up);
+    Tile ISetterTile.SetDownTile(Func<Tile,Tile,bool> checkOnPath) => SetPath(_down,checkOnPath);
 
-    Tile ISetterTile.SetDownTile() => SetPath(_down);
+    Tile ISetterTile.SetRightTile(Func<Tile,Tile,bool> checkOnPath) => SetPath(_right,checkOnPath);
 
-    Tile ISetterTile.SetRightTile() => SetPath(_right);
-
-    Tile ISetterTile.SetLeftTile() => SetPath(_left);
+    Tile ISetterTile.SetLeftTile(Func<Tile,Tile,bool> checkOnPath) => SetPath(_left,checkOnPath);
 
     void ISetterTile.SetTypeTile(TypeOfTile tileType)
     {
@@ -101,12 +89,12 @@ public class Tile : MonoBehaviour,ISetterTile
         Content.InitializeTile(this);
     }
 
-    private Tile SetPath(Tile tile)
+    private Tile SetPath(Tile tile,Func<Tile,Tile,bool> checkOnPath)
     {
-        if (_isWall|| tile == null|| tile._isWall || _checkOn(this,tile) )
+        if (_isWall|| tile == null|| tile._isWall || checkOnPath(this,tile) )
             return null;
         tile._nextTile = this;
-        tile._distance = _distance+1;
+        tile.Distance = Distance+1;
         if (tile._up == this)
             tile.Direction = Direction.Up;
         else if (tile._down == this)
@@ -122,8 +110,8 @@ public class Tile : MonoBehaviour,ISetterTile
 
 public static class DirectionExtension
 {
-    private static Dictionary<Direction, Quaternion> _directions =
-        new Dictionary<Direction, Quaternion>()
+    private static readonly Dictionary<Direction, Quaternion> _directions =
+        new()
         {
             { Direction.Up, Quaternion.Euler(Vector3.zero) },
             { Direction.Down, Quaternion.Euler(new Vector3(0, 180, 0)) },

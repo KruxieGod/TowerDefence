@@ -26,6 +26,8 @@ public class Laser : MonoBehaviour
 
     private IEnumerator Strench(Transform target,float timeAppear)
     {
+        if(target is null)
+            yield break;
         _lineRenderer.SetPosition(1,transform.InverseTransformPoint(target.position));
         yield return new WaitForSeconds(timeAppear);
         _lineRenderer.SetPosition(1,Vector3.zero);

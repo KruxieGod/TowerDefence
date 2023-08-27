@@ -46,7 +46,7 @@ public class EnemySpawner : TileContent
             var enemyBehaviour = _currentWave[_currentWave.Count - _countEnemiesWave--].GetBehaviour();
             _timeToEnemy = _waves[_indexWave - 1].RecoverTimeEnemies;
             var enemy = Instantiate(_prefab);
-            enemy.Initialize(enemyBehaviour,SpawnerTile,_factory,OnEnemyDestroy);
+            enemy.Initialize(enemyBehaviour,SpawnerTile,_factory,Remove);
             _moveOnEnemy.AddListener(enemy.UpdatePos);
             _enemies.Add(enemy);
         }
@@ -55,8 +55,5 @@ public class EnemySpawner : TileContent
         _moveOnEnemy.Invoke();
     }
 
-    private void OnEnemyDestroy(Enemy enemy)
-    {
-        _enemies.Remove(enemy);
-    }
+    private void Remove(Enemy enemy) => _enemies.Remove(enemy);
 }

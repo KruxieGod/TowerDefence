@@ -13,10 +13,13 @@ public class Enemy : MonoBehaviour,IDamagable
     private GameEnemyFactory _factory;
     private Direction _previousDirection;
     private const float _distance = 1f;
-    private Action<Enemy> _onDestroy;
     public int HealthPoints { get; private set; }
+    private Action<Enemy> _onDestroy;
 
-    public void Initialize(BehaviourEnemy behaviour,Tile currentTile,GameEnemyFactory factory,Action<Enemy> onDestroy)
+    public void Initialize(BehaviourEnemy behaviour,
+        Tile currentTile,
+        GameEnemyFactory factory,
+        Action<Enemy> onDestroy)
     {
         _onDestroy = onDestroy;
         _previousDirection = currentTile.Direction;
@@ -56,14 +59,14 @@ public class Enemy : MonoBehaviour,IDamagable
         _previousDirection = _currentTile.Direction;
     }
 
-    private void OnDestroy()
-    {
-        _onDestroy(this);
-    }
-
     void IDamagable.TakeDamage(int damage)
     {
         if ((HealthPoints -= damage) <= 0)
             Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        _onDestroy(this);
     }
 }

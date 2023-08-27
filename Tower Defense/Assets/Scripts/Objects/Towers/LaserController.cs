@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class LaserController : TurretController<BehaviourTower>
@@ -12,8 +13,9 @@ public class LaserController : TurretController<BehaviourTower>
     {
         if (_currentTarget is not null)
         {
-            _laser.StrenchTo(_currentTarget.transform,0.2f);
-            ((IDamagable)_currentTarget).TakeDamage((int)_damage);
+            _laser.StrenchTo(_currentTarget?.transform,0.2f);
+            IDamagable damageTarget = _currentTarget;
+            damageTarget?.TakeDamage((int)_damage);
         }
         return _currentTarget is not null;
     }
