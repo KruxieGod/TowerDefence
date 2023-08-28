@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour,IDamagable
     private const float _distance = 1f;
     public int HealthPoints { get; private set; }
     private Action<Enemy> _onDestroy;
-
+    public float Speed => _behaviour.Speed;
     public void Initialize(BehaviourEnemy behaviour,
         Tile currentTile,
         Action<Enemy> onDestroy)
@@ -61,7 +61,7 @@ public class Enemy : MonoBehaviour,IDamagable
     void IDamagable.TakeDamage(int damage)
     {
         if ((HealthPoints -= damage) <= 0)
-            Destroy(gameObject);
+            GameManager.OnDestroy.AddListener(gameObject.Destroy);
     }
 
     private void OnDestroy()

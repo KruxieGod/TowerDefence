@@ -82,7 +82,7 @@ public class Tile : MonoBehaviour,ISetterTile
     void ISetterTile.SetContentTile(TileContent tileContent)
     {
         if (Content != null)
-            Destroy(Content.gameObject);
+            GameManager.OnDestroy.AddListener(Content.gameObject.Destroy);
         tileContent.transform.position = transform.position;
         tileContent.transform.parent = transform;
         Content = tileContent;

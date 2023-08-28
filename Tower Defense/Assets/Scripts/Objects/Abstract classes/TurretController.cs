@@ -1,4 +1,6 @@
+using System;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class TurretController<Behaviour> : MonoBehaviour
@@ -19,22 +21,20 @@ where Behaviour : BehaviourTower
     
     public void PursueTarget()
     {
-        if (_currentTarget != null &&
-            Vector3.Distance(_currentTarget.transform.position, _turret.transform.position) <= _radius)
-            LookAt();
-        else
+        if (_currentTarget.IsUnityNull() ||
+            Vector3.Distance(_currentTarget.transform.position, _turret.transform.position) > _radius)
             FindTarget();
+        LookAt();
     }
 
     protected abstract void LookAt();
     
     private void FindTarget()
     {
-        if (_turret == null)
-            return;
         _currentTarget = Physics.OverlapSphere(_turret.transform.position, _radius,_turret.EnemyLayer)
-            .Select(x => x.transform.root.GetComponent<Enemy>())
-            .FirstOrDefault(enemy => enemy != null);
+            .GetEnemies()
+            .FirstOrDefault(enemy => enemy != null &&
+                                     Vector3.Distance(enemy.transform.position, _turret.transform.position) <= _radius);
     }
 
     public abstract bool Shoot();

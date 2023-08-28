@@ -2,11 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
+    public static UnityEvent OnDestroy { get; set; } = new UnityEvent();
     [SerializeField] private GameTileFactory _factory;
     [SerializeField] private GameBoard _gameBoard;
     [SerializeField] private Vector2Int _size;
@@ -42,6 +45,8 @@ public class GameManager : MonoBehaviour
         
         foreach (var spawner in _enemyFactory.Data)
             spawner?.UpdateSpawner();
+        
+        OnDestroy.Invoke();
     }
 
     private void SetTileOnPath(TypeOfTile type,Func<TileContent> content)

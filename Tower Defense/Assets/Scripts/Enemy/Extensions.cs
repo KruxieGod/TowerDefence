@@ -36,6 +36,13 @@ public static class EnemiesExtension
     {
         return _behaviours[enemy];
     }
+
+    public static IEnumerable<Enemy> GetEnemies(this Collider[] array)
+    {
+        return array.Select(x => x.transform.root.GetComponent<Enemy>());
+    }
+
+    public static void Destroy(this GameObject gameObject) => UnityEngine.Object.Destroy(gameObject);
 }
 
 public enum EnemyType

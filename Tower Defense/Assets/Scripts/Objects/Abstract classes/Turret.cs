@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class Turret<BehaviourT> : TileContent,IUpdatable
@@ -10,15 +11,17 @@ public abstract class Turret<BehaviourT> : TileContent,IUpdatable
     private BehaviourTower _behaviourTower;
     [SerializeField] private TurretController<BehaviourT> _turret;
     private float _lastToShoot;
+    private GameTowerFactory _towerFactory;
     
-    public Turret<BehaviourT> Initialize(BehaviourT behaviourTower)
+    public Turret<BehaviourT> Initialize(BehaviourT behaviourTower,
+        GameTowerFactory towerFactory)
     {
+        _towerFactory = towerFactory;
         _behaviourTower = behaviourTower;
         _turret.Initialize(this,behaviourTower);
         _lastToShoot = _behaviourTower.SpeedFire;
         return this;
     }
-
     void IUpdatable.UpdateEntity()
     {
         _turret?.PursueTarget();
@@ -31,5 +34,10 @@ public abstract class Turret<BehaviourT> : TileContent,IUpdatable
     {
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(transform.position,_behaviourTower.Radius);
+    }
+
+    private void OnDestroy()
+    {
+        _towerFactory.Remove(this);
     }
 }

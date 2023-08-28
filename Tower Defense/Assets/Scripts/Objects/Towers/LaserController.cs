@@ -6,6 +6,8 @@ public class LaserController : TurretController<BehaviourTower>
     [SerializeField] private Laser _laser;
     protected override void LookAt()
     {
+        if (_currentTarget is null)
+            return;
         transform.LookAt(_currentTarget.transform);
     }
 

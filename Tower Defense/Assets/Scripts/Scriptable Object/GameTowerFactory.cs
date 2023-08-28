@@ -16,8 +16,10 @@ public class GameTowerFactory : BaseFactoryCollection<IUpdatable>
     private Turret<T> GetPrefab<T>(Turret<T> prefab,T behaviourTower)
         where T : BehaviourTower
     {
-        var pref = Instantiate(prefab).Initialize(behaviourTower);
+        var pref = Instantiate(prefab).Initialize(behaviourTower,this);
         _data.Add(pref);
         return pref;
     }
+
+    public void Remove(IUpdatable tower) => _data.Remove(tower);
 }
