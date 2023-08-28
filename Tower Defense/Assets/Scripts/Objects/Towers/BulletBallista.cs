@@ -10,6 +10,7 @@ public class BulletBallista : MonoBehaviour,IProjectile
     private float _damage;
     private float _speedBullet;
     private Rigidbody _rigidbody;
+
     // ReSharper disable Unity.PerformanceAnalysis
     public IProjectile Initialize(float radius, float damage,float speedBullet)
     {
@@ -20,9 +21,9 @@ public class BulletBallista : MonoBehaviour,IProjectile
         return this;
     }
 
-    float IProjectile.Launch(Vector3 position)
+    void IProjectile.Launch(Vector3 forward)
     {
-        return 0f;
+        _rigidbody.velocity = forward * _speedBullet;
     }
 
     private void OnCollisionEnter(Collision other)

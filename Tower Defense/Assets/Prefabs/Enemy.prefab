@@ -150,6 +150,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 615f8c5c6cf13e3448d8e0da0e2ccae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speedRotation: 0.6
+  _layerFloor:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &5154237572652186749
 GameObject:
   m_ObjectHideFlags: 0

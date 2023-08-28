@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.WSA;
 
 public class BallisticsController : TurretController<BehaviourBallistics>
 {
@@ -11,17 +12,26 @@ public class BallisticsController : TurretController<BehaviourBallistics>
         var position = _currentTarget.transform.position;
         _root.localRotation = Quaternion.Euler(new Vector3(0,Quaternion.LookRotation(_root.position - position).eulerAngles.y,0));
         float angle = CalculateAngle(position);
-        transform.localRotation = Quaternion.Euler(new Vector3(360f - angle,0,0));
+        transform.localEulerAngles = new Vector3(360f - angle,0,0);
     }
 
     public override bool Shoot()
     {
-        return _currentTarget is not null;
+        if (_currentTarget is null)
+            return false;
+        Instantiate(_prefabBullet,
+                transform.position,
+                Quaternion.identity)
+            .Initialize(_behaviourTower.Radius,
+                _behaviourTower.Damage,
+                _behaviourTower.SpeedBullet)
+            .Launch(transform.forward);
+        return true;
     }
 
     private float CalculateAngle(Vector3 position)
     {
-        Vector3 direction = (position - transform.position).normalized;
+        Vector3 direction = position - transform.position;
         float y = direction.y;
         direction.y = 0;
         float x = direction.magnitude;
@@ -31,8 +41,8 @@ public class BallisticsController : TurretController<BehaviourBallistics>
         if (underTheSqrRoot >= 0)
         {
             float root = Mathf.Sqrt(underTheSqrRoot);
-            Debug.Log(Mathf.Atan2(speedSqr + root, Physics.gravity.y)*Mathf.Rad2Deg);
-            return Mathf.Atan2(speedSqr + root, Physics.gravity.y)*Mathf.Rad2Deg;
+            Debug.Log(Mathf.Atan2(speedSqr + root, Physics.gravity.y*x)*Mathf.Rad2Deg);
+            return Mathf.Atan2(speedSqr + root, Physics.gravity.y*x)*Mathf.Rad2Deg;
         }
         return 0f;
     }

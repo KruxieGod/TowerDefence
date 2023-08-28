@@ -7,10 +7,11 @@ using UnityEngine;
 [SelectionBase]
 public class Enemy : MonoBehaviour,IDamagable
 {
+    [SerializeField] private float _speedRotation;
+    [SerializeField] private LayerMask _layerFloor;
     private BehaviourEnemy _behaviour;
     private Tile _currentTile;
     public const float RADIUS = GameBoard.POSITIONMULTIPLIER/2;
-    private GameEnemyFactory _factory;
     private Direction _previousDirection;
     private const float _distance = 1f;
     public int HealthPoints { get; private set; }
@@ -18,12 +19,10 @@ public class Enemy : MonoBehaviour,IDamagable
 
     public void Initialize(BehaviourEnemy behaviour,
         Tile currentTile,
-        GameEnemyFactory factory,
         Action<Enemy> onDestroy)
     {
         _onDestroy = onDestroy;
         _previousDirection = currentTile.Direction;
-        _factory = factory;
         transform.position = currentTile.transform.position;
         _behaviour = behaviour;
         _currentTile = currentTile;
@@ -41,14 +40,14 @@ public class Enemy : MonoBehaviour,IDamagable
         }
 
         if (Physics.Raycast (new Vector3(transform.position.x,transform.position.y+1f,transform.position.z),
-                Vector3.down, out var hit,_distance,_factory.LayerFloor)
+                Vector3.down, out var hit,_distance,_layerFloor)
             && _currentTile.transform != hit.transform
             && hit.transform.TryGetComponent(out Tile tile))
         {
             _currentTile = tile;
             _previousDirection = _currentTile.Direction;
         }
-        float speedRotation = _factory.SpeedRotation/2f;
+        float speedRotation = _speedRotation/2f;
 
         if (_previousDirection != _currentTile.Direction)
             speedRotation = 100f;

@@ -17,12 +17,10 @@ public class EnemySpawner : TileContent
     private float _timeToEnemy = 0;
     private int _countEnemiesWave = 0;
     private UnityEvent _moveOnEnemy;
-    private GameEnemyFactory _factory;
     public override bool IsEnded => _indexWave >= _waves.Count && _countEnemiesWave <= 0 && _enemies.Count == 0;
     
-    public EnemySpawner InitializeWave(Enemy prefab,List<Wave> waves,GameEnemyFactory factory)
+    public EnemySpawner InitializeWave(Enemy prefab,List<Wave> waves)
     {
-        _factory = factory;
         _moveOnEnemy = new UnityEvent();
         _waves = waves.ToList();
         _prefab = prefab;
@@ -46,7 +44,7 @@ public class EnemySpawner : TileContent
             var enemyBehaviour = _currentWave[_currentWave.Count - _countEnemiesWave--].GetBehaviour();
             _timeToEnemy = _waves[_indexWave - 1].RecoverTimeEnemies;
             var enemy = Instantiate(_prefab);
-            enemy.Initialize(enemyBehaviour,SpawnerTile,_factory,Remove);
+            enemy.Initialize(enemyBehaviour,SpawnerTile,Remove);
             _moveOnEnemy.AddListener(enemy.UpdatePos);
             _enemies.Add(enemy);
         }

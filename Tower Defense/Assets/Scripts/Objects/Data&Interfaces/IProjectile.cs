@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IProjectile
 {
-    float Launch(Vector3 position);
+    void Launch(Vector3 forward);
 }

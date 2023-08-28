@@ -698,6 +698,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tileType: 0
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 8
   _turret: {fileID: 5688157331569901368}
 --- !u!1 &8803692520257442005
 GameObject:
