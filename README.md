@@ -1,2 +1,2 @@
 # TowerDefence
-Trying to update the architecture of Maxim Kryukov project
+Ispired by the Maxim Kryukov project
