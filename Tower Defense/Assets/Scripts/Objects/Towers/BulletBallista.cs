@@ -7,28 +7,22 @@ using UnityEngine;
 public class BulletBallista : MonoBehaviour,IProjectile
 {
     [SerializeField] private ParticleSystem _effectExplosion;
-    private float _radius;
-    private float _damage;
-    private float _speedBullet;
+    private BulletInfo _bulletInfo;
     private Rigidbody _rigidbody;
     private LayerMask _enemyLayer;
     // ReSharper disable Unity.PerformanceAnalysis
-    public IProjectile Initialize(float radius,
-        float damage,
-        float speedBullet,
+    public IProjectile Initialize(BulletInfo bulletInfo,
         LayerMask enemyLayer)
     {
+        _bulletInfo = bulletInfo;
         _enemyLayer = enemyLayer;
-        _radius = radius;
-        _damage = damage;
-        _speedBullet = speedBullet;
         _rigidbody = GetComponent<Rigidbody>();
         return this;
     }
 
     void IProjectile.Launch(Vector3 forward)
     {
-        _rigidbody.velocity = forward * _speedBullet;
+        _rigidbody.velocity = forward * _bulletInfo.SpeedBullet;
     }
 
     private void OnCollisionEnter(Collision other)
@@ -39,11 +33,11 @@ public class BulletBallista : MonoBehaviour,IProjectile
                 transform.position,
                 Quaternion.identity);
         var main = explosion.main;
-        main.startSize = new ParticleSystem.MinMaxCurve(_radius*2f, _radius*2f);
+        main.startSize = new ParticleSystem.MinMaxCurve(_bulletInfo.RadiusDamage*2f, _bulletInfo.RadiusDamage*2f);
         explosion.Play();
         Destroy(explosion, 3);
-        foreach (IDamagable enemy in Physics.OverlapSphere(transform.position, _radius, _enemyLayer).GetEnemies())
-            enemy.TakeDamage((int)_damage);
+        foreach (IDamagable enemy in Physics.OverlapSphere(transform.position, _bulletInfo.RadiusDamage, _enemyLayer).GetEnemies())
+            enemy.TakeDamage((int)_bulletInfo.Damage);
         GameManager.OnDestroy.AddListener(gameObject.Destroy);
     }
 }

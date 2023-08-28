@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
             tower?.UpdateEntity();
         
         foreach (var spawner in _enemyFactory.Data)
-            spawner?.UpdateSpawner();
+            spawner?.UpdateEntity();
         
         OnDestroy.Invoke();
     }

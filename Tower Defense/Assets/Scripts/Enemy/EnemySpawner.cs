@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Object = UnityEngine.Object;
 
-public class EnemySpawner : TileContent
+public class EnemySpawner : TileContent, IUpdatable
 {
     public override TypeOfTile TileType => TypeOfTile.SpawnerEnemy;
     private Enemy _prefab;
@@ -25,9 +25,9 @@ public class EnemySpawner : TileContent
         _waves = waves.ToList();
         _prefab = prefab;
         return this;
-    }
-
-    public void UpdateSpawner()
+    } 
+    
+    public void UpdateEntity()
     {
         if (_timeToWave <= 0 && _indexWave < _waves.Count)
         {
@@ -52,6 +52,6 @@ public class EnemySpawner : TileContent
             _timeToEnemy -= Time.deltaTime;
         _moveOnEnemy.Invoke();
     }
-
+    
     private void Remove(Enemy enemy) => _enemies.Remove(enemy);
 }

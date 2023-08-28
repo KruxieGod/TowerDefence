@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.WSA;
 
 public class BallisticsController : TurretController<BehaviourBallistics>
 {
@@ -26,9 +22,7 @@ public class BallisticsController : TurretController<BehaviourBallistics>
         Instantiate(_prefabBullet,
                 transform.position,
                 Quaternion.identity)
-            .Initialize(_behaviourTower.RadiusDamage,
-                _behaviourTower.Damage,
-                _behaviourTower.SpeedBullet,
+            .Initialize(_behaviourTower.GetBulletInfo(),
                 _turret.EnemyLayer)
             .Launch(transform.forward);
         return true;
