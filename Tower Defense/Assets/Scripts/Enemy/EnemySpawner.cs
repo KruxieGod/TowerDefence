@@ -32,19 +32,19 @@ public class EnemySpawner : TileContent, IUpdatable
         if (_timeToWave <= 0 && _indexWave < _waves.Count)
         {
             var wave = _waves[_indexWave++];
-            _currentWave = wave.WaveEnemy;
+            //_currentWave = wave.WaveEnemy;
             _countEnemiesWave = _currentWave.Count;
-            _timeToWave = wave.RecoverTimeWave;
+            _timeToWave =1f;
         }
 
         if (_countEnemiesWave <= 0)
             _timeToWave -= Time.deltaTime;
         else if (_timeToEnemy <= 0)
         {
-            var enemyBehaviour = _currentWave[_currentWave.Count - _countEnemiesWave--].GetBehaviour();
+            //var enemyBehaviour = _currentWave[_currentWave.Count - _countEnemiesWave--].GetBehaviour();
             _timeToEnemy = _waves[_indexWave - 1].RecoverTimeEnemies;
             var enemy = Instantiate(_prefab);
-            enemy.Initialize(enemyBehaviour,SpawnerTile,Remove);
+            //enemy.Initialize(enemyBehaviour,SpawnerTile,Remove);
             _moveOnEnemy.AddListener(enemy.UpdatePos);
             _enemies.Add(enemy);
         }

@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Camera _camera;
     [SerializeField] private GameEnemyFactory _enemyFactory;
     [SerializeField] private GameTowerFactory _towerFactory;
+    [SerializeField] private GameScenario _scenario;
     private Ray _ray => _camera.ScreenPointToRay(Input.mousePosition);
     void Start()
     {
@@ -30,9 +31,6 @@ public class GameManager : MonoBehaviour
         else if (Input.GetMouseButtonDown(1))
             SetTileOnPath(TypeOfTile.Wall,
                 () => _factory.GetContent(TypeOfTile.Wall));
-        else if(Input.GetKeyDown(KeyCode.LeftShift))
-            SetTileOnPath(TypeOfTile.SpawnerEnemy,
-                _enemyFactory.GetSpawner);
         else if(Input.GetKeyDown(KeyCode.E))
             SetTileOnPath(TypeOfTile.Turret,
                 _towerFactory.GetBallista);

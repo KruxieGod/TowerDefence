@@ -10,6 +10,7 @@ public class GameTileFactory : ScriptableObject
     [SerializeField] private TileContent _destinationPrefab;
     [SerializeField] private TileContent _emptyPrefab;
     [SerializeField] private TileContent _wallPrefab;
+    [SerializeField] private EnemySpawner _spawnerPrefab;
     
     private Dictionary<TypeOfTile, TileContent> _prefabs;
 
@@ -19,7 +20,8 @@ public class GameTileFactory : ScriptableObject
         {
             { _destinationPrefab.TileType, _destinationPrefab},
             { _emptyPrefab.TileType, _emptyPrefab },
-            { _wallPrefab.TileType, _wallPrefab }
+            { _wallPrefab.TileType, _wallPrefab },
+            { _spawnerPrefab.TileType, _spawnerPrefab}
         };
     }
 

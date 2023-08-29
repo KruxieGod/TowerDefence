@@ -1,13 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
+[Serializable]
 public struct BehaviourEnemy
 {
-    public readonly float Speed;
-    public readonly int HP;
-    public BehaviourEnemy(float speed,int hp)
-    {
-        Speed = speed;
-        HP = hp;
-    }
+    [SerializeField]private float _speed;
+    [SerializeField]private int _hp;
+    public float Speed => _speed;
+    public int HP => _hp;
 }
