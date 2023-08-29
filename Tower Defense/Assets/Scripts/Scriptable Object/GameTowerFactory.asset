@@ -21,6 +21,6 @@ MonoBehaviour:
   _behaviourBallistics:
     _speedFire: 2
     _damage: 40
-    _radius: 15
+    _radius: 20
     _radiusDamage: 5
-    _speedBullet: 14
+    _angleBullet: 30

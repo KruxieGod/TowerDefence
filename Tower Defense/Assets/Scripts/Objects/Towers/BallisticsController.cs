@@ -4,15 +4,16 @@ public class BallisticsController : TurretController<BehaviourBallistics>
 {
     [SerializeField] private BulletBallista _prefabBullet;
     [SerializeField] private Transform _root;
-    
+    private readonly float g = Physics.gravity.y;
+    private float _speed;
     protected override void LookAt()
     {
         if (_currentTarget is null)
             return;
         var position = _currentTarget.transform.position;
         _root.localRotation = Quaternion.Euler(new Vector3(0,Quaternion.LookRotation(_root.position - position).eulerAngles.y,0));
-        float angle = CalculateAngle(position + _currentTarget.transform.forward);
-        transform.localEulerAngles = new Vector3(360f - angle,0,0);
+        _speed = CalculateSpeed(position + _currentTarget.transform.forward);
+        transform.localEulerAngles = new Vector3(_behaviourTower.AngleBullet,0,0);
     }
 
     public override bool Shoot()
@@ -24,24 +25,22 @@ public class BallisticsController : TurretController<BehaviourBallistics>
                 Quaternion.identity)
             .Initialize(_behaviourTower.GetBulletInfo(),
                 _turret.EnemyLayer)
-            .Launch(transform.forward);
+            .Launch(-transform.forward,_speed);
         return true;
     }
 
-    private float CalculateAngle(Vector3 position)
+    private float CalculateSpeed(Vector3 position)
     {
-        Vector3 direction = position - transform.position;
-        float y = direction.y;
-        direction.y = 0;
-        float x = direction.magnitude;
-        float speedSqr = _behaviourTower.SpeedBullet * _behaviourTower.SpeedBullet;
-        float underTheSqrRoot =
-            (speedSqr * speedSqr) - Physics.gravity.y * (Physics.gravity.y * x * x + 2 * y * speedSqr);
-        if (underTheSqrRoot >= 0)
-        {
-            float root = Mathf.Sqrt(underTheSqrRoot);
-            return Mathf.Atan2(speedSqr + root, Physics.gravity.y*x)*Mathf.Rad2Deg;
-        }
-        return 0f;
+        Vector3 fromTo = position - transform.position;
+        Vector3 fromToXZ = new Vector3(fromTo.x, 0f, fromTo.z);
+
+        float x = fromToXZ.magnitude;
+        float y = fromTo.y;
+
+        float AngleInRadians = _behaviourTower.AngleBullet * Mathf.PI / 180;
+
+        float v2 = (g * x * x) / (2 * (y - Mathf.Tan(AngleInRadians) * x) * Mathf.Pow(Mathf.Cos(AngleInRadians), 2));
+        float v = Mathf.Sqrt(Mathf.Abs(v2));
+        return v;
     }
 }

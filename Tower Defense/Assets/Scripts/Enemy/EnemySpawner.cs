@@ -22,7 +22,7 @@ public class EnemySpawner : TileContent, IUpdatable
     public EnemySpawner InitializeWave(Enemy prefab,List<Wave> waves)
     {
         _moveOnEnemy = new UnityEvent();
-        _waves = waves.ToList();
+        _waves = waves;
         _prefab = prefab;
         return this;
     } 

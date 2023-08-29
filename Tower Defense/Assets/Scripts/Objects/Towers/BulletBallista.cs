@@ -20,9 +20,9 @@ public class BulletBallista : MonoBehaviour,IProjectile
         return this;
     }
 
-    void IProjectile.Launch(Vector3 forward)
+    void IProjectile.Launch(Vector3 forward,float speed)
     {
-        _rigidbody.velocity = forward * _bulletInfo.SpeedBullet;
+        _rigidbody.velocity = forward * speed;
     }
 
     private void OnCollisionEnter(Collision other)
