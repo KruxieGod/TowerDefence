@@ -5,13 +5,13 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 [CreateAssetMenu]
-public class GameTileFactory : ScriptableObject
+public class GameTileFactory : BaseFactoryCollection<EnemySpawner>
 {
     [SerializeField] private TileContent _destinationPrefab;
     [SerializeField] private TileContent _emptyPrefab;
     [SerializeField] private TileContent _wallPrefab;
     [SerializeField] private EnemySpawner _spawnerPrefab;
-    
+    public int CountSpawners => _data.Count;
     private Dictionary<TypeOfTile, TileContent> _prefabs;
 
     private void OnEnable()
@@ -28,5 +28,12 @@ public class GameTileFactory : ScriptableObject
     public TileContent GetContent(TypeOfTile typeOfTile)
     {
         return Instantiate(_prefabs[typeOfTile]);
+    }
+
+    public EnemySpawner GetEnemySpawner()
+    {
+        var enemySpawner = Instantiate(_spawnerPrefab);
+        _data.Add(enemySpawner);
+        return enemySpawner;
     }
 }

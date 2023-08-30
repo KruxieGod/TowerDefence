@@ -6,21 +6,39 @@ using UnityEngine;
 [Serializable]
 public class SpawnerScenario
 {
-    private Tile _spawnerTile;
+    private EnemySpawner _spawnerTile;
     [SerializeField] private List<Wave> _waves;
     private GameTileFactory _tileFactory;
     private Wave.State _scenario;
-    private int _index = 0;
 
-    public void Initialize(GameTileFactory tileFactory, Tile spawnerTile)
+    public State Initialize(GameTileFactory tileFactory,EnemySpawner spawnerTile)
     {
         _tileFactory = tileFactory;
         _spawnerTile = spawnerTile;
-        _scenario = _waves[_index].GetScenario();
+        return new State(this);
     }
-
-    public bool UpdateWave()
+    
+    public class State
     {
-        return false;
+        private SpawnerScenario _spawnerScenario;
+        private Wave.State _wave;
+        private int _index;
+        public State(SpawnerScenario spawnerScenario)
+        {
+            _index = 0;
+            _spawnerScenario = spawnerScenario;
+            _wave = _spawnerScenario._waves[_index++].GetScenario(_spawnerScenario._spawnerTile);
+        }
+
+        public bool ScenarioUpdate()
+        {
+            return _wave.WaveUpdate();
+        }
+
+        public void NextWave()
+        {
+            if (_index < _spawnerScenario._waves.Count)
+                _wave = _spawnerScenario._waves[_index++].GetScenario(_spawnerScenario._spawnerTile);
+        }
     }
 }

@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 187b4695de71fce49bb988699cd0e5de, type: 2}
+  - {fileID: 2100000, guid: 1f1d5868489b71d449f216912b6025c7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 2454470456468371919}
   - component: {fileID: 4420508057894298517}
   m_Layer: 3
-  m_Name: Enemy
+  m_Name: Orc
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

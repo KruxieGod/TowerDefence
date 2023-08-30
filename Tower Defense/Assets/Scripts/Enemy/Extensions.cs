@@ -12,13 +12,11 @@ public static class TileExtension
         return tile.Content.TileType == TypeOfTile.Destination;
     }
 
-    public static bool CanBeSet(this Tile tile,GameBoard gameBoard,GameEnemyFactory enemyFactory)
+    public static bool CanBeSet(this Tile tile,GameBoard gameBoard)
     {
         if (tile.Content.TileType == TypeOfTile.Destination && gameBoard.CountDestinations == 1)
             return false;
-        else if (tile.Content.TileType == TypeOfTile.SpawnerEnemy)
-            return tile.Content.IsEnded;
-        return true;
+        return tile.Content.TileType != TypeOfTile.SpawnerEnemy;
     }
 }
 

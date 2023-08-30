@@ -17,10 +17,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameEnemyFactory _enemyFactory;
     [SerializeField] private GameTowerFactory _towerFactory;
     [SerializeField] private GameScenario _scenario;
+    private GameScenario.State _currentScenario;
     private Ray _ray => _camera.ScreenPointToRay(Input.mousePosition);
     void Start()
     {
         _gameBoard.Initialize(_size,_factory,_enemyFactory);
+        _currentScenario = _scenario.GetScenario(_gameBoard[0,0]);
     }
 
     private void Update()
@@ -41,8 +43,10 @@ public class GameManager : MonoBehaviour
         foreach (var tower in _towerFactory.Data)
             tower?.UpdateEntity();
         
-        foreach (var spawner in _enemyFactory.Data)
+        foreach (var spawner in _factory.Data)
             spawner?.UpdateEntity();
+        
+        _currentScenario.ScenarioUpdate();
         
         OnDestroy.Invoke();
     }
@@ -52,8 +56,8 @@ public class GameManager : MonoBehaviour
         if (!TrySetTile(type,content)) 
             return;
         _gameBoard.PathUpdate();
-        if (_enemyFactory.CountSpawners != 0 &&
-            !_enemyFactory.Data.All(x => x.SpawnerTile.HasPath()))
+        if (_factory.CountSpawners != 0 &&
+            !_factory.Data.All(x => x.SpawnerTile.HasPath()))
         {
             TrySetTile(TypeOfTile.Empty,content);
             _gameBoard.PathUpdate();
@@ -66,7 +70,7 @@ public class GameManager : MonoBehaviour
         if (tile == null ||
             Physics.OverlapBox(tile.transform.position,new Vector3(Enemy.RADIUS,Enemy.RADIUS,Enemy.RADIUS))
                 .Any(x => x.CompareTag("Enemy")) || 
-            !tile.CanBeSet(_gameBoard,_enemyFactory))
+            !tile.CanBeSet(_gameBoard))
             return false;
         var typeOf = type == tile.Content.TileType ? TypeOfTile.Empty : type;
         _gameBoard.SetType(tile,typeOf);

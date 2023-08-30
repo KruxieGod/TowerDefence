@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04acbf459d50e1e4b97f9304f845d021, type: 3}
   m_Name: GameEnemyFactory
   m_EditorClassIdentifier: 
-  _spawnerPrefab: {fileID: 3003393807697666590, guid: 960b23ce4aca18b4fa4203703f2886b2, type: 3}
-  _prefabEnemy: {fileID: 4420508057894298517, guid: 44ea4e5ea29a98b40b6cb93e695b8b68, type: 3}
-  _waves:
-  - _waveEnemy: 000000000200000002000000020000000200000002000000020000000200000002000000
-    _recoverTimeWave: 1
-    _recoverTimeEnemies: 0.1
+  _prefabElf: {fileID: 4420508057894298517, guid: 4697a3da232a4e54380a682559e3e1e4, type: 3}
+  _prefabHuman: {fileID: 4420508057894298517, guid: 44ea4e5ea29a98b40b6cb93e695b8b68, type: 3}
+  _prefabOrc: {fileID: 4420508057894298517, guid: c667a8e861042ee42b24b8dfd38d7052, type: 3}

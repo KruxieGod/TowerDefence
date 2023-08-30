@@ -15,5 +15,4 @@ MonoBehaviour:
   _destinationPrefab: {fileID: 6401124456257426754, guid: ba654b6f260143046bc073766c8ac625, type: 3}
   _emptyPrefab: {fileID: 2142228098965986277, guid: 99455b169f53de449b0be7747aef8d53, type: 3}
   _wallPrefab: {fileID: 2608587998319272376, guid: 5ab2f22f1b6e3e5489a9afff26311c0b, type: 3}
-  _spawnerEnemyPrefab: {fileID: 3003393807697666590, guid: 960b23ce4aca18b4fa4203703f2886b2, type: 3}
-  _tourrelPrefab: {fileID: 7803718847904924053, guid: d1a733b8ecccd7645ab6f3763e300600, type: 3}
+  _spawnerPrefab: {fileID: 3003393807697666590, guid: 960b23ce4aca18b4fa4203703f2886b2, type: 3}

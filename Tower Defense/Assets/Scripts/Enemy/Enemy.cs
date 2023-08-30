@@ -17,17 +17,22 @@ public class Enemy : MonoBehaviour,IDamagable
     public int HealthPoints { get; private set; }
     private Action<Enemy> _onDestroy;
     public float Speed => _behaviour.Speed;
-    public void Initialize(BehaviourEnemy behaviour,
+    public void Initialize(
         Tile currentTile,
         Action<Enemy> onDestroy)
     {
         _onDestroy = onDestroy;
         _previousDirection = currentTile.Direction;
         transform.position = currentTile.transform.position;
-        _behaviour = behaviour;
         _currentTile = currentTile;
         transform.rotation = currentTile.Direction.GetDirection();
+    }
+
+    public Enemy InitializeEnemy(BehaviourEnemy behaviour)
+    {
+        _behaviour = behaviour;
         HealthPoints = behaviour.HP;
+        return this;
     }
 
     public void UpdatePos()

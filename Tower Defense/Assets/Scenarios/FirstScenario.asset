@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 728a09c519a6455e82e7d5d9a389f756, type: 3}
+  m_Name: FirstScenario
+  m_EditorClassIdentifier: 
+  _timeBetweenWaves: 0
+  _scenarios:
+  - _waves:
+    - {fileID: 11400000, guid: 1bf738d93541753448bfd75e6ffd8052, type: 2}
+    - {fileID: 11400000, guid: 4799f3332cb15474a9a11fc04015a1f5, type: 2}
+    - {fileID: 11400000, guid: 9600d43aa16291c478ed25355f6b9293, type: 2}
+  _gameTileFactory: {fileID: 11400000, guid: 46ba90b4cc4e9324f8b5731fa01d6f80, type: 2}

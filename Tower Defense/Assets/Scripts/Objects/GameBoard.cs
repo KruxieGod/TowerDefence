@@ -121,4 +121,16 @@ public class GameBoard : MonoBehaviour
 
         return null;
     }
+
+    public Tile this[int i, int j]
+    {
+        get
+        {
+            var lengthI = _board.GetLength(0);
+            var lengthJ = _board.GetLength(1);
+            if (i < lengthI && i >= 0 && j < lengthJ && j >= 0)
+                return _board[i, j];
+            throw new ArgumentOutOfRangeException();
+        }
+    }
 }
