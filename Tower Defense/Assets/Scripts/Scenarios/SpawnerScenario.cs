@@ -18,7 +18,7 @@ public class SpawnerScenario
         return new State(this);
     }
     
-    public class State
+    public struct State
     {
         private SpawnerScenario _spawnerScenario;
         private Wave.State _wave;

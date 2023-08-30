@@ -33,7 +33,7 @@ public class GameScenario : ScriptableObject
 
         public void ScenarioUpdate()
         {
-            if (_timeLast <= 0 && _scenarios.All(scenario => scenario.ScenarioUpdate()))
+            if (_timeLast <= 0 && CheckOnUpdatedScenarios())
             {
                 foreach (var scenario in _scenarios)
                     scenario.NextWave();
@@ -41,6 +41,14 @@ public class GameScenario : ScriptableObject
             }
 
             _timeLast -= Time.deltaTime;
+        }
+
+        private bool CheckOnUpdatedScenarios()
+        {
+            for (int i = 0; i < _scenarios.Length; i++)
+                if (!_scenarios[i].ScenarioUpdate())
+                    return false;
+            return true;
         }
     }
 }

@@ -15,15 +15,15 @@ MonoBehaviour:
   _waveEnemy:
   - _enemyType: 2
     _behaviour:
-      _speed: 5
+      _speed: 50
       _hp: 40
   - _enemyType: 2
     _behaviour:
-      _speed: 5
+      _speed: 1
       _hp: 40
   - _enemyType: 2
     _behaviour:
-      _speed: 5
+      _speed: 7
       _hp: 40
   _recoverTimeEnemies: 1
   _factory: {fileID: 11400000, guid: 3ea81be6d1e49144da4f9e0a498e165b, type: 2}

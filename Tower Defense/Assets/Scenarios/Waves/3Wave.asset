@@ -13,17 +13,9 @@ MonoBehaviour:
   m_Name: 3Wave
   m_EditorClassIdentifier: 
   _waveEnemy:
-  - _enemyType: 0
+  - _enemyType: 1
     _behaviour:
-      _speed: 10
-      _hp: 15
-  - _enemyType: 0
-    _behaviour:
-      _speed: 10
-      _hp: 15
-  - _enemyType: 0
-    _behaviour:
-      _speed: 10
-      _hp: 15
+      _speed: 2
+      _hp: 0
   _recoverTimeEnemies: 1
   _factory: {fileID: 11400000, guid: 3ea81be6d1e49144da4f9e0a498e165b, type: 2}
