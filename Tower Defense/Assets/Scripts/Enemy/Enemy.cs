@@ -40,6 +40,7 @@ public class Enemy : MonoBehaviour,IDamagable
         Debug.Log("Start");
         if (_currentTile.NextTile == null)
         {
+            PassedCounter.NotifyCounterOn?.Invoke(1);
             Destroy(gameObject);
             return;
         }

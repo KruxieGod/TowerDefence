@@ -25,5 +25,12 @@ public class EnemySpawner : TileContent, IUpdatable
         _moveOnEnemy.AddListener( enemy.UpdatePos);
     }
     
+    public void Recycle()
+    {
+        foreach (var enemy in _enemies)
+            Destroy(enemy.gameObject);
+        _enemies.Clear();
+    }
+    
     private void Remove(Enemy enemy) => _enemies.Remove(enemy);
 }
