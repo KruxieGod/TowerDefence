@@ -149,6 +149,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ea289172afd4e5438940d704360b954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _counter:
+    _lives: 1
   _factory: {fileID: 11400000, guid: 46ba90b4cc4e9324f8b5731fa01d6f80, type: 2}
   _gameBoard: {fileID: 50896280}
   _size: {x: 11, y: 11}

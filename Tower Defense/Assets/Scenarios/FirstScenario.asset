@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 728a09c519a6455e82e7d5d9a389f756, type: 3}
   m_Name: FirstScenario
   m_EditorClassIdentifier: 
-  _timeBetweenWaves: 0
+  _timeBetweenWaves: 5
   _scenarios:
   - _waves:
     - {fileID: 11400000, guid: 1bf738d93541753448bfd75e6ffd8052, type: 2}

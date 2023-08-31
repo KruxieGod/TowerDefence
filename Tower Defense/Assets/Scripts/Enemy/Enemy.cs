@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour,IDamagable
 
     public void UpdatePos()
     {
-        Debug.Log("Start");
+        Debug.Log("Update");
         if (_currentTile.NextTile == null)
         {
             PassedCounter.NotifyCounterOn?.Invoke(1);

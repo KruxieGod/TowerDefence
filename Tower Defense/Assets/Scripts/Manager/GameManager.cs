@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     private Ray _ray => _camera.ScreenPointToRay(Input.mousePosition);
     void Start()
     {
-        PassedCounter.NotifyCounterOn += _counter.EnemyPassed;
+        _counter.SetEvent();
         StartNewGame();
     }
 

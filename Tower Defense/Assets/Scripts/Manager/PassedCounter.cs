@@ -9,7 +9,7 @@ public class PassedCounter
     [SerializeField] private int _lives;
     private int _livesLast;
     private GameManager _gameManager;
-    public static Action<int> NotifyCounterOn;
+    public static Action<int> NotifyCounterOn { get; protected set; }
 
     public void Initialize(GameManager gameManager)
     {
@@ -19,7 +19,15 @@ public class PassedCounter
 
     public void EnemyPassed(int hp)
     {
+        Debug.Log("EnemyPassed");
         if ((_livesLast -= hp) <= 0)
             _gameManager.ResetGame();
+    }
+
+    public void SetEvent()
+    {
+        Debug.Log("SetEvent");
+        NotifyCounterOn -= EnemyPassed;
+        NotifyCounterOn += EnemyPassed;
     }
 }
