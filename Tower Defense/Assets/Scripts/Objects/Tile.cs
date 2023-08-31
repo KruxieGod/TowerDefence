@@ -21,7 +21,11 @@ public class Tile : MonoBehaviour,ISetterTile
             { TypeOfTile.Destination, SetPosDestination},
             { TypeOfTile.Empty, SetWithoutInteraction},
             { TypeOfTile.Wall , SetWithInteraction},
-            { TypeOfTile.SpawnerEnemy ,SetWithoutInteraction},
+            { TypeOfTile.SpawnerEnemy ,tile =>
+            {
+                SetWithoutInteraction(tile);
+                tile._arrow.SetActive(false);
+            }},
             { TypeOfTile.Turret , SetWithInteraction}
         };
     }

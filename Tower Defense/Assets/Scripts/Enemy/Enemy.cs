@@ -7,7 +7,7 @@ using UnityEngine;
 [SelectionBase]
 public class Enemy : MonoBehaviour,IDamagable
 {
-    [SerializeField] private float _speedRotation;
+    private const float _speedRotation = 0.6f;
     [SerializeField] private LayerMask _layerFloor;
     private BehaviourEnemy _behaviour;
     private Tile _currentTile;
