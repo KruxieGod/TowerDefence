@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 100}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 1266
+  controlID: 3637
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -96,7 +96,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 1
+    m_EnableMouseInput: 0
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 1267
+  controlID: 3638
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -177,7 +177,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 50}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 1268
+  controlID: 3639
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -243,9 +243,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: d25b0000
+      m_SelectedIDs: de5b0000
       m_LastClickedID: 0
-      m_ExpandedIDs: b432feff0e39feff4a3bfeff1ca9feff20fbffff565c0000
+      m_ExpandedIDs: b432feff0e39feff4a3bfeff1ca9feff20fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -972,7 +972,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenarios
+    - Assets/Scripts/Scriptable Object
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -982,16 +982,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenarios
+  - Assets/Scripts/Scriptable Object
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\user\Documents\GitHub\TowerDefence\Tower Defense
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 025e0000
-    m_LastClickedID: 24066
-    m_ExpandedIDs: 00000000fa5d0000fc5d0000fe5d0000005e0000025e0000d85f0000
+    scrollPos: {x: 0, y: 90}
+    m_SelectedIDs: e85f0000
+    m_LastClickedID: 24552
+    m_ExpandedIDs: 00000000fa5d0000fc5d0000fe5d0000005e0000025e0000d25f0000d85f0000e45f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1019,7 +1019,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000fa5d0000fc5d0000fe5d0000005e0000025e0000
+    m_ExpandedIDs: 00000000fa5d0000fc5d0000fe5d0000005e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1044,8 +1044,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: d25b0000
-    m_LastClickedInstanceID: 23506
+    m_SelectedInstanceIDs: de5b0000
+    m_LastClickedInstanceID: 23518
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c62300005a6400001c610000e8700000ac640000c2a0000064a20000bea40000e8a3000050b000007eac00001eb0000000ac00008ead0000340b0100185e00007cae00005e0b0100b462000074770000b4730000f8780000287d000054780000c86c000056620000d0780000887700005a7f0000707a0000d2640000787c0000ee770000d47e0000726a0000367600009a6f00002e6b00005e740000327b00005c6a0000b05e00005c7600006a5f00009e7000001671000052b50000ea750000685f00008a5f0000b8920000ce5f0000e0820000148f0000bc9000008a840000368c0000ac92000072850000766600008e690000c2b8000058f30000b2690000b66900009a6700001a88000040880000de9c0000a4680000aa6b0000266b00007c6b000054680000c0690000e2690000ca690000ac8000007a230100b66800007a6c00000c6500000e6b0000046b0000c66b0000969300006e9300008c680000060b01004877000052770000767b0000627b00006c7b00000a6900005a8a0000208a0000248a0000427100003c710000327100002a7900005288000000000000
     m_RenameOverlay:

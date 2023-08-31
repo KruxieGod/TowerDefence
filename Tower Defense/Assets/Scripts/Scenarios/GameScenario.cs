@@ -35,8 +35,8 @@ public class GameScenario : ScriptableObject
         {
             if (_timeLast <= 0 && CheckOnUpdatedScenarios())
             {
-                foreach (var scenario in _scenarios)
-                    scenario.NextWave();
+                for (int i = 0; i < _scenarios.Length; i++)
+                    _scenarios[i].NextWave();
                 _timeLast = _gameScenario._timeBetweenWaves;
             }
 

@@ -15,8 +15,8 @@ MonoBehaviour:
   _waveEnemy:
   - _enemyType: 2
     _behaviour:
-      _speed: 50
-      _hp: 40
+      _speed: 5
+      _hp: 400
   - _enemyType: 2
     _behaviour:
       _speed: 1

@@ -15,8 +15,8 @@ MonoBehaviour:
   _laserTurretPrefab: {fileID: 4033138660180835146, guid: d1a733b8ecccd7645ab6f3763e300600, type: 3}
   _ballistaPrefab: {fileID: 6422567995290623807, guid: 97f5ea6736c310849be3d070d4e25847, type: 3}
   _behaviourTower:
-    _speedFire: 0.4
-    _damage: 15
+    _speedFire: 0.3
+    _damage: 3
     _radius: 15
   _behaviourBallistics:
     _speedFire: 2
