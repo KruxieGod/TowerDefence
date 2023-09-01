@@ -30,12 +30,6 @@ public abstract class Turret<BehaviourT> : TileContent,IUpdatable
         _lastToShoot -= Time.deltaTime;
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(transform.position,_behaviourTower.Radius);
-    }
-
     private void OnDestroy()
     {
         _towerFactory.Remove(this);

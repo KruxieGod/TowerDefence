@@ -13,7 +13,9 @@ public class BallisticsController : TurretController<BehaviourBallistics>
         var position = _currentTarget.transform.position;
         _root.localRotation = Quaternion.Euler(new Vector3(0,Quaternion.LookRotation(_root.position - position).eulerAngles.y,0));
         _speed = CalculateSpeed(position + _currentTarget.transform.forward);
-        transform.localEulerAngles = new Vector3(_behaviourTower.AngleBullet,0,0);
+        var localEulerAngles = transform.localEulerAngles;
+        localEulerAngles = new Vector3(_behaviourTower.AngleBullet,localEulerAngles.y,localEulerAngles.z);
+        transform.localEulerAngles = localEulerAngles;
     }
 
     public override bool Shoot()

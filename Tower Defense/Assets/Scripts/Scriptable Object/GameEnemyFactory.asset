@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04acbf459d50e1e4b97f9304f845d021, type: 3}
   m_Name: GameEnemyFactory
   m_EditorClassIdentifier: 
-  _prefabElf: {fileID: 4420508057894298517, guid: 9ee56c381295b604d85cf59d65dd81f0, type: 3}
-  _prefabHuman: {fileID: 4373121878831239898, guid: d1a717d91e9320a46b3d41ba6adce732, type: 3}
-  _prefabOrc: {fileID: 7207110414728380671, guid: 381b096dcfe6cdb4694dcc0786df3ed4, type: 3}
+  _prefabElf: {fileID: 4420508057894298517, guid: 4697a3da232a4e54380a682559e3e1e4, type: 3}
+  _prefabHuman: {fileID: 4420508057894298517, guid: 44ea4e5ea29a98b40b6cb93e695b8b68, type: 3}
+  _prefabOrc: {fileID: 4420508057894298517, guid: c667a8e861042ee42b24b8dfd38d7052, type: 3}

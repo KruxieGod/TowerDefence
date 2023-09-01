@@ -38,4 +38,4 @@ MonoBehaviour:
       _speed: 5
       _hp: 40
   _recoverTimeEnemies: 1
-  _factory: {fileID: 11400000, guid: 3ea81be6d1e49144da4f9e0a498e165b, type: 2}
+  _factory: {fileID: 11400000, guid: 62bfb03c8e822f8489b82ebe876b2bb9, type: 2}
