@@ -11,10 +11,9 @@ public class BallisticsController : TurretController<BehaviourBallistics>
         if (_currentTarget is null)
             return;
         var position = _currentTarget.transform.position;
-        _root.localRotation = Quaternion.Euler(new Vector3(0,Quaternion.LookRotation(_root.position - position).eulerAngles.y,0));
+        _root.localRotation= Quaternion.Euler(new Vector3(0,Quaternion.LookRotation(_root.position - position).eulerAngles.y,0));
         _speed = CalculateSpeed(position + _currentTarget.transform.forward);
-        var localEulerAngles = transform.localEulerAngles;
-        localEulerAngles = new Vector3(_behaviourTower.AngleBullet,localEulerAngles.y,localEulerAngles.z);
+        var localEulerAngles = new Vector3(_behaviourTower.AngleBullet,0,0);
         transform.localEulerAngles = localEulerAngles;
     }
 
