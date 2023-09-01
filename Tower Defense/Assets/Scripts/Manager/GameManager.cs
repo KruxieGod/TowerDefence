@@ -15,9 +15,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameBoard _gameBoard;
     [SerializeField] private Vector2Int _size;
     [SerializeField] private Camera _camera;
-    [SerializeField] private GameEnemyFactory _enemyFactory;
     [SerializeField] private GameTowerFactory _towerFactory;
     [SerializeField] private GameScenario _scenario;
+
+    public static CollectionEntities<EnemySpawner>
+        Spawners { get; private set; } = new CollectionEntities<EnemySpawner>();
     private GameScenario.State _currentScenario;
     private bool _isPaused;
     private Action _onReset;
@@ -50,9 +52,8 @@ public class GameManager : MonoBehaviour
         foreach (var tower in _towerFactory.Data)
             tower?.UpdateEntity();
         
-        foreach (var spawner in _factory.Data)
+        foreach (var spawner in Spawners.Data)
             spawner?.UpdateEntity();
-        
         _currentScenario.ScenarioUpdate();
         OnDestroy?.Invoke();
         _onReset?.Invoke();
@@ -65,9 +66,9 @@ public class GameManager : MonoBehaviour
 
     private void StartNewGame()
     {
-        foreach (var spawner in _factory.Data)
+        foreach (var spawner in Spawners.Data)
             spawner.Recycle();
-        _gameBoard.Initialize(_size,_factory,_enemyFactory);
+        _gameBoard.Initialize(_size,_factory);
         _currentScenario = _scenario.GetScenario(_gameBoard[0,0]);
         _counter.Initialize(this);
         _onReset -= StartNewGame;
@@ -85,8 +86,8 @@ public class GameManager : MonoBehaviour
         if (!TrySetTile(type,content)) 
             return;
         _gameBoard.PathUpdate();
-        if (_factory.CountSpawners != 0 &&
-            !_factory.Data.All(x => x.SpawnerTile.HasPath()))
+        if (Spawners.CountSpawners != 0 &&
+            !Spawners.Data.All(x => x.SpawnerTile.HasPath()))
         {
             TrySetTile(TypeOfTile.Empty,content);
             _gameBoard.PathUpdate();

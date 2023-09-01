@@ -15,12 +15,10 @@ public class GameBoard : MonoBehaviour
     private GameTileFactory _factory;
     private HashSet<ISetterTile> _destinations = new HashSet<ISetterTile>();
     private Func<Tile, Tile, bool> _checkOnType;
-    private GameEnemyFactory _enemyFactory;
     public int CountDestinations => _destinations.Count;
 
-    public void Initialize(Vector2Int size,GameTileFactory factory,GameEnemyFactory enemyFactory)
+    public void Initialize(Vector2Int size,GameTileFactory factory)
     {
-        _enemyFactory = enemyFactory;
         _factory = factory;
         Size = size;
         _plane.localScale = new Vector3(Size.x, 1, Size.y);

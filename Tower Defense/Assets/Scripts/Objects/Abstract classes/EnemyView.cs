@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,11 +10,7 @@ public class EnemyView : MonoBehaviour
     private Animator _animator;
     private static readonly int IsDead = Animator.StringToHash(deathFlag);
 
-    public EnemyView Initialize()
-    {
-        _animator = GetComponent<Animator>();
-        return this;
-    }
+    public void Awake() => _animator = GetComponent<Animator>();
 
     public void DieAnimation(ICollector enemy)
     {

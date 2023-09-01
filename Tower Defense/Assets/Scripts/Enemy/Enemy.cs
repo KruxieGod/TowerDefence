@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour,IDamagable,ICollector
         Tile currentTile,
         Action<Enemy> onDestroy)
     {
-        _enemyView = GetComponentInChildren<EnemyView>()?.Initialize();
+        _enemyView = GetComponentInChildren<EnemyView>();
         _onDestroy = onDestroy;
         _previousDirection = currentTile.Direction;
         transform.position = currentTile.transform.position;
