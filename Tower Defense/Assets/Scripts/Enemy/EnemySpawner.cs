@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using Object = UnityEngine.Object;
@@ -28,9 +29,14 @@ public class EnemySpawner : TileContent, IUpdatable
     public void Recycle()
     {
         foreach (var enemy in _enemies)
-            Destroy(enemy.gameObject);
+            if (!enemy.IsUnityNull())
+                Destroy(enemy.gameObject);
         _enemies.Clear();
     }
-    
-    private void Remove(Enemy enemy) => _enemies.Remove(enemy);
+
+    private void Remove(Enemy enemy)
+    {
+        _moveOnEnemy.RemoveListener(enemy.UpdatePos);
+        _enemies.Remove(enemy);
+    }
 }

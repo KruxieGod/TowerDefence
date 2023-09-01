@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using UnityEditor.PackageManager;
 using UnityEngine;
 
-[SelectionBase]
-public class Enemy : MonoBehaviour,IDamagable
+[SelectionBase,RequireComponent(typeof(Collider))]
+public class Enemy : MonoBehaviour,IDamagable,ICollector
 {
+    public bool IsTrigger { get; private set; }
+    private EnemyView _enemyView;
     private const float _speedRotation = 0.6f;
     [SerializeField] private LayerMask _layerFloor;
     private BehaviourEnemy _behaviour;
@@ -21,6 +23,7 @@ public class Enemy : MonoBehaviour,IDamagable
         Tile currentTile,
         Action<Enemy> onDestroy)
     {
+        _enemyView = GetComponentInChildren<EnemyView>()?.Initialize();
         _onDestroy = onDestroy;
         _previousDirection = currentTile.Direction;
         transform.position = currentTile.transform.position;
@@ -41,7 +44,7 @@ public class Enemy : MonoBehaviour,IDamagable
         if (_currentTile.NextTile == null)
         {
             PassedCounter.NotifyCounterOn?.Invoke(1);
-            Destroy(gameObject);
+            Die();
             return;
         }
 
@@ -64,14 +67,39 @@ public class Enemy : MonoBehaviour,IDamagable
         _previousDirection = _currentTile.Direction;
     }
 
+    private void Die()
+    {
+        if (_enemyView == null)
+            GameManager.OnDestroy.AddListener(gameObject.Destroy);
+        else
+        {
+            _enemyView.DieAnimation(this);
+            GameManager.OnDestroy.AddListener(StartDestroy);
+        }
+    }
+
     void IDamagable.TakeDamage(int damage)
     {
         if ((HealthPoints -= damage) <= 0)
-            GameManager.OnDestroy.AddListener(gameObject.Destroy);
+            Die();
     }
 
-    private void OnDestroy()
+    void ICollector.Recycle()
     {
         _onDestroy(this);
+        IsTrigger = true;
+    }
+
+    private void StartDestroy()
+    {
+        GameManager.OnDestroy.RemoveListener(StartDestroy);
+        StartCoroutine(Destroy());
+    }
+
+    private IEnumerator Destroy()
+    {
+        Debug.Log("DestroyEnemy");
+        yield return new WaitForSeconds(3);
+        GameManager.OnDestroy.AddListener(gameObject.Destroy);
     }
 }

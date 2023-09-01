@@ -22,6 +22,7 @@ where Behaviour : BehaviourTower
     public void PursueTarget()
     {
         if (_currentTarget.IsUnityNull() ||
+            _currentTarget.IsTrigger ||
             Vector3.Distance(_currentTarget.transform.position, _turret.transform.position) > _radius)
             FindTarget();
         LookAt();
@@ -34,6 +35,7 @@ where Behaviour : BehaviourTower
         _currentTarget = Physics.OverlapSphere(_turret.transform.position, _radius,_turret.EnemyLayer)
             .GetEnemies()
             .FirstOrDefault(enemy => enemy != null &&
+                                     !enemy.IsTrigger && 
                                      Vector3.Distance(enemy.transform.position, _turret.transform.position) <= _radius);
     }
 
