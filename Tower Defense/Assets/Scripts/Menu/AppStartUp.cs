@@ -1,18 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AppStartUp : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private LoadingScreenProvider _loadingScreenProvider => ProjectContext.Instance.LoadingScreenProvider;
+    [SerializeField] private ProjectContext _projectContext;
+    private void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        _projectContext.Initialize();
+        var queue = new Queue<ILoadingOperation>();
+        queue.Enqueue(ProjectContext.Instance.AssetProvider);
+        queue.Enqueue(new LoginOperation());
+        queue.Enqueue(new MainMenuLoader());
+        _loadingScreenProvider.LoadAndDestroy(queue);
     }
 }

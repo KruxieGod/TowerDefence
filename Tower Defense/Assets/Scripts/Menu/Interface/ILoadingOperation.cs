@@ -7,5 +7,5 @@ using UnityEngine;
 public interface ILoadingOperation
 {
     string Description { get; }
-    UniTask Load<T>(Action<float> onProcess);
+    UniTask Load(Action<float> onProcess);
 }
