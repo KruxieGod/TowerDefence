@@ -1,14 +1,20 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu,Serializable]
 public class Wave : ScriptableObject
 {
     [SerializeField] private List<EnemyInfo> _waveEnemy;
     [SerializeField] private float _recoverTimeEnemies;
     [SerializeField] private GameEnemyFactory _factory;
 
+    public WaveJson GetJsonClass()
+    {
+        return new WaveJson(_waveEnemy,_recoverTimeEnemies);
+    }
+    
     public State GetScenario(EnemySpawner spawner) => new State(this,spawner);
     
     public struct State
@@ -35,5 +41,19 @@ public class Wave : ScriptableObject
             _timeLast -= Time.deltaTime;
             return _index >= _wave._waveEnemy.Count;
         }
+    }
+}
+
+[Serializable]
+public class WaveJson
+{
+    [SerializeField]private List<EnemyInfo> _waveEnemy;
+    [SerializeField]private float _recoverTimeEnemies;
+
+    public WaveJson(List<EnemyInfo> waveEnemy,
+        float recoverTimeEnemies)
+    {
+        _waveEnemy = waveEnemy;
+        _recoverTimeEnemies = recoverTimeEnemies;
     }
 }

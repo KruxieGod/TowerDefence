@@ -10,11 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 728a09c519a6455e82e7d5d9a389f756, type: 3}
-  m_Name: FirstScenario
+  m_Name: 2GameScenario
   m_EditorClassIdentifier: 
-  _timeBetweenWaves: 5
+  _timeBetweenWaves: 6
   _scenarios:
-  - _waves:
+  - _positionSpawner: {x: 1, y: 3}
+    _waves:
+    - {fileID: 11400000, guid: 1bf738d93541753448bfd75e6ffd8052, type: 2}
+    - {fileID: 11400000, guid: 4799f3332cb15474a9a11fc04015a1f5, type: 2}
+    - {fileID: 11400000, guid: 9600d43aa16291c478ed25355f6b9293, type: 2}
+    - {fileID: 11400000, guid: e7c4991d74bcad34cb2666dfed122cfa, type: 2}
+  - _positionSpawner: {x: 5, y: 0}
+    _waves:
     - {fileID: 11400000, guid: 1bf738d93541753448bfd75e6ffd8052, type: 2}
     - {fileID: 11400000, guid: 4799f3332cb15474a9a11fc04015a1f5, type: 2}
     - {fileID: 11400000, guid: 9600d43aa16291c478ed25355f6b9293, type: 2}

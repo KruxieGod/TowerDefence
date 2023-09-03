@@ -23,9 +23,7 @@ public class LoadingScreen : MonoBehaviour
         foreach (var operation in queue)
         {
             ResetFill();
-            Debug.Log(_text.text );
             _text.text = operation.Description;
-            Debug.Log(_text.text );
             await operation.Load(OnProgress);
             await Wait();
         }

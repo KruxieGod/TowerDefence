@@ -1,20 +1,27 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [Serializable]
 public class SpawnerScenario
 {
-    private EnemySpawner _spawnerTile;
+    [SerializeField] private Vector2Int _positionSpawner;
+    [NonSerialized]private EnemySpawner _spawnerTile;
     [SerializeField] private List<Wave> _waves;
-    private GameTileFactory _tileFactory;
-    private Wave.State _scenario;
 
-    public State Initialize(GameTileFactory tileFactory,EnemySpawner spawnerTile)
+    public SpawnerScenarioJson GetJsonClass()
     {
-        _tileFactory = tileFactory;
-        _spawnerTile = spawnerTile;
+        return new SpawnerScenarioJson(_positionSpawner,_waves.Select(x => x.GetJsonClass()).ToList());
+    }
+    
+    public State Initialize(GameTileFactory tileFactory,GameBoard gameBoard)
+    {
+        _spawnerTile = tileFactory?.GetEnemySpawner();
+        ISetterTile tile = gameBoard[_positionSpawner.x, _positionSpawner.y];
+        tile.SetContentTile(_spawnerTile);
+        tile.SetTypeTile(TypeOfTile.SpawnerEnemy);
         return new State(this);
     }
     
@@ -40,5 +47,21 @@ public class SpawnerScenario
             if (_index < _spawnerScenario._waves.Count)
                 _wave = _spawnerScenario._waves[_index++].GetScenario(_spawnerScenario._spawnerTile);
         }
+    }
+}
+
+
+[Serializable]
+public class SpawnerScenarioJson
+{
+    [SerializeField] private Vector2Int _positionSpawner;
+    [NonSerialized]private EnemySpawner _spawnerTile;
+    [SerializeField] private List<WaveJson> _waves;
+
+    public SpawnerScenarioJson(Vector2Int positionSpawner,
+        List<WaveJson> waves)
+    {
+        _positionSpawner = positionSpawner;
+        _waves = waves;
     }
 }

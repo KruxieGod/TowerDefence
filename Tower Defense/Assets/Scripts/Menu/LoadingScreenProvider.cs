@@ -19,7 +19,6 @@ public class LoadingScreenProvider : AssetLoader
         if (_cachedObject == null)
             return;
         _cachedObject.SetActive(false);
-        Addressables.ReleaseInstance(_cachedObject);
         _cachedObject = null;
     }
 }

@@ -6,6 +6,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
+using UnityEngine.Windows;
+using Input = UnityEngine.Input;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,9 +25,14 @@ public class GameManager : MonoBehaviour
     private GameScenario.State _currentScenario;
     private bool _isPaused;
     private Action _onReset;
+    private const string PATHTOFILES = "C:\\Users\\user\\Documents\\GitHub\\TowerDefence\\Tower Defense\\Assets\\Json Files\\";
     private Ray _ray => _camera.ScreenPointToRay(Input.mousePosition);
     void Start()
     {
+        var gameScenario = _scenario.GetJsonClass();
+        var json = JsonUtility.ToJson(gameScenario);
+        var path = PATHTOFILES + _scenario.name + ".json";
+        System.IO.File.WriteAllText(path,json);
         _counter.SetEvent();
         StartNewGame();
     }
@@ -69,7 +76,7 @@ public class GameManager : MonoBehaviour
         foreach (var spawner in Spawners.Data)
             spawner.Recycle();
         _gameBoard.Initialize(_size,_factory);
-        _currentScenario = _scenario.GetScenario(_gameBoard[0,0]);
+        _currentScenario = _scenario.GetScenario(_factory,_gameBoard);
         _counter.Initialize(this);
         _onReset -= StartNewGame;
         Debug.Log("GG");
