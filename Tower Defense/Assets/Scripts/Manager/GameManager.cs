@@ -13,26 +13,21 @@ public class GameManager : MonoBehaviour
 {
     public static UnityEvent OnDestroy { get; set; } = new UnityEvent();
     [SerializeField] private PassedCounter _counter;
-    [SerializeField] private GameTileFactory _factory;
+    private GameTileFactory _factory => ProjectContext.Instance.FactoriesProvider.GameFactories.GameTileFactory;
     [SerializeField] private GameBoard _gameBoard;
     [SerializeField] private Vector2Int _size;
     [SerializeField] private Camera _camera;
-    [SerializeField] private GameTowerFactory _towerFactory;
-    [SerializeField] private GameScenario _scenario;
+    private GameTowerFactory _towerFactory => ProjectContext.Instance.FactoriesProvider.GameFactories.GameTowerFactory;
+    private GameScenarioJson _scenario => ProjectContext.Instance.ScenariosLoader.GetCurrentScenario();
 
     public static CollectionEntities<EnemySpawner>
         Spawners { get; private set; } = new CollectionEntities<EnemySpawner>();
-    private GameScenario.State _currentScenario;
+    private GameScenarioJson.State _currentScenario;
     private bool _isPaused;
     private Action _onReset;
-    private const string PATHTOFILES = "C:\\Users\\user\\Documents\\GitHub\\TowerDefence\\Tower Defense\\Assets\\Json Files\\";
     private Ray _ray => _camera.ScreenPointToRay(Input.mousePosition);
     void Start()
     {
-        var gameScenario = _scenario.GetJsonClass();
-        var json = JsonUtility.ToJson(gameScenario);
-        var path = PATHTOFILES + _scenario.name + ".json";
-        System.IO.File.WriteAllText(path,json);
         _counter.SetEvent();
         StartNewGame();
     }

@@ -35,7 +35,6 @@ public class LoadingScreen : MonoBehaviour
     {
         while (_slider.value < _targetProgress)
         {
-            Debug.Log(_slider.value);
             await UniTask.Yield();
         }
         await UniTask.Delay(TimeSpan.FromSeconds(0.15f));

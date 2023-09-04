@@ -349,7 +349,7 @@ GameObject:
   - component: {fileID: 1608781006063486239}
   - component: {fileID: 2870302958187961114}
   - component: {fileID: 3899027283048033478}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: LoadingScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6433,7 +6433,7 @@ GameObject:
   - component: {fileID: 6300516614342671373}
   - component: {fileID: 5511437129255501687}
   - component: {fileID: 7716941422686878508}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6657,6 +6657,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Label_TitleRibbon_Yellow
       objectReference: {fileID: 0}
+    - target: {fileID: 1440689358921121792, guid: daeca100a3cc04b7b8d24be444ebc7e8, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1440689358921121799, guid: daeca100a3cc04b7b8d24be444ebc7e8, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -6804,6 +6808,18 @@ PrefabInstance:
     - target: {fileID: 1440689359043879875, guid: daeca100a3cc04b7b8d24be444ebc7e8, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1440689359043879884, guid: daeca100a3cc04b7b8d24be444ebc7e8, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1440689359183638550, guid: daeca100a3cc04b7b8d24be444ebc7e8, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1440689359379694057, guid: daeca100a3cc04b7b8d24be444ebc7e8, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

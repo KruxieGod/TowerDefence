@@ -13,7 +13,8 @@ public class AppStartUp : MonoBehaviour
         var queue = new Queue<ILoadingOperation>();
         queue.Enqueue(ProjectContext.Instance.AssetProvider);
         queue.Enqueue(new LoginOperation());
-        queue.Enqueue(new MainMenuLoader());
+        queue.Enqueue(ProjectContext.Instance.FactoriesProvider);
+        queue.Enqueue(new SceneLoader(SceneData.MAINMENUSCENE));
         _loadingScreenProvider.LoadAndDestroy(queue);
     }
 }

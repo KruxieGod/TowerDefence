@@ -12,9 +12,9 @@ public class LoginOperation : ILoadingOperation
     {
         onProcess?.Invoke(0.3f);
         Debug.Log("LoginOperation in");
-        await UniTask.Delay(TimeSpan.FromSeconds(2));
+        await UniTask.Delay(TimeSpan.FromSeconds(0.1f));
         onProcess?.Invoke(0.66f);
-        await UniTask.Delay(TimeSpan.FromSeconds(2));
+        await UniTask.Delay(TimeSpan.FromSeconds(0.1f));
         Debug.Log("LoginOperation is initialized");
         onProcess?.Invoke(1);
     }

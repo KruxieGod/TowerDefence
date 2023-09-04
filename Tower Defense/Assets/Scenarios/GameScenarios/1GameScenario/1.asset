@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 728a09c519a6455e82e7d5d9a389f756, type: 3}
-  m_Name: 1GameScenario
+  m_Name: 1
   m_EditorClassIdentifier: 
   _timeBetweenWaves: 5
   _scenarios:
