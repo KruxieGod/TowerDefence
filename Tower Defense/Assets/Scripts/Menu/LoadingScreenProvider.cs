@@ -9,6 +9,7 @@ public class LoadingScreenProvider : AssetLoader
     public async UniTask LoadAndDestroy(Queue<ILoadingOperation> loadingOperations)
     {
         var loadingScreen = await Load<LoadingScreen>(AddressableData.LOADINGSCREEN);
+        
         await loadingScreen.Load(loadingOperations);
         Unload();
     }
@@ -19,7 +20,7 @@ public class LoadingScreenProvider : AssetLoader
         if (_cachedObject == null)
             return;
         _cachedObject.SetActive(false);
-        //Addressables.ReleaseInstance(_cachedObject);
+        Addressables.ReleaseInstance(_cachedObject);
         _cachedObject = null;
     }
 }

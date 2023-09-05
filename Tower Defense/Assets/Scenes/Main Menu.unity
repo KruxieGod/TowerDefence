@@ -128,6 +128,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1809191338}
     m_Modifications:
+    - target: {fileID: 4843517283219313030, guid: 6e63778e1de38405aa5898ad22f3f879, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 204
+      objectReference: {fileID: 0}
+    - target: {fileID: 4843517283219313030, guid: 6e63778e1de38405aa5898ad22f3f879, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 228
+      objectReference: {fileID: 0}
+    - target: {fileID: 9062648048843785192, guid: 6e63778e1de38405aa5898ad22f3f879, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9062648048843785194, guid: 6e63778e1de38405aa5898ad22f3f879, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -154,11 +166,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9062648048843785194, guid: 6e63778e1de38405aa5898ad22f3f879, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 113.4396
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 9062648048843785194, guid: 6e63778e1de38405aa5898ad22f3f879, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 113.4396
+      value: 119.9472
       objectReference: {fileID: 0}
     - target: {fileID: 9062648048843785194, guid: 6e63778e1de38405aa5898ad22f3f879, type: 3}
       propertyPath: m_LocalPosition.x
@@ -190,11 +202,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9062648048843785194, guid: 6e63778e1de38405aa5898ad22f3f879, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -80
+      value: -167
       objectReference: {fileID: 0}
     - target: {fileID: 9062648048843785194, guid: 6e63778e1de38405aa5898ad22f3f879, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 97
+      value: 185.97
       objectReference: {fileID: 0}
     - target: {fileID: 9062648048843785194, guid: 6e63778e1de38405aa5898ad22f3f879, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -340,8 +352,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 63}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 47.477234, y: 120.02655}
+  m_SizeDelta: {x: 453.4059, y: 67.3868}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1274634224
 GameObject:
@@ -402,15 +414,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Start Game
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9844632d790894e85a0b85fdefbfe1e5, type: 2}
+  m_sharedMaterial: {fileID: 7746803525459343344, guid: 9844632d790894e85a0b85fdefbfe1e5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4278255586
+  m_fontColor: {r: 0.8873817, g: 1, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -427,8 +439,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 64
+  m_fontSizeBase: 64
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -494,7 +506,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1696946527
 RectTransform:
   m_ObjectHideFlags: 0
@@ -512,7 +524,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 260, y: 252}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1696946528
 MonoBehaviour:
@@ -631,7 +643,7 @@ Canvas:
   m_GameObject: {fileID: 1809191333}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0

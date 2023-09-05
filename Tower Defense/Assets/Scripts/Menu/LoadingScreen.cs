@@ -16,6 +16,7 @@ public class LoadingScreen : MonoBehaviour
     private float _targetProgress;
     public async UniTask Load(Queue<ILoadingOperation> queue)
     {
+        DontDestroyOnLoad(this);
         _canvas.worldCamera = ProjectContext.Instance.UiCamera;
         _canvas.enabled = true;
         StartCoroutine(UpdateSlider());
