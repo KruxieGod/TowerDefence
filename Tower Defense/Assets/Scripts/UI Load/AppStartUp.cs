@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class AppStartUp : MonoBehaviour
 {
-    private LoadingScreenProvider _loadingScreenProvider => ProjectContext.Instance.LoadingScreenProvider;
+    private LoadingScreenLoader LoadingScreenLoader => ProjectContext.Instance.LoadingScreenLoader;
     [SerializeField] private ProjectContext _projectContext;
     private void Start()
     {
@@ -13,8 +13,8 @@ public class AppStartUp : MonoBehaviour
         var queue = new Queue<ILoadingOperation>();
         queue.Enqueue(ProjectContext.Instance.AssetProvider);
         queue.Enqueue(new LoginOperation());
-        queue.Enqueue(ProjectContext.Instance.FactoriesProvider);
-        queue.Enqueue(new SceneLoader(SceneData.MAINMENUSCENE));
-        _loadingScreenProvider.LoadAndDestroy(queue);
+        queue.Enqueue(ProjectContext.Instance.GameProvider);
+        queue.Enqueue(new SceneProvider(SceneData.MAINMENUSCENE));
+        LoadingScreenLoader.LoadAndDestroy(queue);
     }
 }

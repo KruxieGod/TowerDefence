@@ -22,8 +22,7 @@ public class MenuTest : MonoBehaviour
     {
         Debug.Log("MenuTest");
         var queue = new Queue<ILoadingOperation>();
-        queue.Enqueue(ProjectContext.Instance.ScenariosLoader);
-        queue.Enqueue(new SceneLoader(SceneData.GAMESCENE));
-        ProjectContext.Instance.LoadingScreenProvider.LoadAndDestroy(queue);
+        queue.Enqueue(new SceneProvider(SceneData.GAMESCENE));
+        ProjectContext.Instance.LoadingScreenLoader.LoadAndDestroy(queue);
     }
 }

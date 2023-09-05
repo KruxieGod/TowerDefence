@@ -13,12 +13,12 @@ public class GameManager : MonoBehaviour
 {
     public static UnityEvent OnDestroy { get; set; } = new UnityEvent();
     [SerializeField] private PassedCounter _counter;
-    private GameTileFactory _factory => ProjectContext.Instance.FactoriesProvider.GameFactories.GameTileFactory;
+    private GameTileFactory _factory => ProjectContext.Instance.GameProvider.FactoriesProvider.GameFactories.GameTileFactory;
     [SerializeField] private GameBoard _gameBoard;
     [SerializeField] private Vector2Int _size;
     [SerializeField] private Camera _camera;
-    private GameTowerFactory _towerFactory => ProjectContext.Instance.FactoriesProvider.GameFactories.GameTowerFactory;
-    private GameScenarioJson _scenario => ProjectContext.Instance.ScenariosLoader.GetCurrentScenario();
+    private GameTowerFactory _towerFactory => ProjectContext.Instance.GameProvider.FactoriesProvider.GameFactories.GameTowerFactory;
+    private GameScenarioJson _scenario => ProjectContext.Instance.GameProvider.ScenariosProvider.GetCurrentScenario();
 
     public static CollectionEntities<EnemySpawner>
         Spawners { get; private set; } = new CollectionEntities<EnemySpawner>();

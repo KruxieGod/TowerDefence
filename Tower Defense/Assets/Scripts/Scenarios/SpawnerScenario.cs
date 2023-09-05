@@ -67,7 +67,7 @@ public class SpawnerScenarioJson
     
     public State Initialize(GameBoard gameBoard)
     {
-        _spawnerTile = ProjectContext.Instance.FactoriesProvider.GameFactories.GameTileFactory?.GetEnemySpawner();
+        _spawnerTile = ProjectContext.Instance.GameProvider.FactoriesProvider.GameFactories.GameTileFactory?.GetEnemySpawner();
         ISetterTile tile = gameBoard[_positionSpawner.x, _positionSpawner.y];
         tile.SetContentTile(_spawnerTile);
         tile.SetTypeTile(TypeOfTile.SpawnerEnemy);

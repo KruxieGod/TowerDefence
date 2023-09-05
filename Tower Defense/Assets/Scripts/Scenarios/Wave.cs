@@ -62,7 +62,7 @@ public class WaveJson
     
     public State GetScenario(EnemySpawner spawner)
     {
-        _enemyFactory = ProjectContext.Instance.FactoriesProvider.GameFactories.GetEnemyFactoryFrom(_factory);
+        _enemyFactory = ProjectContext.Instance.GameProvider.FactoriesProvider.GameFactories.GetEnemyFactoryFrom(_factory);
         return new State(this, spawner);
     }
 

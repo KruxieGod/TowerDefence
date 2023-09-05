@@ -35,7 +35,7 @@ public class BulletBallista : MonoBehaviour,IProjectile
         var main = explosion.main;
         main.startSize = new ParticleSystem.MinMaxCurve(_bulletInfo.RadiusDamage*2f, _bulletInfo.RadiusDamage*2f);
         explosion.Play();
-        Destroy(explosion, 3);
+        Destroy(explosion.gameObject, 3);
         foreach (IDamagable enemy in Physics.OverlapSphere(transform.position, _bulletInfo.RadiusDamage, _enemyLayer).GetEnemies())
             enemy.TakeDamage((int)_bulletInfo.Damage);
         GameManager.OnDestroy.AddListener(gameObject.Destroy);

@@ -4,7 +4,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-public class LoadingScreenProvider : AssetLoader
+public class LoadingScreenLoader : AssetLoader
 {
     public async UniTask LoadAndDestroy(Queue<ILoadingOperation> loadingOperations)
     {

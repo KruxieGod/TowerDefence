@@ -4,7 +4,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public sealed class SceneLoader : ILoadingOperation
+public sealed class SceneProvider : ILoadingOperation
 {
     private string _sceneName;
     public string Description => _sceneName + " loading...";
@@ -21,7 +21,7 @@ public sealed class SceneLoader : ILoadingOperation
         SceneManager.UnloadSceneAsync(currentScene);
     }
 
-    public SceneLoader(string sceneName)
+    public SceneProvider(string sceneName)
     {
         _sceneName = sceneName;
     }

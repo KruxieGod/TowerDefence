@@ -20,6 +20,15 @@ public static class TileExtension
     }
 }
 
+public static class JsonExtension
+{
+    public static T GetClassFromJson<T>(string path)
+    {
+        string jsonText = System.IO.File.ReadAllText(path);
+        return JsonUtility.FromJson<T>(jsonText);
+    }
+}
+
 public static class EnemiesExtension
 {
     public static IEnumerable<Enemy> GetEnemies(this Collider[] array)
