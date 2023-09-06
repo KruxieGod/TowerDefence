@@ -6,6 +6,7 @@ public class GameProvider : ILoadingOperation
 {
     public ScenariosProvider ScenariosProvider { get; private set; } = new ScenariosProvider();
     public FactoriesProvider FactoriesProvider { get; private set; } = new FactoriesProvider();
+    public GameSaverProvider GameSaverProvider { get; private set; } = new GameSaverProvider();
     public string Description => "Game specifications loading...";
     public async UniTask Load(Action<float> onProcess)
     {
@@ -13,6 +14,8 @@ public class GameProvider : ILoadingOperation
         await ScenariosProvider.Load();
         onProcess?.Invoke(0.6f);
         await FactoriesProvider.Load();
+        onProcess?.Invoke(0.8f);
+        await GameSaverProvider.Load();
         onProcess?.Invoke(1f);
     }
 }

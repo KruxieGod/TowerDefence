@@ -23,9 +23,25 @@ public static class TileExtension
 public static class JsonExtension
 {
     public static T GetClassFromJson<T>(string path)
+    where T : class
     {
-        string jsonText = System.IO.File.ReadAllText(path);
-        return JsonUtility.FromJson<T>(jsonText);
+        try
+        {
+            string jsonText = System.IO.File.ReadAllText(path);
+            return JsonUtility.FromJson<T>(jsonText);
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    public static IEnumerable<T> GetEnumerableClassFromJson<T>(string path)
+    where T : class
+    {
+        string[] jsonFiles = System.IO.Directory.GetFiles(path, "*.json");
+        foreach (var jsonPath in jsonFiles)
+            yield return GetClassFromJson<T>(jsonPath);
     }
 }
 

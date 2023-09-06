@@ -5,15 +5,14 @@ using System.Linq;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Windows;
-public class ScenariosProvider
+public class ScenariosProvider : ILoadingOperation
 {
     private List<GameScenarioJson> _gameScenarios = new List<GameScenarioJson>();
-    public async UniTask Load()
+    public async UniTask Load(Action<float> onProcess = null)
     {
-        string[] jsonFiles = System.IO.Directory.GetFiles(PathCollection.PATHTOSCENARIOS, "*.json");
-        foreach (var jsonPath in jsonFiles)
+        foreach (var gameScenario in JsonExtension.GetEnumerableClassFromJson<GameScenarioJson>(PathCollection.PATHTOSCENARIOS))
         {
-            _gameScenarios.Add(JsonExtension.GetClassFromJson<GameScenarioJson>(jsonPath));
+            _gameScenarios.Add(gameScenario);
             await UniTask.Delay(TimeSpan.FromSeconds(1));
         }
 
@@ -24,5 +23,7 @@ public class ScenariosProvider
     {
         return _gameScenarios[0];
     }
+
+    public string Description { get; }
 }
 
