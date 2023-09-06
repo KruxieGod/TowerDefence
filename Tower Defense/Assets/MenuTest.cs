@@ -27,11 +27,13 @@ public class MenuTest : MonoBehaviour
 
     private void CreateNewGame()
     {
-        
+        var queue = new Queue<ILoadingOperation>();
+        queue.Enqueue(new LevelsProvider(new LevelsSaveData()));
+        ProjectContext.Instance.LoadingScreenLoader.LoadAndDestroy(queue);
     }
 
     private void LoadLevels()
     {
-        
+        Debug.Log("Load");
     }
 }

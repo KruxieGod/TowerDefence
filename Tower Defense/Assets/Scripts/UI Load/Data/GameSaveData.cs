@@ -8,5 +8,5 @@ public class GameSaveData
 
 public class LevelsSaveData
 {
-    public int CompletedLevels { get; private set; }
+    public int CompletedLevels { get; private set; } = 0;
 }

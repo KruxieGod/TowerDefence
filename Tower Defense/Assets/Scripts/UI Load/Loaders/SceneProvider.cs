@@ -12,11 +12,9 @@ public sealed class SceneProvider : ILoadingOperation
     {
         var currentScene = SceneManager.GetActiveScene();
         onProcess?.Invoke(0.5f);
-        Debug.Log("Main menu in");
         var scene = SceneManager.LoadSceneAsync(_sceneName,
             LoadSceneMode.Additive);
         await scene;
-        Debug.Log("Main menu is initialized");
         onProcess?.Invoke(1);
         SceneManager.UnloadSceneAsync(currentScene);
     }
