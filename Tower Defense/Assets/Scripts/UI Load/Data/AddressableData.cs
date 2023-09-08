@@ -15,5 +15,5 @@ public static class SceneData
 public static class PathCollection
 {
     public const string PATHTOSCENARIOS = "C:\\Users\\user\\Documents\\GitHub\\TowerDefence\\Tower Defense\\Assets\\Json Files\\Scenarios\\";
-    public const string PATHTOSAVES = "C:\\Users\\user\\Documents\\GitHub\\TowerDefence\\Tower Defense\\Assets\\Json Files\\Saves\\";
+    public const string PATHTOSAVES = "C:\\Users\\user\\Documents\\GitHub\\TowerDefence\\Tower Defense\\Assets\\Json Files\\Saves\\saves.json";
 }

@@ -2,27 +2,45 @@
 using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 public class GameSaverProvider : ILoadingOperation
 {
-    public GameSaveData GameSaveData { get; private set; }
+    private GameSaveData _gameSaveData { get; set; }
 
     private int _count
     {
         get
         {
-            if (GameSaveData == null)
+            if (_gameSaveData == null)
                 return 0;
-            return GameSaveData.CreatedGames.Count;
+            return _gameSaveData.CreatedGames.Count;
         }
     }
     public string Description { get; }
     public UniTask Load(Action<float> onProcess = null)
     {
-        GameSaveData = JsonExtension.GetClassFromJson<GameSaveData>(PathCollection.PATHTOSAVES);
+        _gameSaveData = JsonExtension.GetClassFromJson<GameSaveData>(PathCollection.PATHTOSAVES);
+        Debug.Log(_gameSaveData?.CreatedGames?.Count);
         return UniTask.CompletedTask;
     }
 
     public int GetCurrentGames() => _count;
-    
+
+    public LevelsSaveData CreateNewGame()
+    {
+        var levels = new LevelsSaveData();
+        if (_gameSaveData == null)
+            _gameSaveData = new GameSaveData();
+        _gameSaveData.CreatedGames.Add( levels);
+        Serialize();
+        return levels;
+    }
+
+    private void Serialize()
+    {
+        JsonExtension.SerializeClass(_gameSaveData,PathCollection.PATHTOSAVES);
+    }
+
+    public LevelsSaveData GetLevels(int index) => _gameSaveData.CreatedGames[index];
 }

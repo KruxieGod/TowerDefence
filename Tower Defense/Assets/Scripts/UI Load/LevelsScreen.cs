@@ -23,7 +23,8 @@ public class LevelsScreen : MonoBehaviour
         {
             var button = settings[i].GetComponent<Button>();
             // ReSharper disable once AccessToModifiedClosure
-            button.onClick.AddListener(() => LoadLevel(settings[i]));
+            int index = i;
+            button.onClick.AddListener(() => LoadLevel(settings[index]));
         }
 
         for (int i = countCompletedLevels == 0 ?
@@ -36,6 +37,10 @@ public class LevelsScreen : MonoBehaviour
 
     private void LoadLevel(LevelSettings levelSettings)
     {
-        
+        Debug.Log(levelSettings.ScenarioNumber);
+        var queue = new Queue<ILoadingOperation>();
+        ((ISettable)ProjectContext.Instance.GameProvider).Set(levelSettings);
+        queue.Enqueue(new SceneProvider(SceneData.GAMESCENE));
+        ProjectContext.Instance.LoadingScreenLoader.LoadAndDestroy(queue);
     }
 }

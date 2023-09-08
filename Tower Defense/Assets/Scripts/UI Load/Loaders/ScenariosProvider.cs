@@ -5,6 +5,7 @@ using System.Linq;
 using Cysharp.Threading.Tasks;
 public class ScenariosProvider : ILoadingOperation
 {
+    private int _currentIndex;
     private List<GameScenarioJson> _gameScenarios;
     public async UniTask Load(Action<float> onProcess = null)
     {
@@ -16,9 +17,11 @@ public class ScenariosProvider : ILoadingOperation
 
     public GameScenarioJson GetCurrentScenario()
     {
-        return _gameScenarios[0];
+        return _gameScenarios[_currentIndex];
     }
 
     public string Description { get; }
+
+    public void SetScenario(int index) => _currentIndex = index;
 }
 

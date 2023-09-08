@@ -66,9 +66,7 @@ public class GameScenario : ScriptableObject
     private void Serialization()
     {
         var gameScenario = GetJsonClass();
-        var json = JsonUtility.ToJson(gameScenario);
-        var path = PathCollection.PATHTOSCENARIOS + name + ".json";
-        System.IO.File.WriteAllText(path,json);
+        JsonExtension.SerializeClass(gameScenario,PathCollection.PATHTOSCENARIOS + name + ".json");
     }
 }
 

@@ -22,6 +22,13 @@ public static class TileExtension
 
 public static class JsonExtension
 {
+    public static void SerializeClass<T>(T instance,string path)
+        where T : class
+    {
+        var json = JsonUtility.ToJson(instance);
+        System.IO.File.WriteAllText(path,json);
+    }
+    
     public static T GetClassFromJson<T>(string path)
     where T : class
     {
