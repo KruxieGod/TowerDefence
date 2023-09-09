@@ -12,5 +12,9 @@ public class GameSaveData
 [Serializable]
 public class LevelsSaveData
 {
+    public LevelsSaveData(int completedLevels) => CompletedLevels = completedLevels;
+
+    public LevelsSaveData() { }
+
     [field: SerializeField]public int CompletedLevels { get; private set; } = 0;
 }

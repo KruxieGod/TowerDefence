@@ -102,4 +102,9 @@ public class Enemy : MonoBehaviour,IDamagable,ICollector
         yield return new WaitForSeconds(3);
         GameManager.OnDestroy.AddListener(gameObject.Destroy);
     }
+
+    private void OnDestroy()
+    {
+        _onDestroy(this);
+    }
 }

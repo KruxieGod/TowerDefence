@@ -11,6 +11,7 @@ public class EnemySpawner : TileContent, IUpdatable
     public override TypeOfTile TileType => TypeOfTile.SpawnerEnemy;
     private HashSet<Enemy> _enemies = new HashSet<Enemy>();
     private UnityEvent _moveOnEnemy = new UnityEvent();
+    public bool IsEnded => _enemies.Count == 0;
     
     public void UpdateEntity()
     {

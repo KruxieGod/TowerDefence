@@ -2,7 +2,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 
-public class GameProvider : ILoadingOperation,ISettable
+public class GameProvider : ILoadingOperation
 {
     public ScenariosProvider ScenariosProvider { get; private set; } = new ScenariosProvider();
     public FactoriesProvider FactoriesProvider { get; private set; } = new FactoriesProvider();
@@ -17,10 +17,5 @@ public class GameProvider : ILoadingOperation,ISettable
         onProcess?.Invoke(0.8f);
         await GameSaverProvider.Load();
         onProcess?.Invoke(1f);
-    }
-
-    public void Set(LevelSettings index)
-    {
-        throw new NotImplementedException();
     }
 }

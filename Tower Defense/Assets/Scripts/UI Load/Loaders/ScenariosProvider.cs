@@ -22,6 +22,6 @@ public class ScenariosProvider : ILoadingOperation
 
     public string Description { get; }
 
-    public void SetScenario(int index) => _currentIndex = index;
+    public void SetScenario(int index) => _currentIndex = --index;
 }
 

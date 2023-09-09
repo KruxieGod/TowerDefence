@@ -91,10 +91,12 @@ public class SpawnerScenarioJson
             return _wave.WaveUpdate();
         }
 
-        public void NextWave()
+        public bool NextWave()
         {
-            if (_index < _spawnerScenario._waves.Count)
+            var res = _index < _spawnerScenario._waves.Count;
+            if (res)
                 _wave = _spawnerScenario._waves[_index++].GetScenario(_spawnerScenario._spawnerTile);
+            return res || !_spawnerScenario._spawnerTile.IsEnded;
         }
     }
 }
