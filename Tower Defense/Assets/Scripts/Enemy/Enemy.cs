@@ -40,7 +40,6 @@ public class Enemy : MonoBehaviour,IDamagable,ICollector
 
     public void UpdatePos()
     {
-        Debug.Log("Update");
         if (_currentTile.NextTile == null)
         {
             PassedCounter.NotifyCounterOn?.Invoke(1);
@@ -98,7 +97,6 @@ public class Enemy : MonoBehaviour,IDamagable,ICollector
 
     private IEnumerator Destroy()
     {
-        Debug.Log("DestroyEnemy");
         yield return new WaitForSeconds(3);
         GameManager.OnDestroy.AddListener(gameObject.Destroy);
     }

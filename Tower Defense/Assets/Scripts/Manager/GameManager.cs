@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     private GameScenarioJson.State _currentScenario;
     private bool _isPaused;
     private Action _onReset;
+    private bool _isEndedGame;
     private Ray _ray => _camera.ScreenPointToRay(Input.mousePosition);
     void Start()
     {
@@ -34,6 +35,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (_isEndedGame)
+            return;
         if (Input.GetKeyDown(KeyCode.Escape))
             Pause();
         if (_isPaused)
@@ -71,16 +74,21 @@ public class GameManager : MonoBehaviour
         foreach (var spawner in Spawners.Data)
             spawner.Recycle();
         _gameBoard.Initialize(_size,_factory);
-        _currentScenario = _scenario.GetScenario(_factory,_gameBoard);
+        _currentScenario = _scenario.GetScenario(_gameBoard);
         _counter.Initialize(this);
         _onReset -= StartNewGame;
         Debug.Log("GG");
     }
-    
-    private void Pause()
+
+    public void EndGame()
     {
-        _isPaused = !_isPaused;
-        Time.timeScale = _isPaused ? 0 : 1;
+        _isEndedGame = true;
+        Pause(true);
+    }
+
+    private void Pause(bool pause = false)
+    {
+        _isPaused = !_isPaused || pause;
     }
     
     private void SetTileOnPath(TypeOfTile type,Func<TileContent> content)

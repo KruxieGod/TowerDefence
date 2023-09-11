@@ -45,7 +45,7 @@ public class GameScenarioJson
         _scenarios = scenarios;
     }
 
-    public State GetScenario(GameTileFactory tileFactory, GameBoard gameBoard) => new State(this, gameBoard);
+    public State GetScenario(GameBoard gameBoard) => new State(this, gameBoard);
     
     public struct State
     {
@@ -69,7 +69,7 @@ public class GameScenarioJson
                 for (int i = 0; i < _scenarios.Length; i++)
                     isContinued = _scenarios[i].NextWave() || isContinued;
                 if (!isContinued)
-                    ProjectContext.Instance.GameProvider.GameSaverProvider.Save();
+                    ProjectContext.Instance.GameEvents.OnGameState(new WinLoader());
                 _timeLast = _gameScenario._timeBetweenWaves;
             }
 
