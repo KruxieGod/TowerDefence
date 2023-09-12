@@ -9,12 +9,13 @@ public class GameScenario : ScriptableObject
     [SerializeField] private float _timeBetweenWaves;
     [SerializeField] private List<SpawnerScenario> _scenarios;
     [NonSerialized] private GameTileFactory _gameTileFactory;
-
+    [SerializeField] private CountTiles _countTiles;
     private GameScenarioJson GetJsonClass()
     {
         return new GameScenarioJson(_timeBetweenWaves,
             _scenarios.Select(x => x.GetJsonClass()).ToList(),
-            name);
+            name,
+            _countTiles);
     }
 
     private void OnDisable() => Serialization();
@@ -35,11 +36,14 @@ public class GameScenarioJson
     [SerializeField] private float _timeBetweenWaves;
     [SerializeField] private List<SpawnerScenarioJson> _scenarios;
     [field : SerializeField] public string Name { get; private set; }
+    [field: SerializeField] public CountTiles CountTiles { get; private set; }
 
     public GameScenarioJson(float timeBetweenWaves,
         List<SpawnerScenarioJson> scenarios,
-        string name)
+        string name,
+        CountTiles countTiles)
     {
+        CountTiles = countTiles;
         Name = name;
         _timeBetweenWaves = timeBetweenWaves;
         _scenarios = scenarios;

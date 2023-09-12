@@ -12,18 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 728a09c519a6455e82e7d5d9a389f756, type: 3}
   m_Name: 1
   m_EditorClassIdentifier: 
-  _timeBetweenWaves: 5
+  _timeBetweenWaves: 50
   _scenarios:
   - _positionSpawner: {x: 0, y: 0}
-    _waves:
-    - {fileID: 11400000, guid: 1bf738d93541753448bfd75e6ffd8052, type: 2}
-    - {fileID: 11400000, guid: 4799f3332cb15474a9a11fc04015a1f5, type: 2}
-    - {fileID: 11400000, guid: 9600d43aa16291c478ed25355f6b9293, type: 2}
-    - {fileID: 11400000, guid: e7c4991d74bcad34cb2666dfed122cfa, type: 2}
+    _waves: []
   - _positionSpawner: {x: 7, y: 0}
-    _waves:
-    - {fileID: 11400000, guid: 1bf738d93541753448bfd75e6ffd8052, type: 2}
-    - {fileID: 11400000, guid: 4799f3332cb15474a9a11fc04015a1f5, type: 2}
-    - {fileID: 11400000, guid: 9600d43aa16291c478ed25355f6b9293, type: 2}
-    - {fileID: 11400000, guid: e7c4991d74bcad34cb2666dfed122cfa, type: 2}
-  _gameTileFactory: {fileID: 11400000, guid: 46ba90b4cc4e9324f8b5731fa01d6f80, type: 2}
+    _waves: []
+  _countTiles:
+    <Walls>k__BackingField: 5
+    <Destinations>k__BackingField: 2
+    <Lasers>k__BackingField: 6
+    <Mortars>k__BackingField: 4

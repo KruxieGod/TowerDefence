@@ -82,6 +82,8 @@ public class WaveJson
 
         public bool WaveUpdate()
         {
+            if (_wave is null)
+                return true;
             if (_timeLast <= 0 && _index < _wave._waveEnemy.Count)
             {
                 _timeLast = _wave._recoverTimeEnemies;

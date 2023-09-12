@@ -13,7 +13,7 @@ public class DefeatLoader : IInterface
     public void ToNext()
     {
         Object.Destroy(_prefab.gameObject);
-        _gameManager.ResetGame();
+        _gameManager.StartNewGame();
     }
 
     public string AddressableName => "Defeat";

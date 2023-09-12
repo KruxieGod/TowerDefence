@@ -5,7 +5,6 @@ using UnityEngine;
 public abstract class Turret<BehaviourT> : TileContent,IUpdatable
     where BehaviourT : BehaviourTower
 {
-    public override TypeOfTile TileType => TypeOfTile.Turret;
     [SerializeField] private LayerMask _enemyLayer;
     public LayerMask EnemyLayer => _enemyLayer;
     private BehaviourTower _behaviourTower;

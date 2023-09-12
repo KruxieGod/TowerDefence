@@ -83,7 +83,10 @@ public class SpawnerScenarioJson
         {
             _index = 0;
             _spawnerScenario = spawnerScenario;
-            _wave = _spawnerScenario._waves[_index++].GetScenario(_spawnerScenario._spawnerTile);
+            if (_spawnerScenario._waves.Count > 0)
+                _wave = _spawnerScenario._waves[_index++].GetScenario(_spawnerScenario._spawnerTile);
+            else
+                _wave = new WaveJson.State();
         }
 
         public bool ScenarioUpdate()

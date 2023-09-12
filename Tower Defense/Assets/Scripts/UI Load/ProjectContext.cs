@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class ProjectContext : MonoBehaviour
@@ -13,11 +15,13 @@ public class ProjectContext : MonoBehaviour
     public AppearingWindowLoader AppearingWindowLoader { get; private set; }
     public GameEvents GameEvents { get; private set; }
     public GameObjectsProvider GameObjectsProvider { get; private set; }
+    public TilesCounterUILoader TilesCounterUILoader { get; private set; }
 
     public void Initialize()
     {
         Instance = this;
         DontDestroyOnLoad(this);
+        TilesCounterUILoader = new TilesCounterUILoader();
         GameObjectsProvider = new GameObjectsProvider();
         AppearingWindowLoader = new AppearingWindowLoader();
         GameEvents = new GameEvents(value =>

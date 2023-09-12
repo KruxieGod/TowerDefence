@@ -4,5 +4,7 @@ public enum TypeOfTile
     Destination,
     Wall,
     SpawnerEnemy,
-    Turret
+    Turret,
+    Mortar,
+    Laser 
 }

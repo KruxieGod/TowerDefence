@@ -38,6 +38,6 @@ public class BulletBallista : MonoBehaviour,IProjectile
         Destroy(explosion.gameObject, 3);
         foreach (IDamagable enemy in Physics.OverlapSphere(transform.position, _bulletInfo.RadiusDamage, _enemyLayer).GetEnemies())
             enemy.TakeDamage((int)_bulletInfo.Damage);
-        GameManager.OnDestroy.AddListener(gameObject.Destroy);
+        gameObject.Destroy();
     }
 }

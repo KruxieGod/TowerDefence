@@ -26,7 +26,9 @@ public class Tile : MonoBehaviour,ISetterTile
                 SetWithoutInteraction(tile);
                 tile._arrow.SetActive(false);
             }},
-            { TypeOfTile.Turret , SetWithInteraction}
+            { TypeOfTile.Turret , SetWithInteraction},
+            { TypeOfTile.Laser , SetWithInteraction},
+            { TypeOfTile.Mortar , SetWithInteraction}
         };
     }
 

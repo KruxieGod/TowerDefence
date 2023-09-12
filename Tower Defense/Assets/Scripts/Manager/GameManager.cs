@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
         Spawners { get; private set; } = new CollectionEntities<EnemySpawner>();
     private GameScenarioJson.State _currentScenario;
     private bool _isPaused;
-    private Action _onReset;
     private bool _isEndedGame;
     private Ray _ray => _camera.ScreenPointToRay(Input.mousePosition);
     void Start()
@@ -48,10 +47,10 @@ public class GameManager : MonoBehaviour
             SetTileOnPath(TypeOfTile.Wall,
                 () => _factory.GetContent(TypeOfTile.Wall));
         else if(Input.GetKeyDown(KeyCode.E))
-            SetTileOnPath(TypeOfTile.Turret,
+            SetTileOnPath(TypeOfTile.Mortar,
                 _towerFactory.GetBallista);
         else if(Input.GetKeyDown(KeyCode.R))
-            SetTileOnPath(TypeOfTile.Turret,
+            SetTileOnPath(TypeOfTile.Laser,
                 _towerFactory.GetLaserTurret);
         
         foreach (var tower in _towerFactory.Data)
@@ -61,22 +60,17 @@ public class GameManager : MonoBehaviour
             spawner?.UpdateEntity();
         _currentScenario.ScenarioUpdate();
         OnDestroy?.Invoke();
-        _onReset?.Invoke();
     }
 
-    public void ResetGame()
-    {
-        _onReset += StartNewGame;
-    }
-
-    private void StartNewGame()
+    public void StartNewGame()
     {
         foreach (var spawner in Spawners.Data)
             spawner.Recycle();
+        _isEndedGame = false;
+        _isPaused = false;
         _gameBoard.Initialize(_size,_factory);
         _currentScenario = _scenario.GetScenario(_gameBoard);
         _counter.Initialize(this);
-        _onReset -= StartNewGame;
         Debug.Log("GG");
     }
 
@@ -113,6 +107,12 @@ public class GameManager : MonoBehaviour
             !tile.CanBeSet(_gameBoard))
             return false;
         var typeOf = type == tile.Content.TileType ? TypeOfTile.Empty : type;
+        if (typeOf == TypeOfTile.Empty)
+            ProjectContext.Instance.TilesCounterUILoader.TilesCounter.Replace(tile.Content.TileType);
+        else if (!ProjectContext.Instance.TilesCounterUILoader.TilesCounter.TryPlace(typeOf))
+            return false;
+        if (typeOf != TypeOfTile.Empty && typeOf != tile.Content.TileType && tile.Content.TileType != TypeOfTile.Empty)
+            ProjectContext.Instance.TilesCounterUILoader.TilesCounter.Replace(tile.Content.TileType);
         _gameBoard.SetType(tile,typeOf);
         _gameBoard.SetContent(tile, typeOf == TypeOfTile.Empty ? _factory.GetContent(TypeOfTile.Empty) : content());
         return true;
