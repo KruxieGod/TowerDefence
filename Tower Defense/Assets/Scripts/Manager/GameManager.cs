@@ -5,7 +5,9 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
+using UnityEngine.UIElements;
 using UnityEngine.Windows;
 using Input = UnityEngine.Input;
 
@@ -41,6 +43,10 @@ public class GameManager : MonoBehaviour
             Pause();
         if (_isPaused)
             return;
+        if (Input.GetMouseButtonDown(0) &&
+            Physics.Raycast(_ray,out var hit) && 
+            hit.transform.TryGetComponent<IPointerDownHandler>(out var component))
+            component.OnPointerDown(null);
         
         foreach (var tower in _towerFactory.Data)
             tower?.UpdateEntity();

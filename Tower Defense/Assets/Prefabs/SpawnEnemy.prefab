@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7356422808191298731}
   - component: {fileID: 3003393807697666590}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpawnEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,8 +55,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 7356422808191298731}
     m_Modifications:
     - target: {fileID: 1379201802750310, guid: 1103bc5779fcc26419c248d4fd2f8586, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379201802750310, guid: 1103bc5779fcc26419c248d4fd2f8586, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1638706924568622, guid: 1103bc5779fcc26419c248d4fd2f8586, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1638706924568622, guid: 1103bc5779fcc26419c248d4fd2f8586, type: 3}
       propertyPath: m_IsActive
@@ -65,6 +73,10 @@ PrefabInstance:
     - target: {fileID: 1796635450895110, guid: 1103bc5779fcc26419c248d4fd2f8586, type: 3}
       propertyPath: m_Name
       value: FX_Healing_Cirle_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1796635450895110, guid: 1103bc5779fcc26419c248d4fd2f8586, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4019780306595676, guid: 1103bc5779fcc26419c248d4fd2f8586, type: 3}
       propertyPath: m_LocalScale.x

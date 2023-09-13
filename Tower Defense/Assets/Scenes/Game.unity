@@ -199,6 +199,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecfb5338c7a974843987237d3f50148b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _layer:
+    serializedVersion: 2
+    m_Bits: 64
   _plane: {fileID: 814496116}
   _prefabTile: {fileID: 2013081666917811420, guid: c1104896578b90b4ba8b3347271929dd, type: 3}
 --- !u!4 &50896281

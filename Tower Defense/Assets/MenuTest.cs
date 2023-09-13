@@ -23,9 +23,9 @@ public class MenuTest : MonoBehaviour
         Debug.Log("Games: "+ countGames);
         for (int i = 0; i < countGames; i++)
         {
-            _buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = "Load Game";
-            int index = i;
-            _buttons[i].onClick.AddListener(() => LoadLevels(index));
+            int index = i%_buttons.Count;
+            _buttons[index].GetComponentInChildren<TextMeshProUGUI>().text = "Load Game";
+            _buttons[index].onClick.AddListener(() => LoadLevels(index));
         }
     }
 

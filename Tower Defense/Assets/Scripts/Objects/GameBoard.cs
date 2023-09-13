@@ -8,6 +8,7 @@ using UnityEngine.Serialization;
 
 public class GameBoard : MonoBehaviour
 {
+    [SerializeField] private LayerMask _layer;
     [SerializeField] private Transform _plane;
     [SerializeField] private Tile _prefabTile;
     public Vector2Int Size { get; private set; }
@@ -129,8 +130,9 @@ public class GameBoard : MonoBehaviour
 
     public Tile GetTile(Ray ray)
     {
-        if (Physics.Raycast(ray, out var hit))
+        if (Physics.Raycast(ray, out var hit, 2000,_layer))
         {
+            Debug.Log("Tile is gave");
             int x = (int)(hit.point.x/POSITIONMULTIPLIER + Size.x * 0.5f);
             int y = (int)(hit.point.z/POSITIONMULTIPLIER + Size.y * 0.5f);
             if (x >= 0 && x < Size.x && y >= 0 && y < Size.y)
