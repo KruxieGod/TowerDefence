@@ -21,6 +21,10 @@ public abstract class Turret<BehaviourT> : TileContent,IUpdatable
         _lastToShoot = _behaviourTower.SpeedFire;
         return this;
     }
+
+    private void OnEnable() => _turret.enabled = true;
+    private void OnDisable() => _turret.enabled = false;
+
     void IUpdatable.UpdateEntity()
     {
         _turret?.PursueTarget();

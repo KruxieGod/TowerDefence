@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DefeatLoader : IInterface
@@ -12,7 +13,8 @@ public class DefeatLoader : IInterface
     public CanvasGroup GetCanvasGroup(GameResult gameResult) => (_prefab = gameResult).GetComponent<CanvasGroup>();
     public void ToNext()
     {
-        Object.Destroy(_prefab.gameObject);
+        _prefab.gameObject.Destroy();
+        Debug.Log("ToNext : "+_prefab.IsUnityNull());
         _gameManager.StartNewGame();
     }
 

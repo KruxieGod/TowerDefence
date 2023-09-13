@@ -5,7 +5,7 @@ public class TilesCounter
 {
     private CountTiles _countTiles;
     private Dictionary<TypeOfTile, int> _typesCount;
-    private TilesCounterUI _tilesCounterUI => ProjectContext.Instance.TilesCounterUILoader.TilesCounterUI;
+    private TilesCounterUI _tilesCounterUI => ProjectContext.Instance.TilesCounterUILoader?.TilesCounterUI;
     public TilesCounter(CountTiles countTiles)
     {
         _countTiles = countTiles;
@@ -16,6 +16,12 @@ public class TilesCounter
             { TypeOfTile.Mortar , _countTiles.Mortars},
             { TypeOfTile.Laser , _countTiles.Lasers}
         };
+    }
+
+    public void Reset()
+    {
+        if (_tilesCounterUI != null)
+             _tilesCounterUI.Initialize(_countTiles);
     }
     
     public bool TryPlace(TypeOfTile type)

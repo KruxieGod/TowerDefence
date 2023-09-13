@@ -1,5 +1,5 @@
 
-public interface ISettable
+public interface ISettable<in T>
 {
-    void Set(LevelSettings index);
+    void Set(T index);
 }

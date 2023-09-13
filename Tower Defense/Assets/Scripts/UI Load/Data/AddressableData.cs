@@ -5,6 +5,7 @@ public static class AddressableData
     public const string GAMEFACTORIES = "GameFactory";
     public const string LEVELSCREEN = "LevelsScreen";
     public const string UI_TILES = "UITiles";
+    public const string SELECTING_TILES_UI = "SelectingTilesUI";
 }
 
 public static class SceneData

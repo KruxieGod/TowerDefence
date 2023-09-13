@@ -16,11 +16,13 @@ public class ProjectContext : MonoBehaviour
     public GameEvents GameEvents { get; private set; }
     public GameObjectsProvider GameObjectsProvider { get; private set; }
     public TilesCounterUILoader TilesCounterUILoader { get; private set; }
+    public SelectingTilesLoader SelectingTilesLoader { get; private set; }
 
     public void Initialize()
     {
         Instance = this;
         DontDestroyOnLoad(this);
+        SelectingTilesLoader = new SelectingTilesLoader();
         TilesCounterUILoader = new TilesCounterUILoader();
         GameObjectsProvider = new GameObjectsProvider();
         AppearingWindowLoader = new AppearingWindowLoader();

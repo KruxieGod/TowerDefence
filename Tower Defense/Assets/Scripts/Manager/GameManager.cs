@@ -11,12 +11,13 @@ using Input = UnityEngine.Input;
 
 public class GameManager : MonoBehaviour
 {
+    [field: SerializeField] public int DistanceFromCamera { get; private set; }
     public static UnityEvent OnDestroy { get; set; } = new UnityEvent();
     [SerializeField] private PassedCounter _counter;
     private GameTileFactory _factory => ProjectContext.Instance.GameProvider.FactoriesProvider.GameFactories.GameTileFactory;
     [SerializeField] private GameBoard _gameBoard;
     [SerializeField] private Vector2Int _size;
-    [SerializeField] private Camera _camera;
+    [field :SerializeField] public Camera Camera { get; private set; }
     private GameTowerFactory _towerFactory => ProjectContext.Instance.GameProvider.FactoriesProvider.GameFactories.GameTowerFactory;
     private GameScenarioJson _scenario => ProjectContext.Instance.GameProvider.ScenariosProvider.GetCurrentScenario();
 
@@ -25,7 +26,7 @@ public class GameManager : MonoBehaviour
     private GameScenarioJson.State _currentScenario;
     private bool _isPaused;
     private bool _isEndedGame;
-    private Ray _ray => _camera.ScreenPointToRay(Input.mousePosition);
+    public static  Ray _ray =>ProjectContext.Instance.GameObjectsProvider.GameManager.Camera.ScreenPointToRay(Input.mousePosition);
     void Start()
     {
         _counter.SetEvent();
@@ -40,18 +41,6 @@ public class GameManager : MonoBehaviour
             Pause();
         if (_isPaused)
             return;
-        if (Input.GetMouseButtonDown(0))
-            SetTileOnPath(TypeOfTile.Destination,
-                () => _factory.GetContent(TypeOfTile.Destination));
-        else if (Input.GetMouseButtonDown(1))
-            SetTileOnPath(TypeOfTile.Wall,
-                () => _factory.GetContent(TypeOfTile.Wall));
-        else if(Input.GetKeyDown(KeyCode.E))
-            SetTileOnPath(TypeOfTile.Mortar,
-                _towerFactory.GetBallista);
-        else if(Input.GetKeyDown(KeyCode.R))
-            SetTileOnPath(TypeOfTile.Laser,
-                _towerFactory.GetLaserTurret);
         
         foreach (var tower in _towerFactory.Data)
             tower?.UpdateEntity();
@@ -66,6 +55,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (var spawner in Spawners.Data)
             spawner.Recycle();
+        ProjectContext.Instance.TilesCounterUILoader?.TilesCounter?.Reset();
         _isEndedGame = false;
         _isPaused = false;
         _gameBoard.Initialize(_size,_factory);
@@ -85,7 +75,7 @@ public class GameManager : MonoBehaviour
         _isPaused = !_isPaused || pause;
     }
     
-    private void SetTileOnPath(TypeOfTile type,Func<TileContent> content)
+    public void SetTileOnPath(TypeOfTile type,TileContent content)
     {
         if (!TrySetTile(type,content)) 
             return;
@@ -98,23 +88,34 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    private bool TrySetTile(TypeOfTile type,Func<TileContent> content)
+    private bool TrySetTile(TypeOfTile type,TileContent content)
     {
         var tile = _gameBoard.GetTile(_ray);
         if (tile == null ||
-            Physics.OverlapBox(tile.transform.position,new Vector3(Enemy.RADIUS,Enemy.RADIUS,Enemy.RADIUS))
-                .Any(x => x.CompareTag("Enemy")) || 
+            Physics.OverlapBox(tile.transform.position, new Vector3(Enemy.RADIUS, Enemy.RADIUS, Enemy.RADIUS))
+                .Any(x => x.CompareTag("Enemy")) ||
             !tile.CanBeSet(_gameBoard))
+        {
+            Destroy(content.gameObject);
             return false;
+        }
         var typeOf = type == tile.Content.TileType ? TypeOfTile.Empty : type;
         if (typeOf == TypeOfTile.Empty)
+        {
+            Destroy(content.gameObject);
             ProjectContext.Instance.TilesCounterUILoader.TilesCounter.Replace(tile.Content.TileType);
+        }
         else if (!ProjectContext.Instance.TilesCounterUILoader.TilesCounter.TryPlace(typeOf))
+        {
+            Destroy(content.gameObject);
             return false;
+        }
+
         if (typeOf != TypeOfTile.Empty && typeOf != tile.Content.TileType && tile.Content.TileType != TypeOfTile.Empty)
             ProjectContext.Instance.TilesCounterUILoader.TilesCounter.Replace(tile.Content.TileType);
+        content.enabled = true;
         _gameBoard.SetType(tile,typeOf);
-        _gameBoard.SetContent(tile, typeOf == TypeOfTile.Empty ? _factory.GetContent(TypeOfTile.Empty) : content());
+        _gameBoard.SetContent(tile, typeOf == TypeOfTile.Empty ? _factory.GetContent(TypeOfTile.Empty) : content);
         return true;
     }
 }

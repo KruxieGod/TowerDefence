@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-public class GameSaverProvider : ILoadingOperation,ISettable
+public class GameSaverProvider : ILoadingOperation,ISettable<LevelSettings>
 {
     private int _lastLevelUsed;
     private int _lastGameUsed;
