@@ -16,18 +16,18 @@ MonoBehaviour:
   - _enemyType: 2
     _behaviour:
       _speed: 7
-      _hp: 100
+      _hp: 150
   - _enemyType: 0
     _behaviour:
-      _speed: 2
-      _hp: 70
+      _speed: 15
+      _hp: 45
   - _enemyType: 1
     _behaviour:
-      _speed: 7
-      _hp: 40
+      _speed: 16
+      _hp: 20
   - _enemyType: 1
     _behaviour:
-      _speed: 7
-      _hp: 40
-  _recoverTimeEnemies: 1
-  _factory: {fileID: 11400000, guid: 3ea81be6d1e49144da4f9e0a498e165b, type: 2}
+      _speed: 16
+      _hp: 20
+  _recoverTimeEnemies: 0.5
+  _factory: {fileID: 11400000, guid: 62bfb03c8e822f8489b82ebe876b2bb9, type: 2}

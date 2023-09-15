@@ -5,7 +5,7 @@ public class LaserTurret : Turret<BehaviourTower>
     protected override async void UpgradeTower()
     {
         _visitor = _visitor.NextVisitor();
-        ((ISetterTile)SpawnerTile).SetContentTile((await _visitor.VisitLaser()).Initialize(_behaviourTower,_towerFactory,_visitor));
+        ((ISetterTile)SpawnerTile).SetContentTile((await _visitor.VisitLaser()).Initialize(this));
         Destroy(gameObject);
     }
 }

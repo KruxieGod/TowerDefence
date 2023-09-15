@@ -12,14 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 728a09c519a6455e82e7d5d9a389f756, type: 3}
   m_Name: 1
   m_EditorClassIdentifier: 
-  _timeBetweenWaves: 50
+  _timeBetweenWaves: 10
   _scenarios:
-  - _positionSpawner: {x: 0, y: 0}
-    _waves: []
-  - _positionSpawner: {x: 7, y: 0}
-    _waves: []
+  - _positionSpawner: {x: 0, y: 6}
+    _waves:
+    - {fileID: 11400000, guid: 1bf738d93541753448bfd75e6ffd8052, type: 2}
+  - _positionSpawner: {x: 9, y: 0}
+    _waves:
+    - {fileID: 11400000, guid: 4799f3332cb15474a9a11fc04015a1f5, type: 2}
   _countTiles:
     <Walls>k__BackingField: 5
-    <Destinations>k__BackingField: 2
+    <Destinations>k__BackingField: 0
     <Lasers>k__BackingField: 6
     <Mortars>k__BackingField: 4

@@ -5,7 +5,7 @@ public class Ballista : Turret<BehaviourBallistics>
     protected override async void UpgradeTower()
     {
         _visitor = _visitor.NextVisitor();
-        ((ISetterTile)SpawnerTile).SetContentTile((await _visitor.VisitBallistics()).Initialize(_behaviourTower,_towerFactory,_visitor));
+        ((ISetterTile)SpawnerTile).SetContentTile((await _visitor.VisitBallistics()).Initialize(this));
         Destroy(gameObject);
     }
 }

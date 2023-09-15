@@ -20,6 +20,13 @@ public class TilesCounter
 
     public void Reset()
     {
+        _typesCount = new Dictionary<TypeOfTile, int>()
+        {
+            { TypeOfTile.Destination , _countTiles.Destinations},
+            { TypeOfTile.Wall , _countTiles.Walls},
+            { TypeOfTile.Mortar , _countTiles.Mortars},
+            { TypeOfTile.Laser , _countTiles.Lasers}
+        };
         if (_tilesCounterUI != null)
              _tilesCounterUI.Initialize(_countTiles);
     }
