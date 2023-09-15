@@ -33,7 +33,7 @@ public class BulletBallista : MonoBehaviour,IProjectile
                 transform.position,
                 Quaternion.identity);
         var main = explosion.main;
-        main.startSize = new ParticleSystem.MinMaxCurve(_bulletInfo.RadiusDamage*2f, _bulletInfo.RadiusDamage*2f);
+        main.startSize = new ParticleSystem.MinMaxCurve(_bulletInfo.RadiusDamage*4f, _bulletInfo.RadiusDamage*4f);
         explosion.Play();
         Destroy(explosion.gameObject, 3);
         foreach (IDamagable enemy in Physics.OverlapSphere(transform.position, _bulletInfo.RadiusDamage, _enemyLayer).GetEnemies())

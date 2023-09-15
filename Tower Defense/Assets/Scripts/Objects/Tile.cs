@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -42,6 +43,8 @@ public class Tile : MonoBehaviour,ISetterTile
 
     private static void SetWithoutInteraction(Tile tile)
     {
+        if (tile.IsUnityNull())
+            return;
         tile._isWall = false;
         tile._arrow.SetActive(true);
     }

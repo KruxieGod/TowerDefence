@@ -124,6 +124,8 @@ public class GameBoard : MonoBehaviour
 
     public void SetContent(ISetterTile tileDestination,TileContent tileContent)
     {
+        if (tileContent.IsUnityNull())
+            return;
         tileContent.transform.parent = transform;
         tileDestination.SetContentTile(tileContent);
     }
