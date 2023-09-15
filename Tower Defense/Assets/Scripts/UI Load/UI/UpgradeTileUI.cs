@@ -30,7 +30,6 @@ public class UpgradeTileUI : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(enabled);
         transform.localRotation = Quaternion.LookRotation(ProjectContext.Instance.GameObjectsProvider.GameManager.Camera.transform.position - transform.position);
     }
 

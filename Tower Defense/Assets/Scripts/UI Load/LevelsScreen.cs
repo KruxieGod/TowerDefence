@@ -39,9 +39,7 @@ public class LevelsScreen : MonoBehaviour
         Debug.Log(levelSettings.ScenarioNumber);
         var queue = new Queue<ILoadingOperation>();
         ((ISettable<LevelSettings>)ProjectContext.Instance.GameProvider.GameSaverProvider).Set(levelSettings);
-        queue.Enqueue(new SceneProvider(SceneData.GAMESCENE));
-        queue.Enqueue(ProjectContext.Instance.TilesCounterUILoader);
-        queue.Enqueue(ProjectContext.Instance.SelectingTilesLoader);
+        queue.Enqueue(ProjectContext.Instance.GameSceneLoader);
         ProjectContext.Instance.LoadingScreenLoader.LoadAndDestroy(queue);
     }
 }

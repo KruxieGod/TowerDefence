@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public static class TileExtension
@@ -60,6 +61,15 @@ public static class EnemiesExtension
     }
 
     public static void Destroy(this GameObject gameObject) => UnityEngine.Object.Destroy(gameObject);
+}
+
+public static class AsyncExtension
+{
+    public static T WaitAndGetResult<T>(this UniTask<T>.Awaiter awaiter)
+    {
+        while (!awaiter.IsCompleted){}
+        return awaiter.GetResult();
+    }
 }
 
 public enum EnemyType

@@ -4,11 +4,11 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public sealed class SceneProvider : ILoadingOperation
+public class SceneProvider : ILoadingOperation
 {
     private string _sceneName;
     public string Description => _sceneName + " loading...";
-    public async UniTask Load(Action<float> onProcess)
+    public virtual async UniTask Load(Action<float> onProcess)
     {
         var currentScene = SceneManager.GetActiveScene();
         onProcess?.Invoke(0.5f);
