@@ -14,7 +14,7 @@ public class LevelsProvider : AssetLoader,ILoadingOperation
     public async UniTask Load(Action<float> onProcess)
     {
         onProcess?.Invoke(0.3f);
-        var levelsScreen = await Load<LevelsScreen>(AddressableData.LEVELSCREEN);
+        var levelsScreen = await LoadAsync<LevelsScreen>(AddressableData.LEVELSCREEN);
         levelsScreen.gameObject.SetActive(true);
         onProcess?.Invoke(1);
         levelsScreen.Initialize( _levels.CompletedLevels);

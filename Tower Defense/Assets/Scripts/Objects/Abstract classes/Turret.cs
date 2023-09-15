@@ -7,21 +7,24 @@ public abstract class Turret<BehaviourT> :  Turret,IUpdatable
 {
     [SerializeField] private LayerMask _enemyLayer;
     public LayerMask EnemyLayer => _enemyLayer;
-    private BehaviourTower _behaviourTower;
+    protected BehaviourT _behaviourTower;
     [SerializeField] private TurretController<BehaviourT> _turret;
     private float _lastToShoot;
-    private GameTowerFactory _towerFactory;
-    private ITowerUpgradeVisitor _visitor;
+    protected GameTowerFactory _towerFactory;
+    protected ITowerUpgradeVisitor _visitor;
+    [SerializeField]private UpgradeTileUI _upgradeTileUI;
     
     public Turret<BehaviourT> Initialize(BehaviourT behaviourTower,
         GameTowerFactory towerFactory,
         ITowerUpgradeVisitor visitor)
     {
+        towerFactory.Add(this);
         _visitor = visitor;
         _towerFactory = towerFactory;
         _behaviourTower = behaviourTower;
         _turret.Initialize(this,behaviourTower);
         _lastToShoot = _behaviourTower.SpeedFire;
+        _upgradeTileUI.OnClick(UpgradeTower);
         return this;
     }
 

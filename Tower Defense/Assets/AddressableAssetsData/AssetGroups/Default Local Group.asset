@@ -57,6 +57,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4d8ae50d9748b7245ae9af18ee7e9443
+    m_Address: Laser Second Tower
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c0e1ebd845bfe6a4a97246c3457d7ed4
+    m_Address: Ballistics Second Tower
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 8b9b8e47b448b0c488a79ba1d5520971, type: 2}
   m_SchemaSet:

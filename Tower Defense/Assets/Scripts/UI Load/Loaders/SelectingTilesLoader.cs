@@ -11,7 +11,7 @@ public class SelectingTilesLoader : AssetLoader,ILoadingOperation
         SelectingTiles = new SelectingTiles(
             ProjectContext.Instance.GameProvider.FactoriesProvider.GameFactories.GameTileFactory,
             ProjectContext.Instance.GameProvider.FactoriesProvider.GameFactories.GameTowerFactory);
-        var selectingTilesUI = await Load<SelectingTilesUI>(AddressableData.SELECTING_TILES_UI);
+        var selectingTilesUI = await LoadAsync<SelectingTilesUI>(AddressableData.SELECTING_TILES_UI);
         selectingTilesUI.Initialize(SelectingTiles);
         onProcess?.Invoke(1f);
     }

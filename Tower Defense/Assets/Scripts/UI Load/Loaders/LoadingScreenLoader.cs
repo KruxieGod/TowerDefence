@@ -8,7 +8,7 @@ public class LoadingScreenLoader : AssetLoader
 {
     public async UniTask LoadAndDestroy(Queue<ILoadingOperation> loadingOperations)
     {
-        var loadingScreen = await Load<LoadingScreen>(AddressableData.LOADINGSCREEN);
+        var loadingScreen = await LoadAsync<LoadingScreen>(AddressableData.LOADINGSCREEN);
         
         await loadingScreen.Load(loadingOperations);
         Unload();

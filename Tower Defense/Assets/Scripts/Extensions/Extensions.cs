@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using UnityEditor.VersionControl;
 using UnityEngine;
+using Task = UnityEditor.VersionControl.Task;
 
 public static class TileExtension
 {
@@ -65,10 +68,10 @@ public static class EnemiesExtension
 
 public static class AsyncExtension
 {
-    public static T WaitAndGetResult<T>(this UniTask<T>.Awaiter awaiter)
+    public static T WaitAndGetResult<T>(this Task<T> awaiter)
     {
-        while (!awaiter.IsCompleted){}
-        return awaiter.GetResult();
+        awaiter.Wait();
+        return awaiter.Result;
     }
 }
 

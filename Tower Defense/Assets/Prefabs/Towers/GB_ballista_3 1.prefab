@@ -94,7 +94,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b5b26c47d7a1b5347bd64af3f3edd988, type: 2}
+  - {fileID: 2100000, guid: a4c47f2857144904388dd77125400f3b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 3131095499776543014}
   - component: {fileID: 1555561488084061280}
   m_Layer: 0
-  m_Name: GB_ballista_3
+  m_Name: GB_ballista_3 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -269,7 +269,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b5b26c47d7a1b5347bd64af3f3edd988, type: 2}
+  - {fileID: 2100000, guid: a443782650a8bfb42890735660003ba5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -398,7 +398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f0ea3963a4a74748998efcc3eb6106f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefabBullet: {fileID: 7251890491724530806, guid: c3938279c5ed55f41bf08c79b815443a, type: 3}
+  _prefabBullet: {fileID: 7251890491724530806, guid: 2f56a97cef73fa146acc8c38e9ae6004, type: 3}
   _root: {fileID: 738022347651022974}
 --- !u!1 &7958976185082252748
 GameObject:

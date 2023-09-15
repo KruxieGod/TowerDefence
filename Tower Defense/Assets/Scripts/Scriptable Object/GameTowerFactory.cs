@@ -17,9 +17,9 @@ public class GameTowerFactory : BaseFactoryCollection<IUpdatable>
         where T : BehaviourTower
     {
         var pref = Instantiate(prefab).Initialize(behaviourTower,this,new FirstTowerUpgradeVisitor());
-        _data.Add(pref);
         return pref;
     }
 
     public void Remove(IUpdatable tower) => _data.Remove(tower);
+    public void Add(IUpdatable tower) => _data.Add(tower);
 }

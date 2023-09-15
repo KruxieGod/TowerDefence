@@ -11,7 +11,7 @@ public class TilesCounterUILoader : AssetLoader,ILoadingOperation
     {
         onProcess?.Invoke(0f);
         TilesCounter = new TilesCounter(ProjectContext.Instance.GameProvider.ScenariosProvider.GetCurrentScenario().CountTiles);
-        TilesCounterUI = await Load<TilesCounterUI>(AddressableData.UI_TILES);
+        TilesCounterUI = await LoadAsync<TilesCounterUI>(AddressableData.UI_TILES);
         TilesCounterUI.Initialize(
             ProjectContext.Instance.GameProvider.ScenariosProvider.GetCurrentScenario().CountTiles);
         onProcess?.Invoke(1f);

@@ -1,7 +1,9 @@
 
+using Cysharp.Threading.Tasks;
+
 public interface ITowerUpgradeVisitor
 {
-    Turret<BehaviourBallistics> VisitBallistics();
-    Turret<BehaviourTower> VisitLaser();
+    UniTask<Turret<BehaviourBallistics>> VisitBallistics();
+    UniTask<Turret<BehaviourTower>> VisitLaser();
     ITowerUpgradeVisitor NextVisitor();
 }

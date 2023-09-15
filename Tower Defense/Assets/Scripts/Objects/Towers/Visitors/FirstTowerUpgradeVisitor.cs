@@ -1,20 +1,20 @@
 
+using System.Threading;
 using Cysharp.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEditor.VersionControl;
 
 public class FirstTowerUpgradeVisitor : AssetLoader,ITowerUpgradeVisitor
 {
-    public Turret<BehaviourBallistics> VisitBallistics()
+    public UniTask<Turret<BehaviourBallistics>> VisitBallistics()
     {
-        var task =  Load<Turret<BehaviourBallistics>>(AddressableData.TowersData.BALLISTICS_FIRST_TOWER).GetAwaiter();
-        return task.WaitAndGetResult();
+        return LoadAsync<Turret<BehaviourBallistics>>(AddressableData.TowersData.BALLISTICS_FIRST_TOWER);;
     }
 
-    public Turret<BehaviourTower> VisitLaser()
+    public UniTask<Turret<BehaviourTower>> VisitLaser()
     {
-        var task =  Load<Turret<BehaviourTower>>(AddressableData.TowersData.LASER_FIRST_TOWER).GetAwaiter();
-        return task.WaitAndGetResult();
+        return LoadAsync<Turret<BehaviourTower>>(AddressableData.TowersData.LASER_FIRST_TOWER);
     }
 
-    public ITowerUpgradeVisitor NextVisitor() => null;
+    public ITowerUpgradeVisitor NextVisitor() => new SecondTowerUpgradeVisitor();
 }

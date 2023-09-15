@@ -10,7 +10,7 @@ public class AppearingWindowLoader : AssetLoader
     {
         if (!_cachedObject.IsUnityNull())
             return;
-        var gameResult = await Load<GameResult>(popUpWindow.AddressableName);
+        var gameResult = await LoadAsync<GameResult>(popUpWindow.AddressableName);
         gameResult.Initialize(popUpWindow);
         gameResult.StartCoroutine(
             UpdateAlpha(

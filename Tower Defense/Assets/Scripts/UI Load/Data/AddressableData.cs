@@ -11,6 +11,8 @@ public static class AddressableData
     {
         public const string LASER_FIRST_TOWER = "Laser First Tower";
         public const string BALLISTICS_FIRST_TOWER = "Ballistics First Tower";
+        public const string LASER_SECOND_TOWER = "Laser Second Tower";
+        public const string BALLISTICS_SECOND_TOWER = "Ballistics Second Tower";
     }
 }
 
