@@ -94,7 +94,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a4c47f2857144904388dd77125400f3b, type: 2}
+  - {fileID: 2100000, guid: b5b26c47d7a1b5347bd64af3f3edd988, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 3131095499776543014}
   - component: {fileID: 1555561488084061280}
   m_Layer: 0
-  m_Name: GB_ballista_3 1
+  m_Name: Ballista 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -269,7 +269,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a443782650a8bfb42890735660003ba5, type: 2}
+  - {fileID: 2100000, guid: b5b26c47d7a1b5347bd64af3f3edd988, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -398,7 +398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f0ea3963a4a74748998efcc3eb6106f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefabBullet: {fileID: 7251890491724530806, guid: 2f56a97cef73fa146acc8c38e9ae6004, type: 3}
+  _prefabBullet: {fileID: 7251890491724530806, guid: c3938279c5ed55f41bf08c79b815443a, type: 3}
   _root: {fileID: 738022347651022974}
 --- !u!1 &7958976185082252748
 GameObject:
@@ -606,7 +606,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8541253342662884280, guid: bf06f6fa85b653849931fbe0171c9523, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 651.8
+      value: 650
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7051273019322767905, guid: bf06f6fa85b653849931fbe0171c9523, type: 3}
@@ -615,7 +615,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8287069637071313398, guid: bf06f6fa85b653849931fbe0171c9523, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 616109907564059540}
+      addedObject: {fileID: 8011896434115880569}
   m_SourcePrefab: {fileID: 100100000, guid: bf06f6fa85b653849931fbe0171c9523, type: 3}
 --- !u!224 &84222729720099622 stripped
 RectTransform:
@@ -627,7 +627,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8287069637071313398, guid: bf06f6fa85b653849931fbe0171c9523, type: 3}
   m_PrefabInstance: {fileID: 8423721841413704682}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &616109907564059540
+--- !u!65 &8011896434115880569
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

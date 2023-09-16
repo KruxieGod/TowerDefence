@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 public class EventTriggerButton : MonoBehaviour, IPointerDownHandler
 {
     [HideInInspector]public UnityEvent OnClick;
-
+    
     public void OnPointerDown(PointerEventData eventData)
     {
         Debug.Log("CLICKED");
