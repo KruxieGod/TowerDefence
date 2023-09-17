@@ -5,20 +5,24 @@
 
     public class GameSceneLoader : SceneProvider
     {
-        public TilesCounterUILoader TilesCounterUILoader { get; private set; }
+        public TilesCounterLoader TilesCounterLoader { get; private set; }
         public SelectingTilesLoader SelectingTilesLoader { get; private set; }
+        public CounterMoneyLoader CounterMoneyLoader { get; private set; }
         
         public GameSceneLoader() : base(SceneData.GAMESCENE)
         {
         }
 
         public string Description { get; }
+        // ReSharper disable Unity.PerformanceAnalysis
         public override async UniTask Load(Action<float> onProcess)
         {
+            CounterMoneyLoader = new CounterMoneyLoader();
             SelectingTilesLoader = new SelectingTilesLoader();
-            TilesCounterUILoader = new TilesCounterUILoader();
+            TilesCounterLoader = new TilesCounterLoader();
             await base.Load(onProcess);
-            await TilesCounterUILoader.Load(onProcess);
+            await CounterMoneyLoader.Load(onProcess);
+            await TilesCounterLoader.Load(onProcess);
             await SelectingTilesLoader.Load(onProcess);
         }
     }

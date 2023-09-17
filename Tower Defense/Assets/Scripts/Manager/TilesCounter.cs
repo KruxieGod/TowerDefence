@@ -5,7 +5,7 @@ public class TilesCounter
 {
     private CountTiles _countTiles;
     private Dictionary<TypeOfTile, int> _typesCount;
-    private TilesCounterUI _tilesCounterUI => ProjectContext.Instance.GameSceneLoader.TilesCounterUILoader?.TilesCounterUI;
+    private TilesCounterUI _tilesCounterUI => ProjectContext.Instance.GameSceneLoader.TilesCounterLoader?.TilesCounterUI;
     public TilesCounter(CountTiles countTiles)
     {
         _countTiles = countTiles;

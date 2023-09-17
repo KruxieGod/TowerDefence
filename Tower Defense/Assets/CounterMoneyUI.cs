@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class CostPricerUI : MonoBehaviour
+public class CounterMoneyUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _text;
 

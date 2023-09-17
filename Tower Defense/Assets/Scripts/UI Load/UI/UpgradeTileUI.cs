@@ -12,6 +12,7 @@ public class UpgradeTileUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _price;
     private EventTriggerButton _button;
     [SerializeField] private EventTriggerButton _trigger;
+    private Action _action;
 
     private void Awake()
     {
@@ -33,8 +34,12 @@ public class UpgradeTileUI : MonoBehaviour
         transform.localRotation = Quaternion.LookRotation(ProjectContext.Instance.GameObjectsProvider.GameManager.Camera.transform.position - transform.position);
     }
 
-    public void OnClick(Action action) => _button.OnClick.AddListener(action.Invoke);
+    public void OnClick(Action action) => _action = action;
     public void SetPrice(int price) => _price.SetText(price.ToString());
-    public void SetEvent(ISettable<int> pricer) =>
-        _button.OnClick.AddListener(() => pricer.Set(int.Parse(_price.text)));
+    public void SetEvent(Func<int,bool> pricer) =>
+        _button.OnClick.AddListener(() =>
+        {
+            if (pricer(int.Parse(_price.text)))
+                _action();
+        });
 }

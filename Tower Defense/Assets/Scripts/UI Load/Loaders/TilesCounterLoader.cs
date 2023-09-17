@@ -2,7 +2,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 
-public class TilesCounterUILoader : AssetLoader,ILoadingOperation
+public class TilesCounterLoader : AssetLoader,ILoadingOperation
 {
     public TilesCounter TilesCounter { get; private set; }
     public TilesCounterUI TilesCounterUI { get; private set; }

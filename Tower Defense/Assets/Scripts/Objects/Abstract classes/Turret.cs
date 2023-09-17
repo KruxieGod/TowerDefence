@@ -1,6 +1,7 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public abstract class Turret<BehaviourT> :  Turret,IUpdatable
     where BehaviourT : BehaviourTower
@@ -13,7 +14,6 @@ public abstract class Turret<BehaviourT> :  Turret,IUpdatable
     protected GameTowerFactory _towerFactory;
     protected ITowerUpgradeVisitor _visitor;
     [SerializeField]private UpgradeTileUI _upgradeTileUI;
-    
     public Turret<BehaviourT> Initialize(
         BehaviourT behaviourTower,
         GameTowerFactory towerFactory,
@@ -26,6 +26,8 @@ public abstract class Turret<BehaviourT> :  Turret,IUpdatable
         _turret.Initialize(this,behaviourTower);
         _lastToShoot = _behaviourTower.SpeedFire;
         _upgradeTileUI.OnClick(UpgradeTower);
+        _upgradeTileUI.SetPrice(ProjectContext.Instance.GameProvider.TowerInfoLoader.GetPrice( name.Replace("(Clone)","") ));
+        _upgradeTileUI.SetEvent(ProjectContext.Instance.GameSceneLoader.CounterMoneyLoader.CounterMoney.EnoughMoney);
         return this;
     }
 
@@ -45,11 +47,12 @@ public abstract class Turret<BehaviourT> :  Turret,IUpdatable
 
     private void OnDisable() => _turret.enabled = false;
 
+    // ReSharper disable Unity.PerformanceAnalysis
     void IUpdatable.UpdateEntity()
     {
         if (!_turret.enabled)
             return;
-        _turret?.PursueTarget();
+        _turret.PursueTarget();
         if (_lastToShoot <= 0)
             _lastToShoot = _turret.Shoot() ? _behaviourTower.SpeedFire : 0;
         _lastToShoot -= Time.deltaTime;
@@ -58,5 +61,15 @@ public abstract class Turret<BehaviourT> :  Turret,IUpdatable
     private void OnDestroy()
     {
         _towerFactory.Remove(this);
+    }
+
+    private void OnValidate() => Serialize();
+    
+    private void Serialize()
+    {
+        var path = PathCollection.PATH_TO_TOWERS + name + ".json";
+        var value = JsonExtension.GetClassFromJson<PriceData>(path);
+        if (value == null)
+            JsonExtension.SerializeClass(new PriceData(name,0),PathCollection.PATH_TO_TOWERS + name + ".json");
     }
 }
