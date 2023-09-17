@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour,IDamagable,ICollector
     private EnemyView _enemyView;
     private const float _speedRotation = 0.6f;
     [SerializeField] private LayerMask _layerFloor;
-    private BehaviourEnemy _behaviour;
+    private EnemyInfo _behaviour;
     private Tile _currentTile;
     public const float RADIUS = GameBoard.POSITIONMULTIPLIER/2;
     private Direction _previousDirection;
@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour,IDamagable,ICollector
         transform.rotation = currentTile.Direction.GetDirection();
     }
 
-    public Enemy InitializeEnemy(BehaviourEnemy behaviour)
+    public Enemy InitializeEnemy(EnemyInfo behaviour)
     {
         _behaviour = behaviour;
         HealthPoints = behaviour.HP;
@@ -40,7 +40,7 @@ public class Enemy : MonoBehaviour,IDamagable,ICollector
 
     public void UpdatePos()
     {
-        if (_currentTile.NextTile == null)
+        if (_currentTile.Content.TileType == TypeOfTile.Destination)
         {
             PassedCounter.NotifyCounterOn?.Invoke(1);
             Die();
@@ -75,6 +75,7 @@ public class Enemy : MonoBehaviour,IDamagable,ICollector
             _enemyView.DieAnimation(this);
             GameManager.OnDestroy.AddListener(StartDestroy);
         }
+        ProjectContext.Instance.GameSceneLoader.CounterMoneyLoader.CounterMoney.AddMoney((int)_behaviour.Price);
     }
 
     void IDamagable.TakeDamage(int damage)

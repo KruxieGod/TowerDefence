@@ -18,8 +18,8 @@ public class MenuTest : MonoBehaviour
     {
         _canvas = GetComponent<Canvas>();
         _canvas.worldCamera = ProjectContext.Instance.UiCamera;
-        _createNewGame.onClick.AddListener(CreateNewGame);
         int countGames = ProjectContext.Instance.GameProvider.GameSaverProvider.GetCurrentGames();
+        _createNewGame.onClick.AddListener(() => CreateNewGame(countGames));
         Debug.Log("Games: "+ countGames);
         for (int i = 0; i < countGames; i++)
         {
@@ -29,10 +29,10 @@ public class MenuTest : MonoBehaviour
         }
     }
 
-    private void CreateNewGame()
+    private void CreateNewGame(int index)
     {
         var queue = new Queue<ILoadingOperation>();
-        queue.Enqueue(new LevelsProvider(ProjectContext.Instance.GameProvider.GameSaverProvider.CreateNewGame()));
+        queue.Enqueue(new LevelsProvider(ProjectContext.Instance.GameProvider.GameSaverProvider.CreateNewGame(index)));
         ProjectContext.Instance.LoadingScreenLoader.LoadAndDestroy(queue);
     }
 

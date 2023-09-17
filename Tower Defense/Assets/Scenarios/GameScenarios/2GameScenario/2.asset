@@ -16,4 +16,18 @@ MonoBehaviour:
   _scenarios:
   - _positionSpawner: {x: 1, y: 3}
     _waves:
+    - {fileID: 11400000, guid: bd425d58fe9c66e4d988c41afed348e9, type: 2}
+    - {fileID: 11400000, guid: bfa52aa477225bd4da6ffdec56e512e0, type: 2}
     - {fileID: 11400000, guid: d9fb551aaef698c48b56bba936d129fc, type: 2}
+    - {fileID: 11400000, guid: de9db35aefb164540955c3743c111c11, type: 2}
+  - _positionSpawner: {x: 8, y: 6}
+    _waves:
+    - {fileID: 11400000, guid: de9db35aefb164540955c3743c111c11, type: 2}
+    - {fileID: 11400000, guid: bd425d58fe9c66e4d988c41afed348e9, type: 2}
+    - {fileID: 11400000, guid: bfa52aa477225bd4da6ffdec56e512e0, type: 2}
+    - {fileID: 11400000, guid: d9fb551aaef698c48b56bba936d129fc, type: 2}
+  _countTiles:
+    <Walls>k__BackingField: 6
+    <Destinations>k__BackingField: 0
+    <Lasers>k__BackingField: 6
+    <Mortars>k__BackingField: 4

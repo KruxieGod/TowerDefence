@@ -29,8 +29,9 @@ public class GameSaverProvider : ILoadingOperation,ISettable<LevelSettings>
 
     public int GetCurrentGames() => _count;
 
-    public LevelsSaveData CreateNewGame()
+    public LevelsSaveData CreateNewGame(int index)
     {
+        _lastGameUsed = index;
         var levels = new LevelsSaveData();
         _gameSaveData ??= new GameSaveData();
         _gameSaveData.CreatedGames.Add( levels);

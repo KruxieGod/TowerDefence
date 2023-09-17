@@ -15,7 +15,13 @@ public class CounterMoney
         if (AmountMoney - money < 0)
             return false;
         AmountMoney -= money;
+        _counterMoneyUI.SetMoney(AmountMoney);
         return true;
+    }
 
+    public void Reset()
+    {
+        AmountMoney = 0;
+        _counterMoneyUI.SetMoney(AmountMoney);
     }
 }

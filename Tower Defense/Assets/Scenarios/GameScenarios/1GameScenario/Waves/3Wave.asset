@@ -14,16 +14,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _waveEnemy:
   - _enemyType: 2
-    _behaviour:
-      _speed: 4
-      _hp: 150
+    _speed:
+      min: 5
+      max: 5
+    _hp:
+      min: 45
+      max: 55
+    _cost:
+      min: 14
+      max: 20
   - _enemyType: 2
-    _behaviour:
-      _speed: 4
-      _hp: 150
+    _speed:
+      min: 5
+      max: 5
+    _hp:
+      min: 45
+      max: 55
+    _cost:
+      min: 14
+      max: 20
   - _enemyType: 2
-    _behaviour:
-      _speed: 4
-      _hp: 150
+    _speed:
+      min: 5
+      max: 5
+    _hp:
+      min: 45
+      max: 55
+    _cost:
+      min: 14
+      max: 20
   _recoverTimeEnemies: 1
   _factory: {fileID: 11400000, guid: 62bfb03c8e822f8489b82ebe876b2bb9, type: 2}

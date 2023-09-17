@@ -16,11 +16,11 @@ public class GameEnemyFactory : ScriptableObject
         switch (enemyInfo.EnemyType)
         {
             case (EnemyType.Human):
-                return Instantiate(_prefabHuman).InitializeEnemy(enemyInfo.Behaviour);
+                return Instantiate(_prefabHuman).InitializeEnemy(enemyInfo);
             case (EnemyType.Elf):
-                return Instantiate(_prefabElf).InitializeEnemy(enemyInfo.Behaviour);
+                return Instantiate(_prefabElf).InitializeEnemy(enemyInfo);
             case (EnemyType.Orc):
-                return Instantiate(_prefabOrc).InitializeEnemy(enemyInfo.Behaviour);
+                return Instantiate(_prefabOrc).InitializeEnemy(enemyInfo);
         }
 
         throw new ArgumentException("Wrong type:" + enemyInfo.EnemyType);

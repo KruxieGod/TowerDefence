@@ -6,8 +6,8 @@ using UnityEngine;
 [Serializable]
 public struct BehaviourEnemy
 {
-    [SerializeField]private float _speed;
-    [SerializeField]private int _hp;
-    public float Speed => _speed;
-    public int HP => _hp;
+    [SerializeField,FloatRangeSlider(0.5f,15f)]private FloatRange _speed;
+    [SerializeField,FloatRangeSlider(1,300)]private FloatRange _hp;
+    public float Speed => _speed.RandomValueInRange;
+    public int HP => (int)_hp.RandomValueInRange;
 }

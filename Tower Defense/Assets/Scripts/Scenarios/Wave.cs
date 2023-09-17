@@ -14,33 +14,11 @@ public class Wave : ScriptableObject
     {
         return new WaveJson(_waveEnemy,_recoverTimeEnemies,_factory.name);
     }
-    
-    public State GetScenario(EnemySpawner spawner) => new State(this,spawner);
-    
-    public struct State
-    {
-        private Wave _wave;
-        private float _timeLast;
-        private int _index;
-        private EnemySpawner _enemySpawner;
-        public State(Wave wave,EnemySpawner tile)
-        {
-            _wave = wave;
-            _timeLast = 0;
-            _index = 0;
-            _enemySpawner = tile;
-        }
 
-        public bool WaveUpdate()
-        {
-            if (_timeLast <= 0 && _index < _wave._waveEnemy.Count)
-            {
-                _timeLast = _wave._recoverTimeEnemies;
-                _enemySpawner.SpawnEnemy(_wave._waveEnemy[_index++],_wave._factory);
-            }
-            _timeLast -= Time.deltaTime;
-            return _index >= _wave._waveEnemy.Count;
-        }
+    private void OnValidate()
+    {
+        for (int i = 0; i < _waveEnemy.Count; i++)
+            _waveEnemy[i] = _waveEnemy[i].OnValidate();
     }
 }
 
