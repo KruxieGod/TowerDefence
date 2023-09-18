@@ -1,18 +1,47 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
+using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
+using Unity.Burst;
+using Unity.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
-using UnityEngine.UIElements;
-using UnityEngine.Windows;
+using UnityEngine.Jobs;
 using Input = UnityEngine.Input;
+
+public struct TransformInfo
+{
+    public readonly Quaternion Rotation;
+    public readonly Vector3 Position;
+
+    public TransformInfo( Quaternion rotation, Vector3 position)
+    {
+        Rotation = rotation;
+        Position = position;
+    }
+}
 
 public class GameManager : MonoBehaviour
 {
+    private UniTask<TransformInfo[]> ParallelEnemies(IEnumerable<Enemy> enemies)
+    {
+        transform.position += Vector3.left;
+        foreach (var enemy in enemies)
+        {
+            var enemyTransform = enemy.transform;
+            var pos = enemyTransform.position;
+            var forward = enemyTransform.forward;
+            var rot = enemyTransform.rotation;
+            _tasks.Add(UniTask.RunOnThreadPool(() => enemy.GetInfos(pos,forward,rot),false));
+        }
+        return UniTask.WhenAll(_tasks);
+    }
+
+    private List<UniTask<TransformInfo>> _tasks = new();
+    [SerializeField] private bool _isJob = true;
     [field: SerializeField] public int DistanceFromCamera { get; private set; }
     public static UnityEvent OnDestroy { get; set; } = new UnityEvent();
     [SerializeField] private PassedCounter _counter;
@@ -22,9 +51,9 @@ public class GameManager : MonoBehaviour
     [field :SerializeField] public Camera Camera { get; private set; }
     private GameTowerFactory _towerFactory => ProjectContext.Instance.GameProvider.FactoriesProvider.GameFactories.GameTowerFactory;
     private GameScenarioJson _scenario => ProjectContext.Instance.GameProvider.ScenariosProvider.GetCurrentScenario();
-
+    public static CollectionEntities<Enemy> Enemies { get; private set; } = new();
     public static CollectionEntities<EnemySpawner>
-        Spawners { get; private set; } = new CollectionEntities<EnemySpawner>();
+        Spawners { get; private set; } = new ();
     private GameScenarioJson.State _currentScenario;
     private bool _isPaused;
     private bool _isEndedGame;
@@ -35,7 +64,7 @@ public class GameManager : MonoBehaviour
         StartNewGame();
     }
 
-    private void Update()
+    private async void Update()
     {
         if (_isEndedGame)
             return;
@@ -50,13 +79,30 @@ public class GameManager : MonoBehaviour
         
         foreach (var tower in _towerFactory.Data)
             tower?.UpdateEntity();
+
+        if (_isJob)
+        {
+            var enemies = Enemies.Data.ToList();
+            var array = await ParallelEnemies(enemies);
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                var info = array[i];
+                enemies[i].transform.position = info.Position;
+                enemies[i].transform.rotation = info.Rotation;
+            }
+            _tasks.Clear();
+        }
+        else
+        {
+            Debug.Log("No Jobs");
+            foreach (var spawner in Spawners.Data)
+                spawner.UpdateEntity();
+        }
         
-        foreach (var spawner in Spawners.Data)
-            spawner?.UpdateEntity();
         _currentScenario.ScenarioUpdate();
         OnDestroy?.Invoke();
     }
-
+    
     public void StartNewGame()
     {
         foreach (var spawner in Spawners.Data)
@@ -86,7 +132,7 @@ public class GameManager : MonoBehaviour
         if (!TrySetTile(type,content)) 
             return;
         _gameBoard.PathUpdate();
-        if (Spawners.CountSpawners != 0 &&
+        if (Spawners.Count != 0 &&
             !Spawners.Data.All(x => x.SpawnerTile.HasPath()))
         {
             TrySetTile(TypeOfTile.Empty,content);

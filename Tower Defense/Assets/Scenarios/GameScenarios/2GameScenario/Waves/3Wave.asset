@@ -183,5 +183,835 @@ MonoBehaviour:
     _cost:
       min: 8
       max: 10
-  _recoverTimeEnemies: 0.2
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  - _enemyType: 0
+    _speed:
+      min: 10
+      max: 10
+    _hp:
+      min: 20
+      max: 20
+    _cost:
+      min: 8
+      max: 10
+  _recoverTimeEnemies: 0.001
   _factory: {fileID: 11400000, guid: 3ea81be6d1e49144da4f9e0a498e165b, type: 2}

@@ -9,8 +9,8 @@ using Object = UnityEngine.Object;
 public class EnemySpawner : TileContent, IUpdatable
 {
     public override TypeOfTile TileType => TypeOfTile.SpawnerEnemy;
-    private HashSet<Enemy> _enemies = new HashSet<Enemy>();
-    private UnityEvent _moveOnEnemy = new UnityEvent();
+    private HashSet<Enemy> _enemies = new ();
+    private UnityEvent _moveOnEnemy = new ();
     public bool IsEnded => _enemies.Count == 0;
     
     public void UpdateEntity()
@@ -22,6 +22,8 @@ public class EnemySpawner : TileContent, IUpdatable
     {
         ((ICollectionEntities<EnemySpawner>)GameManager.Spawners).Add(this);
         var enemy = factory.GetPrefabEnemy(enemyInfo);
+        GameManager.Enemies.Add(enemy);
+        
         _enemies.Add(enemy);
         enemy.transform.position = transform.position;
         enemy.Initialize(SpawnerTile,Remove);
@@ -38,6 +40,7 @@ public class EnemySpawner : TileContent, IUpdatable
 
     private void Remove(Enemy enemy)
     {
+        GameManager.Enemies.Remove(enemy);
         _moveOnEnemy.RemoveListener(enemy.UpdatePos);
         _enemies.Remove(enemy);
     }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;using System.Data;
+using Unity.Jobs;
 using UnityEngine;
 
 public abstract class BaseFactoryCollection<T> : ScriptableObject
@@ -20,7 +21,7 @@ public class CollectionEntities<T> : ICollectionEntities<T>
 {
     private HashSet<T> _data = new HashSet<T>();
 
-    public int CountSpawners => _data.Count;
+    public int Count => _data.Count;
     
     public IEnumerable<T> Data
     {
@@ -31,8 +32,8 @@ public class CollectionEntities<T> : ICollectionEntities<T>
         }
     }
 
-    void ICollectionEntities<T>.Remove(T entity) => _data.Remove(entity);
-    void ICollectionEntities<T>.Add(T entity) => _data.Add(entity);
+    public void Remove(T entity) => _data.Remove(entity);
+    public void Add(T entity) => _data.Add(entity);
 }
 
 public interface ICollectionEntities<T>
