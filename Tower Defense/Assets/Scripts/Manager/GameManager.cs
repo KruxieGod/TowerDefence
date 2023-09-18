@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
             if (hits[i].transform.position != currentTilePositions[i])
                 enemy.TryGetComponentTile(hits[i]);
         }
-
+        
         var job = new RotationJob()
         {
             Speed = speeds,
@@ -78,6 +78,14 @@ public class GameManager : MonoBehaviour
             DeltaTime = Time.deltaTime
         }.Schedule(transformAccessArray);
         job.Complete();
+        currentTilePositions.Dispose();
+        commands.Dispose();
+        currentTileDirections.Dispose();
+        previousTileDirections.Dispose();
+        speeds.Dispose();
+        forwardEnemies.Dispose();
+        transformAccessArray.Dispose();
+        hits.Dispose();
     }
     
     [SerializeField] private bool _isJob = true;
