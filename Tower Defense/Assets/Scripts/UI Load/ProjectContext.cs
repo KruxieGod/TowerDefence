@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class ProjectContext : MonoBehaviour
 {
+    [field: SerializeField] public LayerMask LayerFloor { get; private set; }
     public static ProjectContext Instance { get; private set; }
     [SerializeField] private Camera _mainCamera;
     public Camera UiCamera => _mainCamera;

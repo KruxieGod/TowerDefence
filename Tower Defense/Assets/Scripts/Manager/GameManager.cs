@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Unity.Burst;
 using Unity.Collections;
+using Unity.Jobs;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,35 +13,73 @@ using UnityEngine.EventSystems;
 using UnityEngine.Jobs;
 using Input = UnityEngine.Input;
 
-public struct TransformInfo
+[BurstCompile]
+public struct RotationJob : IJobParallelForTransform
 {
-    public readonly Quaternion Rotation;
-    public readonly Vector3 Position;
-
-    public TransformInfo( Quaternion rotation, Vector3 position)
+    public NativeArray<Vector3> ForwardEnemies;
+    public NativeArray<Direction> CurrentTileDirections;
+    public NativeArray<Direction> PreviousTileDirections;
+    public NativeArray<float> Speed;
+    public float DeltaTime;
+    public void Execute(int index,TransformAccess transform)
     {
-        Rotation = rotation;
-        Position = position;
+        var speedRotation = Enemy.SpeedRotation;
+        transform.rotation =  Quaternion.Lerp( transform.rotation,CurrentTileDirections[index].GetDirection(),speedRotation*DeltaTime*Speed[index]);
+        transform.position += ForwardEnemies[index] * Speed[index] * DeltaTime;
     }
 }
 
 public class GameManager : MonoBehaviour
 {
-    private UniTask<TransformInfo[]> ParallelEnemies(IEnumerable<Enemy> enemies)
+    private void ParallelEnemies()
     {
-        transform.position += Vector3.left;
-        foreach (var enemy in enemies)
+        var length = Enemies.Count;
+        var enemies= Enemies.Data.ToArray();
+        NativeArray<Vector3> currentTilePositions = new(length, Allocator.TempJob);
+        NativeArray<RaycastCommand> commands = new(length,Allocator.TempJob);
+        var layer = ProjectContext.Instance.LayerFloor;
+        NativeArray<Direction> currentTileDirections = new(length,Allocator.TempJob);
+        NativeArray<Direction> previousTileDirections = new(length,Allocator.TempJob);
+        NativeArray<float> speeds = new(length,Allocator.TempJob);
+        NativeArray<Vector3> forwardEnemies = new(length,Allocator.TempJob);
+        TransformAccessArray transformAccessArray = new(length);
+        for (int i = 0; i < length; i++)
         {
-            var enemyTransform = enemy.transform;
-            var pos = enemyTransform.position;
-            var forward = enemyTransform.forward;
-            var rot = enemyTransform.rotation;
-            _tasks.Add(UniTask.RunOnThreadPool(() => enemy.GetInfos(pos,forward,rot),false));
+            var enemy = enemies[i];
+            currentTilePositions [i] = enemy.CurrentTilePosition;
+            commands[i] = new RaycastCommand(
+                enemy.transform.position + Vector3.up,
+                Vector3.down,
+                Enemy.Distance,
+                layer);
+            currentTileDirections[i] = enemy.CurrentDirection;
+            previousTileDirections[i] = enemy.PreviousDirection;
+            speeds[i] = enemy.Speed;
+            var transform1 = enemy.transform;
+            forwardEnemies[i] = transform1.forward;
+            transformAccessArray.Add(transform1);
         }
-        return UniTask.WhenAll(_tasks);
-    }
+        NativeArray<RaycastHit> hits = new(length,Allocator.TempJob);
+        var jobRaycast = RaycastCommand.ScheduleBatch(commands, hits,1);
+        jobRaycast.Complete();
+        for (int i = 0; i < length; i++)
+        {
+            var enemy = enemies[i];
+            if (hits[i].transform.position != currentTilePositions[i])
+                enemy.TryGetComponentTile(hits[i]);
+        }
 
-    private List<UniTask<TransformInfo>> _tasks = new();
+        var job = new RotationJob()
+        {
+            Speed = speeds,
+            ForwardEnemies = forwardEnemies,
+            CurrentTileDirections = currentTileDirections,
+            PreviousTileDirections = previousTileDirections,
+            DeltaTime = Time.deltaTime
+        }.Schedule(transformAccessArray);
+        job.Complete();
+    }
+    
     [SerializeField] private bool _isJob = true;
     [field: SerializeField] public int DistanceFromCamera { get; private set; }
     public static UnityEvent OnDestroy { get; set; } = new UnityEvent();
@@ -64,7 +103,7 @@ public class GameManager : MonoBehaviour
         StartNewGame();
     }
 
-    private async void Update()
+    private void Update()
     {
         if (_isEndedGame)
             return;
@@ -82,15 +121,7 @@ public class GameManager : MonoBehaviour
 
         if (_isJob)
         {
-            var enemies = Enemies.Data.ToList();
-            var array = await ParallelEnemies(enemies);
-            for (int i = 0; i < enemies.Count; i++)
-            {
-                var info = array[i];
-                enemies[i].transform.position = info.Position;
-                enemies[i].transform.rotation = info.Rotation;
-            }
-            _tasks.Clear();
+            ParallelEnemies();
         }
         else
         {

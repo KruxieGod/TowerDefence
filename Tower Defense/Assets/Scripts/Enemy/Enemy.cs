@@ -3,18 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [SelectionBase,RequireComponent(typeof(Collider))]
 public class Enemy : MonoBehaviour,IDamagable,ICollector
 {
     public bool IsTrigger { get; private set; }
     private EnemyView _enemyView;
-    public const float SpeedRotation = 0.6f;
-    [field: SerializeField] public LayerMask LayerFloor { get; private set; }
+    public const float SpeedRotation = 0.3f;
     private EnemyInfo _behaviour;
     private Tile _currentTile;
+    public Vector3 CurrentTilePosition => _currentTile.transform.position;
     public const float RADIUS = GameBoard.POSITIONMULTIPLIER/2;
-    private Direction _previousDirection;
+    public Direction PreviousDirection { get; private set; }
+    public Direction CurrentDirection => _currentTile.Direction;
     public const float Distance = 1f;
     public int HealthPoints { get; private set; }
     private Action<Enemy> _onDestroy;
@@ -25,7 +27,7 @@ public class Enemy : MonoBehaviour,IDamagable,ICollector
     {
         _enemyView = GetComponentInChildren<EnemyView>();
         _onDestroy = onDestroy;
-        _previousDirection = currentTile.Direction;
+        PreviousDirection = currentTile.Direction;
         transform.position = currentTile.transform.position;
         _currentTile = currentTile;
         transform.rotation = currentTile.Direction.GetDirection();
@@ -37,43 +39,51 @@ public class Enemy : MonoBehaviour,IDamagable,ICollector
         HealthPoints = behaviour.HP;
         return this;
     }
-
-    public TransformInfo GetInfos(Vector3 posEnemy,Vector3 forwardEnemy,Quaternion rotationEnemy) => 
-        new (position:GetDirection(posEnemy,forwardEnemy),rotation: GetRotation(rotationEnemy));
     
     public void UpdatePos()
     {
-        //transform.position = GetDirection(transform);
-        //transform.rotation = GetRotation(transform);
+        transform.position = GetDirection();
+        transform.rotation = GetRotation();
     }
 
-    public Vector3 GetDirection(Vector3 positionEnemy,Vector3 forwardEnemy)
+    public Vector3 GetDirection()
     {
+        /*
         if (_currentTile.Content.TileType == TypeOfTile.Destination)
         {
             PassedCounter.NotifyCounterOn?.Invoke(1);
             Die();
         }
-        if (Physics.Raycast (new Vector3(positionEnemy.x,positionEnemy.y+1f,positionEnemy.z),
-                Vector3.down, out var hit,Distance,LayerFloor)
+        */
+        PreviousDirection = _currentTile.Direction;
+        if (Physics.Raycast (new Vector3(transform.position.x,transform.position.y+1f,transform.position.z),
+                Vector3.down, out var hit,Distance,ProjectContext.Instance.LayerFloor)
             && _currentTile.transform != hit.transform
             && hit.transform.TryGetComponent(out Tile tile))
         {
             _currentTile = tile;
-            _previousDirection = _currentTile.Direction;
+            PreviousDirection = _currentTile.Direction;
         }
 
-        return positionEnemy + forwardEnemy * (_behaviour.Speed * Time.deltaTime);
+        return transform.position + transform.forward * (_behaviour.Speed * Time.deltaTime);
+    }
+
+    public void TryGetComponentTile(RaycastHit hit)
+    {
+        PreviousDirection = _currentTile.Direction;
+        if (!hit.transform.TryGetComponent(out Tile tile))
+            return;
+        _currentTile = tile;
+        PreviousDirection = _currentTile.Direction;
     }
     
-    public Quaternion GetRotation(Quaternion rotationEnemy)
+    public Quaternion GetRotation()
     {
-        float speedRotation = SpeedRotation/2f;
-
-        if (_previousDirection != _currentTile.Direction)
+        var speedRotation = SpeedRotation;
+        if (PreviousDirection != _currentTile.Direction)
             speedRotation = 100f;
-        _previousDirection = _currentTile.Direction;
-        return Quaternion.Lerp( rotationEnemy,_currentTile.Direction.GetDirection(),speedRotation*Time.deltaTime*_behaviour.Speed);
+        
+        return Quaternion.Lerp( transform.rotation,_currentTile.Direction.GetDirection(),speedRotation*Time.deltaTime*_behaviour.Speed);
     }
 
     private void Die()
