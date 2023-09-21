@@ -48,13 +48,12 @@ public class Enemy : MonoBehaviour,IDamagable,ICollector
 
     public Vector3 GetDirection()
     {
-        /*
         if (_currentTile.Content.TileType == TypeOfTile.Destination)
         {
             PassedCounter.NotifyCounterOn?.Invoke(1);
             Die();
         }
-        */
+        
         PreviousDirection = _currentTile.Direction;
         if (Physics.Raycast (new Vector3(transform.position.x,transform.position.y+1f,transform.position.z),
                 Vector3.down, out var hit,Distance,ProjectContext.Instance.LayerFloor)
@@ -70,11 +69,24 @@ public class Enemy : MonoBehaviour,IDamagable,ICollector
 
     public void TryGetComponentTile(RaycastHit hit)
     {
-        PreviousDirection = _currentTile.Direction;
-        if (!hit.transform.TryGetComponent(out Tile tile))
+        
+        if (_currentTile.Content.TileType == TypeOfTile.Destination)
+        {
+            PassedCounter.NotifyCounterOn?.Invoke(1);
+            Die();
             return;
-        _currentTile = tile;
-        PreviousDirection = _currentTile.Direction;
+        }
+        
+        if (_currentTile.transform != hit.transform &&
+            hit.transform.TryGetComponent(out Tile tile))
+        {
+            _currentTile = tile;
+            PreviousDirection = _currentTile.Direction;
+        }
+
+        var transform1 = transform;
+        transform1.position += transform1.forward * (_behaviour.Speed * Time.deltaTime);
+        transform1.rotation = GetRotation();
     }
     
     public Quaternion GetRotation()

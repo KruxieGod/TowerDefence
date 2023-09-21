@@ -31,60 +31,28 @@ public struct RotationJob : IJobParallelForTransform
 
 public class GameManager : MonoBehaviour
 {
+    [Obsolete("Obsolete")]
     private void ParallelEnemies()
     {
         var length = Enemies.Count;
         var enemies= Enemies.Data.ToArray();
-        NativeArray<Vector3> currentTilePositions = new(length, Allocator.TempJob);
         NativeArray<RaycastCommand> commands = new(length,Allocator.TempJob);
         var layer = ProjectContext.Instance.LayerFloor;
-        NativeArray<Direction> currentTileDirections = new(length,Allocator.TempJob);
-        NativeArray<Direction> previousTileDirections = new(length,Allocator.TempJob);
-        NativeArray<float> speeds = new(length,Allocator.TempJob);
-        NativeArray<Vector3> forwardEnemies = new(length,Allocator.TempJob);
-        TransformAccessArray transformAccessArray = new(length);
         for (int i = 0; i < length; i++)
         {
             var enemy = enemies[i];
-            currentTilePositions [i] = enemy.CurrentTilePosition;
             commands[i] = new RaycastCommand(
                 enemy.transform.position + Vector3.up,
                 Vector3.down,
                 Enemy.Distance,
                 layer);
-            currentTileDirections[i] = enemy.CurrentDirection;
-            previousTileDirections[i] = enemy.PreviousDirection;
-            speeds[i] = enemy.Speed;
-            var transform1 = enemy.transform;
-            forwardEnemies[i] = transform1.forward;
-            transformAccessArray.Add(transform1);
         }
         NativeArray<RaycastHit> hits = new(length,Allocator.TempJob);
         var jobRaycast = RaycastCommand.ScheduleBatch(commands, hits,1);
         jobRaycast.Complete();
         for (int i = 0; i < length; i++)
-        {
-            var enemy = enemies[i];
-            if (hits[i].transform.position != currentTilePositions[i])
-                enemy.TryGetComponentTile(hits[i]);
-        }
-        
-        var job = new RotationJob()
-        {
-            Speed = speeds,
-            ForwardEnemies = forwardEnemies,
-            CurrentTileDirections = currentTileDirections,
-            PreviousTileDirections = previousTileDirections,
-            DeltaTime = Time.deltaTime
-        }.Schedule(transformAccessArray);
-        job.Complete();
-        currentTilePositions.Dispose();
+            enemies[i].TryGetComponentTile(hits[i]);
         commands.Dispose();
-        currentTileDirections.Dispose();
-        previousTileDirections.Dispose();
-        speeds.Dispose();
-        forwardEnemies.Dispose();
-        transformAccessArray.Dispose();
         hits.Dispose();
     }
     
