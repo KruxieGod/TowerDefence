@@ -15,8 +15,8 @@ MonoBehaviour:
   _waveEnemy:
   - _enemyType: 2
     _speed:
-      min: 3
-      max: 3
+      min: 0.5
+      max: 0.5
     _hp:
       min: 45
       max: 45
@@ -25,8 +25,8 @@ MonoBehaviour:
       max: 20
   - _enemyType: 2
     _speed:
-      min: 3
-      max: 3
+      min: 0.5
+      max: 0.5
     _hp:
       min: 45
       max: 45
@@ -35,8 +35,8 @@ MonoBehaviour:
       max: 20
   - _enemyType: 2
     _speed:
-      min: 3
-      max: 3
+      min: 0.5
+      max: 0.5
     _hp:
       min: 45
       max: 45
@@ -45,8 +45,8 @@ MonoBehaviour:
       max: 20
   - _enemyType: 2
     _speed:
-      min: 3
-      max: 3
+      min: 0.5
+      max: 0.5
     _hp:
       min: 45
       max: 45
@@ -55,8 +55,8 @@ MonoBehaviour:
       max: 20
   - _enemyType: 2
     _speed:
-      min: 3
-      max: 3
+      min: 0.5
+      max: 0.5
     _hp:
       min: 45
       max: 45
@@ -65,8 +65,8 @@ MonoBehaviour:
       max: 20
   - _enemyType: 2
     _speed:
-      min: 3
-      max: 3
+      min: 0.5
+      max: 0.5
     _hp:
       min: 45
       max: 45
@@ -75,8 +75,8 @@ MonoBehaviour:
       max: 20
   - _enemyType: 2
     _speed:
-      min: 3
-      max: 3
+      min: 0.5
+      max: 0.5
     _hp:
       min: 45
       max: 45
@@ -85,8 +85,8 @@ MonoBehaviour:
       max: 20
   - _enemyType: 2
     _speed:
-      min: 3
-      max: 3
+      min: 0.5
+      max: 0.5
     _hp:
       min: 45
       max: 45
@@ -95,8 +95,8 @@ MonoBehaviour:
       max: 20
   - _enemyType: 2
     _speed:
-      min: 3
-      max: 3
+      min: 0.5
+      max: 0.5
     _hp:
       min: 45
       max: 45
@@ -105,8 +105,8 @@ MonoBehaviour:
       max: 20
   - _enemyType: 2
     _speed:
-      min: 3
-      max: 3
+      min: 0.5
+      max: 0.5
     _hp:
       min: 45
       max: 45

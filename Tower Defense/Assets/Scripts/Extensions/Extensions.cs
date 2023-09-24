@@ -65,9 +65,9 @@ public interface IClamp
 
 public class ClampSpeed : IClamp
 {
-    public FloatRange ToHuman(FloatRange floatRange) => new (Mathf.Clamp(floatRange.Min, 8f, 10f), Mathf.Clamp(floatRange.Max, 8f, 10f));
-    public FloatRange ToElf(FloatRange floatRange) => new (Mathf.Clamp(floatRange.Min, 13f, 15f), Mathf.Clamp(floatRange.Max, 13f, 15f));
-    public FloatRange ToOrc(FloatRange floatRange) =>new (Mathf.Clamp(floatRange.Min, 3f, 5f), Mathf.Clamp(floatRange.Max, 3f, 5f));
+    public FloatRange ToHuman(FloatRange floatRange) => new (Mathf.Clamp(floatRange.Min, 0.8f, 0.10f), Mathf.Clamp(floatRange.Max, 0.8f, 0.10f));
+    public FloatRange ToElf(FloatRange floatRange) => new (Mathf.Clamp(floatRange.Min, 1.3f, 1.5f), Mathf.Clamp(floatRange.Max, 1.3f, 1.5f));
+    public FloatRange ToOrc(FloatRange floatRange) =>new (Mathf.Clamp(floatRange.Min, 0.3f, 0.5f), Mathf.Clamp(floatRange.Max, 0.3f, 0.5f));
 }
 
 public class ClampHP : IClamp

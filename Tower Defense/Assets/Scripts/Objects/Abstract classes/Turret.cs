@@ -15,15 +15,14 @@ public abstract class Turret<BehaviourT> :  Turret,IUpdatable
     protected ITowerUpgradeVisitor _visitor;
     [SerializeField]private UpgradeTileUI _upgradeTileUI;
     public Turret<BehaviourT> Initialize(
-        BehaviourT behaviourTower,
         GameTowerFactory towerFactory,
         ITowerUpgradeVisitor visitor)
     {
         towerFactory.Add(this);
         _visitor = visitor;
         _towerFactory = towerFactory;
-        _behaviourTower = behaviourTower;
-        _turret.Initialize(this,behaviourTower);
+        _behaviourTower = ProjectContext.Instance.GameProvider.TowerInfoLoader.GetBehaviour<BehaviourT>(name.Replace("(Clone)",""));
+        _turret.Initialize(this,_behaviourTower);
         _lastToShoot = _behaviourTower.SpeedFire;
         _upgradeTileUI.OnClick(UpgradeTower);
         _upgradeTileUI.SetPrice(ProjectContext.Instance.GameProvider.TowerInfoLoader.GetPrice( name.Replace("(Clone)","") ));
@@ -33,7 +32,7 @@ public abstract class Turret<BehaviourT> :  Turret,IUpdatable
 
     public Turret<BehaviourT> Initialize(Turret<BehaviourT> tower)
     {
-        Initialize(_behaviourTower, tower._towerFactory, _visitor);
+        Initialize(tower._towerFactory, _visitor);
         return this;
     }
 
@@ -68,8 +67,8 @@ public abstract class Turret<BehaviourT> :  Turret,IUpdatable
     private void Serialize()
     {
         var path = PathCollection.PATH_TO_TOWERS + name + ".json";
-        var value = JsonExtension.GetClassFromJson<PriceData>(path);
+        var value = JsonExtension.GetClassFromJson<TowerData<BehaviourT>>(path);
         if (value == null)
-            JsonExtension.SerializeClass(new PriceData(name,0),PathCollection.PATH_TO_TOWERS + name + ".json");
+            JsonExtension.SerializeClass(new TowerData<BehaviourT>(name,0,null),PathCollection.PATH_TO_TOWERS + name + ".json");
     }
 }

@@ -7,16 +7,14 @@ public class GameTowerFactory : BaseFactoryCollection<IUpdatable>
 {
     [SerializeField] private LaserTurret _laserTurretPrefab;
     [SerializeField] private Ballista _ballistaPrefab;
-    [SerializeField] private BehaviourTower _behaviourTower;
-    [SerializeField] private BehaviourBallistics _behaviourBallistics;
 
-    public Turret<BehaviourBallistics> GetBallista() => GetPrefab(_ballistaPrefab,_behaviourBallistics);
-    public Turret<BehaviourTower> GetLaserTurret() => GetPrefab(_laserTurretPrefab,_behaviourTower);
+    public Turret<BehaviourBallistics> GetBallista() => GetPrefab(_ballistaPrefab);
+    public Turret<BehaviourTower> GetLaserTurret() => GetPrefab(_laserTurretPrefab);
 
-    private Turret<T> GetPrefab<T>(Turret<T> prefab,T behaviourTower)
+    private Turret<T> GetPrefab<T>(Turret<T> prefab)
         where T : BehaviourTower
     {
-        var pref = Instantiate(prefab).Initialize( behaviourTower,this,new FirstTowerUpgradeVisitor());
+        var pref = Instantiate(prefab).Initialize( this,new FirstTowerUpgradeVisitor());
         return pref;
     }
 

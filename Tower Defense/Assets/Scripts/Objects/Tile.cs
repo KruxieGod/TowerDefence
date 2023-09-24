@@ -6,7 +6,6 @@ using UnityEngine.Serialization;
 
 public class Tile : MonoBehaviour,ISetterTile
 {
-    [SerializeField] private GameObject _arrow;
     public TileContent Content { get; private set; }
     private Tile _up, _down, _right, _left,_nextTile;
     public Tile NextTile => _nextTile;
@@ -22,11 +21,7 @@ public class Tile : MonoBehaviour,ISetterTile
             { TypeOfTile.Destination, SetPosDestination},
             { TypeOfTile.Empty, SetWithoutInteraction},
             { TypeOfTile.Wall , SetWithInteraction},
-            { TypeOfTile.SpawnerEnemy ,tile =>
-            {
-                SetWithoutInteraction(tile);
-                tile._arrow.SetActive(false);
-            }},
+            { TypeOfTile.SpawnerEnemy ,SetWithoutInteraction},
             { TypeOfTile.Turret , SetWithInteraction},
             { TypeOfTile.Laser , SetWithInteraction},
             { TypeOfTile.Mortar , SetWithInteraction}
@@ -46,7 +41,6 @@ public class Tile : MonoBehaviour,ISetterTile
         if (tile.IsUnityNull())
             return;
         tile._isWall = false;
-        tile._arrow.SetActive(true);
     }
     
     private static void SetPosDestination(Tile tile)
@@ -54,7 +48,6 @@ public class Tile : MonoBehaviour,ISetterTile
         tile._isWall = false;
         tile.Distance = 0;
         tile._nextTile = null;
-        tile._arrow.SetActive(false);
     }
     #endregion
 

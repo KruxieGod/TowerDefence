@@ -15,8 +15,8 @@ MonoBehaviour:
   _waveEnemy:
   - _enemyType: 1
     _speed:
-      min: 13
-      max: 13
+      min: 1.5
+      max: 1.5
     _hp:
       min: 10
       max: 10
@@ -25,8 +25,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 1
     _speed:
-      min: 13
-      max: 13
+      min: 1.5
+      max: 1.5
     _hp:
       min: 10
       max: 10
@@ -35,8 +35,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 2
     _speed:
-      min: 5
-      max: 5
+      min: 0.5
+      max: 0.5
     _hp:
       min: 45
       max: 45
@@ -45,8 +45,8 @@ MonoBehaviour:
       max: 14
   - _enemyType: 2
     _speed:
-      min: 5
-      max: 5
+      min: 0.5
+      max: 0.5
     _hp:
       min: 45
       max: 45
@@ -55,8 +55,8 @@ MonoBehaviour:
       max: 14
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -65,8 +65,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 1
     _speed:
-      min: 13
-      max: 13
+      min: 1.5
+      max: 1.5
     _hp:
       min: 10
       max: 10
@@ -75,8 +75,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 1
     _speed:
-      min: 13
-      max: 13
+      min: 1.5
+      max: 1.5
     _hp:
       min: 10
       max: 10
@@ -85,8 +85,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -95,8 +95,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -105,8 +105,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -115,8 +115,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -125,8 +125,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -135,8 +135,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -145,8 +145,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -155,8 +155,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -165,8 +165,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -175,8 +175,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -185,8 +185,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -195,8 +195,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -205,8 +205,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -215,8 +215,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -225,8 +225,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -235,8 +235,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -245,8 +245,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -255,8 +255,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -265,8 +265,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -275,8 +275,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -285,8 +285,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -295,8 +295,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -305,8 +305,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -315,8 +315,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -325,8 +325,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -335,8 +335,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -345,8 +345,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -355,8 +355,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -365,8 +365,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -375,8 +375,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -385,8 +385,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -395,8 +395,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -405,8 +405,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -415,8 +415,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -425,8 +425,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -435,8 +435,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -445,8 +445,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -455,8 +455,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -465,8 +465,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -475,8 +475,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -485,8 +485,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -495,8 +495,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -505,8 +505,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -515,8 +515,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -525,8 +525,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -535,8 +535,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -545,8 +545,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -555,8 +555,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -565,8 +565,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -575,8 +575,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -585,8 +585,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -595,8 +595,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -605,8 +605,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -615,8 +615,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -625,8 +625,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -635,8 +635,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -645,8 +645,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -655,8 +655,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -665,8 +665,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -675,8 +675,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -685,8 +685,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -695,8 +695,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -705,8 +705,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -715,8 +715,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -725,8 +725,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -735,8 +735,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -745,8 +745,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -755,8 +755,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -765,8 +765,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -775,8 +775,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -785,8 +785,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -795,8 +795,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -805,8 +805,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -815,8 +815,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -825,8 +825,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -835,8 +835,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -845,8 +845,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -855,8 +855,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -865,8 +865,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -875,8 +875,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -885,8 +885,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -895,8 +895,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -905,8 +905,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -915,8 +915,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -925,8 +925,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -935,8 +935,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -945,8 +945,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -955,8 +955,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -965,8 +965,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -975,8 +975,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -985,8 +985,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -995,8 +995,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20
@@ -1005,8 +1005,8 @@ MonoBehaviour:
       max: 10
   - _enemyType: 0
     _speed:
-      min: 10
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 20

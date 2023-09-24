@@ -8,7 +8,6 @@ using UnityEngine.UI;
 [RequireComponent(typeof(EventTriggerButton))]
 public class UpgradeTileUI : MonoBehaviour
 {
-    [SerializeField] private Canvas _canvas;
     [SerializeField] private TextMeshProUGUI _price;
     private EventTriggerButton _button;
     [SerializeField] private EventTriggerButton _trigger;
@@ -16,7 +15,6 @@ public class UpgradeTileUI : MonoBehaviour
 
     private void Awake()
     {
-        _canvas.worldCamera = ProjectContext.Instance.UiCamera;
         _trigger.OnClick.AddListener(() =>
         {
             Debug.Log("ENABLED!!!");

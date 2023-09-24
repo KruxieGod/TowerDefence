@@ -52,7 +52,7 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 924e5b544476d6c428cd90aaa15542ae
+  - m_GUID: 97f5ea6736c310849be3d070d4e25847
     m_Address: Ballistics First Tower
     m_ReadOnly: 0
     m_SerializedLabels: []
@@ -62,13 +62,13 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c0e1ebd845bfe6a4a97246c3457d7ed4
-    m_Address: Ballistics Second Tower
+  - m_GUID: 1c964811f07499d488d7eb6a63e10780
+    m_Address: UI Counter Money
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1c964811f07499d488d7eb6a63e10780
-    m_Address: UI Counter Money
+  - m_GUID: c941eba60a0c9a44e9084948f95f81f7
+    m_Address: Ballistics Second Tower
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

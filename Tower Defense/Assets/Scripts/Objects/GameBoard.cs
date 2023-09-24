@@ -9,11 +9,10 @@ using UnityEngine.Serialization;
 public class GameBoard : MonoBehaviour
 {
     [SerializeField] private LayerMask _layer;
-    [SerializeField] private Transform _plane;
     [SerializeField] private Tile _prefabTile;
     public Vector2Int Size { get; private set; }
     private Tile[,] _board;
-    public const int POSITIONMULTIPLIER = 10;
+    public const int POSITIONMULTIPLIER = 1;
     private GameTileFactory _factory;
     private HashSet<ISetterTile> _destinations = new HashSet<ISetterTile>();
     private Func<Tile, Tile, bool> _checkOnType;
@@ -23,8 +22,6 @@ public class GameBoard : MonoBehaviour
     {
         _factory = factory;
         Size = size;
-        if (!_plane.IsUnityNull() || _plane != null)
-            _plane.localScale = new Vector3(Size.x, 1, Size.y);
         if (_board != null)
             Clear();
         else

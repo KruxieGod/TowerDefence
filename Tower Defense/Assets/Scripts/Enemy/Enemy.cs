@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour,IDamagable,ICollector
 {
     public bool IsTrigger { get; private set; }
     private EnemyView _enemyView;
-    public const float SpeedRotation = 0.3f;
+    public const float SpeedRotation = 3f;
     private EnemyInfo _behaviour;
     private Tile _currentTile;
     public Vector3 CurrentTilePosition => _currentTile.transform.position;

@@ -319,7 +319,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &6420133838280250153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559,6 +559,7 @@ GameObject:
   - component: {fileID: 3144011036990460456}
   - component: {fileID: 2003114696581798766}
   - component: {fileID: 2304845783284038746}
+  - component: {fileID: 5430937859865179341}
   m_Layer: 8
   m_Name: Button_Cost
   m_TagString: Untagged
@@ -575,7 +576,7 @@ RectTransform:
   m_GameObject: {fileID: 8287069637071313398}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2025601774799215632}
@@ -636,7 +637,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7ed2ec93c8d2e742856feea2f45ba03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canvas: {fileID: 7089463390280636995}
   _price: {fileID: 5297765860791229561}
   _trigger: {fileID: 0}
 --- !u!114 &2304845783284038746
@@ -654,3 +654,24 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!65 &5430937859865179341
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8287069637071313398}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 440, y: 150, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
