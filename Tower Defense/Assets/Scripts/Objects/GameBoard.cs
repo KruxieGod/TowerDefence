@@ -68,6 +68,32 @@ public class GameBoard : MonoBehaviour
         }
     }
 
+    public void SetPathwayToDestinations()
+    {
+        foreach (var spawner in GameManager.Spawners.Data)
+        {
+            var tile = spawner.SpawnerTile.NextTile;
+            while (tile.NextTile is not null && tile.Content.TileType != TypeOfTile.SpawnerEnemy)
+            {
+                ((ISetterTile)tile).SetContentTile(_factory.GetPathway());
+                tile = tile.NextTile;
+            }
+        }
+    }
+    
+    public void ResetPathwayToDestinations()
+    {
+        foreach (var spawner in GameManager.Spawners.Data)
+        {
+            var tile = spawner.SpawnerTile.NextTile;
+            while (tile.NextTile is not null && tile.Content.TileType != TypeOfTile.SpawnerEnemy)
+            {
+                ((ISetterTile)tile).SetContentTile(_factory.GetContent(TypeOfTile.Empty));
+                tile = tile.NextTile;
+            }
+        }
+    }
+
     public void PathUpdate()
     {
         if (_destinations.Count == 0)
@@ -75,6 +101,7 @@ public class GameBoard : MonoBehaviour
         ResetAllPaths();
         foreach (var destination in _destinations)
             SetCorrectDirectionTo(destination,(original, next) => original.Distance+1 > next.Distance);
+        SetPathwayToDestinations();
     }
 
     public void AddDestination(ISetterTile tileDestination)
@@ -84,6 +111,7 @@ public class GameBoard : MonoBehaviour
         ResetAllPaths();
         _destinations.Add(tileDestination);
         SetCorrectDirectionTo(tileDestination, (original,next) => next.IsHasPath);
+        SetPathwayToDestinations();
     }
     
     private void SetCorrectDirectionTo(ISetterTile tileDestination,Func<Tile,Tile,bool> checkOnPath)
@@ -106,6 +134,7 @@ public class GameBoard : MonoBehaviour
 
     private void ResetAllPaths()
     {
+        ResetPathwayToDestinations();
         foreach (var tile in _board)
             tile.ResetDistance();
     }

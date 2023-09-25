@@ -120,6 +120,7 @@ public class GameManager : MonoBehaviour
         _gameBoard.Initialize(_size,_factory);
         _currentScenario = _scenario.GetScenario(_gameBoard);
         _counter.Initialize(this);
+        _gameBoard.SetPathwayToDestinations();
         Debug.Log("GG");
     }
 

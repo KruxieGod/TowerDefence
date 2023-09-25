@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5e069af53bfc5e4c8713ac5a55e15e5, type: 3}
   m_Name: GameTileFactory
   m_EditorClassIdentifier: 
+  _pathwayPrefab: {fileID: 6572192376833958304, guid: 041d7bf1363b17945a898a33763e9b41, type: 3}
   _destinationPrefab: {fileID: 6401124456257426754, guid: ba654b6f260143046bc073766c8ac625, type: 3}
   _emptyPrefab: {fileID: -6636733709032102550, guid: 97a346376a7623444a528fda7ea7f839, type: 3}
   _wallPrefab: {fileID: 4936564583145755984, guid: 106e8b9919ec4784e9c72fefd85d44de, type: 3}

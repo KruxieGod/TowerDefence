@@ -20,7 +20,6 @@ public class EnemySpawner : TileContent, IUpdatable
 
     public void SpawnEnemy(EnemyInfo enemyInfo, GameEnemyFactory factory)
     {
-        ((ICollectionEntities<EnemySpawner>)GameManager.Spawners).Add(this);
         var enemy = factory.GetPrefabEnemy(enemyInfo);
         GameManager.Enemies.Add(enemy);
         
@@ -28,6 +27,12 @@ public class EnemySpawner : TileContent, IUpdatable
         enemy.transform.position = transform.position;
         enemy.Initialize(SpawnerTile,Remove);
         _moveOnEnemy.AddListener( enemy.UpdatePos);
+    }
+
+    public EnemySpawner Initialize()
+    {
+        ((ICollectionEntities<EnemySpawner>)GameManager.Spawners).Add(this);
+        return this;
     }
     
     public void Recycle()

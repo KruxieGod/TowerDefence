@@ -49,7 +49,7 @@ public class GameScenarioJson
         _scenarios = scenarios;
     }
 
-    public State GetScenario(GameBoard gameBoard) => new State(this, gameBoard);
+    public State GetScenario(GameBoard gameBoard) => new (this, gameBoard);
     
     public struct State
     {

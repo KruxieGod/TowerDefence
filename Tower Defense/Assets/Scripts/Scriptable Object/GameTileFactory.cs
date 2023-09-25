@@ -7,6 +7,7 @@ using UnityEngine.Serialization;
 [CreateAssetMenu]
 public class GameTileFactory : ScriptableObject
 {
+    [SerializeField] private TileContent _pathwayPrefab;
     [SerializeField] private TileContent _destinationPrefab;
     [SerializeField] private TileContent _emptyPrefab;
     [SerializeField] private TileContent _wallPrefab;
@@ -23,6 +24,8 @@ public class GameTileFactory : ScriptableObject
             { _spawnerPrefab.TileType, _spawnerPrefab}
         };
     }
+
+    public TileContent GetPathway() => Instantiate(_pathwayPrefab);
 
     public TileContent GetContent(TypeOfTile typeOfTile)
     {
