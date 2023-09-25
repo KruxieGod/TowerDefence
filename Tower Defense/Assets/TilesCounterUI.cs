@@ -13,7 +13,7 @@ public class TilesCounterUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _laser;
 
     private void Awake() =>
-        GetComponent<Canvas>().worldCamera = ProjectContext.Instance.UiCamera;
+        GetComponent<Canvas>().worldCamera = ProjectContexter.Instance.UiCamera;
 
     public TilesCounterUI Initialize(CountTiles countTiles)
     {

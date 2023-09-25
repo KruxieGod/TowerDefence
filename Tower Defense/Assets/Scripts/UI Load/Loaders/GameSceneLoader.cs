@@ -18,7 +18,7 @@
         public override async UniTask Load(Action<float> onProcess)
         {
             CounterMoneyLoader = new CounterMoneyLoader();
-            SelectingTilesLoader = new SelectingTilesLoader();
+            //SelectingTilesLoader = new SelectingTilesLoader();
             TilesCounterLoader = new TilesCounterLoader();
             await base.Load(onProcess);
             await CounterMoneyLoader.Load(onProcess);

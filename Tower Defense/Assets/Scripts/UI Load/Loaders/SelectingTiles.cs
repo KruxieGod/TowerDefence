@@ -6,7 +6,7 @@ public class SelectingTiles : ISettable<TypeOfTile>
 {
     private readonly GameTileFactory _gameTileFactory;
     private readonly GameTowerFactory _gameTowerFactory;
-    private GameManager _gameManager => ProjectContext.Instance.GameObjectsProvider.GameManager;
+    private GameManager _gameManager => ProjectContexter.Instance.GameObjectsProvider.GameManager;
     public SelectingTiles(GameTileFactory gameTileFactory,
         GameTowerFactory gameTowerFactory)
     {
@@ -41,10 +41,10 @@ public class SelectingTiles : ISettable<TypeOfTile>
     {
         Debug.Log("Waiting for set tile");
         content.enabled = false;
-        content.transform.position = GameManager._ray.GetPoint(ProjectContext.Instance.GameObjectsProvider.GameManager.DistanceFromCamera);
+        content.transform.position = GameManager._ray.GetPoint(ProjectContexter.Instance.GameObjectsProvider.GameManager.DistanceFromCamera);
         while (!Input.GetMouseButtonUp(0))
         {
-            content.transform.position = GameManager._ray.GetPoint(ProjectContext.Instance.GameObjectsProvider.GameManager.DistanceFromCamera);
+            content.transform.position = GameManager._ray.GetPoint(ProjectContexter.Instance.GameObjectsProvider.GameManager.DistanceFromCamera);
             yield return null;
         }
         action(content);

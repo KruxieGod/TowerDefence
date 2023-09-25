@@ -15,7 +15,7 @@ public class SceneProvider : ILoadingOperation
         var scene = SceneManager.LoadSceneAsync(_sceneName,
             LoadSceneMode.Additive);
         await scene;
-        await ProjectContext.Instance.GameObjectsProvider.Load();
+        await ProjectContexter.Instance.GameObjectsProvider.Load();
         onProcess?.Invoke(1);
         SceneManager.UnloadSceneAsync(currentScene);
     }

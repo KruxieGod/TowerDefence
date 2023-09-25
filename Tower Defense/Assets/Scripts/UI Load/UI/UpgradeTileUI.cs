@@ -29,7 +29,7 @@ public class UpgradeTileUI : MonoBehaviour
 
     private void Update()
     {
-        transform.localRotation = Quaternion.LookRotation(ProjectContext.Instance.GameObjectsProvider.GameManager.Camera.transform.position - transform.position);
+        transform.localRotation = Quaternion.LookRotation(ProjectContexter.Instance.GameObjectsProvider.GameManager.Camera.transform.position - transform.position);
     }
 
     public void OnClick(Action action) => _action = action;

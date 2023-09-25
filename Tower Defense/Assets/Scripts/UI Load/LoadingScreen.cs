@@ -6,6 +6,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class LoadingScreen : MonoBehaviour
 {
@@ -13,11 +14,12 @@ public class LoadingScreen : MonoBehaviour
     [SerializeField] private Slider _slider;
     [SerializeField] private TextMeshProUGUI _text;
     [SerializeField] private float _speedBar;
+    private Camera _uiCamera;
     private float _targetProgress;
     public async UniTask Load(Queue<ILoadingOperation> queue)
     {
         DontDestroyOnLoad(this);
-        _canvas.worldCamera = ProjectContext.Instance.UiCamera;
+        _canvas.worldCamera = _uiCamera;
         _canvas.enabled = true;
         StartCoroutine(UpdateSlider());
         
@@ -31,6 +33,9 @@ public class LoadingScreen : MonoBehaviour
         
         _canvas.enabled = false;
     }
+
+    [Inject]
+    private void Construct(Camera uiCamera) => _uiCamera = uiCamera;
 
     private async UniTask Wait()
     {

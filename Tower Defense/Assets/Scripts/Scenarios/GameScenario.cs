@@ -73,7 +73,7 @@ public class GameScenarioJson
                 for (int i = 0; i < _scenarios.Length; i++)
                     isContinued = _scenarios[i].NextWave() || isContinued;
                 if (!isContinued)
-                    ProjectContext.Instance.GameEvents.OnGameState(new WinLoader());
+                    //ProjectContext.Instance.GameEvents.OnGameState(new WinLoader());
                 _timeLast = _gameScenario._timeBetweenWaves;
             }
 

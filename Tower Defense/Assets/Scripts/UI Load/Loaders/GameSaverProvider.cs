@@ -3,9 +3,11 @@ using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
 public class GameSaverProvider : ILoadingOperation,ISettable<LevelSettings>
 {
+    private ScenariosProvider _scenariosProvider;
     private int _lastLevelUsed;
     private int _lastGameUsed;
     private GameSaveData _gameSaveData { get; set; }
@@ -48,10 +50,12 @@ public class GameSaverProvider : ILoadingOperation,ISettable<LevelSettings>
                 : _gameSaveData.CreatedGames[_lastGameUsed];
         Serialize();
     }
-    
+
+    [Inject]
+    private void Construct(ScenariosProvider scenariosProvider) => _scenariosProvider = scenariosProvider;
 
     private void Serialize() => JsonExtension.SerializeClass(_gameSaveData,PathCollection.PATHTOSAVES);
     public LevelsSaveData GetLevels(int index) => _gameSaveData.CreatedGames[_lastGameUsed = index];
     public void Set(LevelSettings index) =>
-        ProjectContext.Instance.GameProvider.ScenariosProvider.SetScenario(_lastLevelUsed = index.ScenarioNumber);
+        _scenariosProvider.SetScenario(_lastLevelUsed = index.ScenarioNumber);
 }

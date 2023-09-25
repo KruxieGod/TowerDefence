@@ -10,10 +10,10 @@ public class TilesCounterLoader : AssetLoader,ILoadingOperation
     public async UniTask Load(Action<float> onProcess)
     {
         onProcess?.Invoke(0f);
-        TilesCounter = new TilesCounter(ProjectContext.Instance.GameProvider.ScenariosProvider.GetCurrentScenario().CountTiles);
+        //TilesCounter = new TilesCounter(ProjectContexter.Instance.GameProvider.ScenariosProvider.GetCurrentScenario().CountTiles);
         TilesCounterUI = await LoadAsync<TilesCounterUI>(AddressableData.UI_TILES);
-        TilesCounterUI.Initialize(
-            ProjectContext.Instance.GameProvider.ScenariosProvider.GetCurrentScenario().CountTiles);
+       // TilesCounterUI.Initialize(
+          //  ProjectContexter.Instance.GameProvider.ScenariosProvider.GetCurrentScenario().CountTiles);
         onProcess?.Invoke(1f);
     }
 }

@@ -5,17 +5,19 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
+using Zenject;
 
 [RequireComponent(typeof(Canvas))]
 public class LevelsScreen : MonoBehaviour
 {
     private Canvas _canvas;
-
+    private LoadingScreenLoader _loadingScreenLoader;
+    private GameProvider _gameProvider;
     public void Initialize(int countCompletedLevels)
     {
         countCompletedLevels++;
         _canvas = GetComponent<Canvas>();
-        _canvas.worldCamera = ProjectContext.Instance.UiCamera;
+        _canvas.worldCamera = ProjectContexter.Instance.UiCamera;
         var settings = GetComponentsInChildren<LevelSettings>()
             .OrderBy(x => x.name)
             .ToArray();
@@ -34,12 +36,20 @@ public class LevelsScreen : MonoBehaviour
             settings[i].gameObject.SetActive(false);
     }
 
+    [Inject]
+    private void Construct(GameProvider gameProvider,
+        LoadingScreenLoader loadingScreenLoader)
+    {
+        _gameProvider = gameProvider;
+        _loadingScreenLoader = loadingScreenLoader;
+    }
+
     private void LoadLevel(LevelSettings levelSettings)
     {
         Debug.Log(levelSettings.ScenarioNumber);
         var queue = new Queue<ILoadingOperation>();
-        ((ISettable<LevelSettings>)ProjectContext.Instance.GameProvider.GameSaverProvider).Set(levelSettings);
-        queue.Enqueue(ProjectContext.Instance.GameSceneLoader);
-        ProjectContext.Instance.LoadingScreenLoader.LoadAndDestroy(queue);
+        ((ISettable<LevelSettings>)_gameProvider).Set(levelSettings);
+        queue.Enqueue(ProjectContexter.Instance.GameSceneLoader);
+        _loadingScreenLoader.LoadAndDestroy(queue);
     }
 }

@@ -21,7 +21,7 @@ public class PassedCounter
     {
         Debug.Log("EnemyPassed");
         if ((_livesLast -= hp) <= 0)
-            ProjectContext.Instance.GameEvents.OnGameState(new DefeatLoader(_gameManager));
+            ProjectContexter.Instance.GameEvents.OnGameState(new DefeatLoader(_gameManager));
     }
 
     public void SetEvent()

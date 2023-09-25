@@ -11,6 +11,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.Jobs;
+using Zenject;
 using Input = UnityEngine.Input;
 
 [BurstCompile]
@@ -37,7 +38,7 @@ public class GameManager : MonoBehaviour
         var length = Enemies.Count;
         var enemies= Enemies.Data.ToArray();
         NativeArray<RaycastCommand> commands = new(length,Allocator.TempJob);
-        var layer = ProjectContext.Instance.LayerFloor;
+        var layer = ProjectContexter.Instance.LayerFloor;
         for (int i = 0; i < length; i++)
         {
             var enemy = enemies[i];
@@ -60,23 +61,33 @@ public class GameManager : MonoBehaviour
     [field: SerializeField] public int DistanceFromCamera { get; private set; }
     public static UnityEvent OnDestroy { get; set; } = new UnityEvent();
     [SerializeField] private PassedCounter _counter;
-    private GameTileFactory _factory => ProjectContext.Instance.GameProvider.FactoriesProvider.GameFactories.GameTileFactory;
+    private GameTileFactory _factory;
     [SerializeField] private GameBoard _gameBoard;
     [SerializeField] private Vector2Int _size;
     [field :SerializeField] public Camera Camera { get; private set; }
-    private GameTowerFactory _towerFactory => ProjectContext.Instance.GameProvider.FactoriesProvider.GameFactories.GameTowerFactory;
-    private GameScenarioJson _scenario => ProjectContext.Instance.GameProvider.ScenariosProvider.GetCurrentScenario();
+    private GameTowerFactory _towerFactory;
+    private GameScenarioJson _scenario;
     public static CollectionEntities<Enemy> Enemies { get; private set; } = new();
     public static CollectionEntities<EnemySpawner>
         Spawners { get; private set; } = new ();
     private GameScenarioJson.State _currentScenario;
     private bool _isPaused;
     private bool _isEndedGame;
-    public static  Ray _ray =>ProjectContext.Instance.GameObjectsProvider.GameManager.Camera.ScreenPointToRay(Input.mousePosition);
+    public static  Ray _ray =>ProjectContexter.Instance.GameObjectsProvider.GameManager.Camera.ScreenPointToRay(Input.mousePosition);
     void Start()
     {
         _counter.SetEvent();
         StartNewGame();
+    }
+
+    [Inject]
+    private void Construct(GameTowerFactory towerFactory,
+        GameScenarioJson scenario,
+        GameTileFactory factory)
+    {
+        _towerFactory = towerFactory;
+        _scenario = scenario;
+        _factory = factory;
     }
 
     private void Update()
@@ -114,7 +125,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (var spawner in Spawners.Data)
             spawner.Recycle();
-        ProjectContext.Instance.GameSceneLoader.TilesCounterLoader?.TilesCounter?.Reset();
+        ProjectContexter.Instance.GameSceneLoader.TilesCounterLoader?.TilesCounter?.Reset();
         _isEndedGame = false;
         _isPaused = false;
         _gameBoard.Initialize(_size,_factory);
@@ -163,16 +174,16 @@ public class GameManager : MonoBehaviour
         if (typeOf == TypeOfTile.Empty)
         {
             Destroy(content.gameObject);
-            ProjectContext.Instance.GameSceneLoader.TilesCounterLoader.TilesCounter.Replace(tile.Content.TileType);
+            ProjectContexter.Instance.GameSceneLoader.TilesCounterLoader.TilesCounter.Replace(tile.Content.TileType);
         }
-        else if (!ProjectContext.Instance.GameSceneLoader.TilesCounterLoader.TilesCounter.TryPlace(typeOf))
+        else if (!ProjectContexter.Instance.GameSceneLoader.TilesCounterLoader.TilesCounter.TryPlace(typeOf))
         {
             Destroy(content.gameObject);
             return false;
         }
 
         if (typeOf != TypeOfTile.Empty && typeOf != tile.Content.TileType && tile.Content.TileType != TypeOfTile.Empty)
-            ProjectContext.Instance.GameSceneLoader.TilesCounterLoader.TilesCounter.Replace(tile.Content.TileType);
+            ProjectContexter.Instance.GameSceneLoader.TilesCounterLoader.TilesCounter.Replace(tile.Content.TileType);
         content.enabled = true;
         _gameBoard.SetType(tile,typeOf);
         _gameBoard.SetContent(tile, typeOf == TypeOfTile.Empty ? _factory.GetContent(TypeOfTile.Empty) : content);

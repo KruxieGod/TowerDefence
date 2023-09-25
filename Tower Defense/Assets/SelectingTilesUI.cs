@@ -12,7 +12,7 @@ public class SelectingTilesUI : MonoBehaviour
 
     private void Awake()
     {
-        GetComponent<Canvas>().worldCamera = ProjectContext.Instance.UiCamera;
+        GetComponent<Canvas>().worldCamera = ProjectContexter.Instance.UiCamera;
     }
 
     public void Initialize(ISettable<TypeOfTile> settableFactory)

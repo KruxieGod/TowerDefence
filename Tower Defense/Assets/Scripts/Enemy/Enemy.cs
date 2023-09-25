@@ -56,7 +56,7 @@ public class Enemy : MonoBehaviour,IDamagable,ICollector
         
         PreviousDirection = _currentTile.Direction;
         if (Physics.Raycast (new Vector3(transform.position.x,transform.position.y+1f,transform.position.z),
-                Vector3.down, out var hit,Distance,ProjectContext.Instance.LayerFloor)
+                Vector3.down, out var hit,Distance,ProjectContexter.Instance.LayerFloor)
             && _currentTile.transform != hit.transform
             && hit.transform.TryGetComponent(out Tile tile))
         {
@@ -107,7 +107,7 @@ public class Enemy : MonoBehaviour,IDamagable,ICollector
             _enemyView.DieAnimation(this);
             GameManager.OnDestroy.AddListener(StartDestroy);
         }
-        ProjectContext.Instance.GameSceneLoader.CounterMoneyLoader.CounterMoney.AddMoney((int)_behaviour.Price);
+        ProjectContexter.Instance.GameSceneLoader.CounterMoneyLoader.CounterMoney.AddMoney((int)_behaviour.Price);
     }
 
     void IDamagable.TakeDamage(int damage)

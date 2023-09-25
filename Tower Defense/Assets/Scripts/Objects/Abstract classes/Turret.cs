@@ -21,12 +21,12 @@ public abstract class Turret<BehaviourT> :  Turret,IUpdatable
         towerFactory.Add(this);
         _visitor = visitor;
         _towerFactory = towerFactory;
-        _behaviourTower = ProjectContext.Instance.GameProvider.TowerInfoLoader.GetBehaviour<BehaviourT>(name.Replace("(Clone)",""));
+        //_behaviourTower = ProjectContext.Instance.GameProvider.TowerInfoLoader.GetBehaviour<BehaviourT>(name.Replace("(Clone)",""));
         _turret.Initialize(this,_behaviourTower);
         _lastToShoot = _behaviourTower.SpeedFire;
         _upgradeTileUI.OnClick(UpgradeTower);
-        _upgradeTileUI.SetPrice(ProjectContext.Instance.GameProvider.TowerInfoLoader.GetPrice( name.Replace("(Clone)","") ));
-        _upgradeTileUI.SetEvent(ProjectContext.Instance.GameSceneLoader.CounterMoneyLoader.CounterMoney.EnoughMoney);
+        //_upgradeTileUI.SetPrice(ProjectContext.Instance.GameProvider.TowerInfoLoader.GetPrice( name.Replace("(Clone)","") ));
+        _upgradeTileUI.SetEvent(ProjectContexter.Instance.GameSceneLoader.CounterMoneyLoader.CounterMoney.EnoughMoney);
         return this;
     }
 

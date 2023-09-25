@@ -6,9 +6,12 @@ using UnityEngine;
 
 public class WinLoader : IInterface
 {
-    public WinLoader()
+    private readonly LoadingScreenLoader _loadingScreenLoader;
+    public WinLoader(LoadingScreenLoader loadingScreenLoader,
+        GameSaverProvider gameSaverProvider)
     {
-        ProjectContext.Instance.GameProvider.GameSaverProvider.Save();
+        _loadingScreenLoader = loadingScreenLoader;
+        gameSaverProvider.Save();
     }
     
     public CanvasGroup GetCanvasGroup(GameResult gameResult) => gameResult.GetComponent<CanvasGroup>();
@@ -17,7 +20,7 @@ public class WinLoader : IInterface
     {
         var queue = new Queue<ILoadingOperation>();
         queue.Enqueue(new SceneProvider(SceneData.MAINMENUSCENE));
-        ProjectContext.Instance.LoadingScreenLoader.LoadAndDestroy(queue);
+        _loadingScreenLoader.LoadAndDestroy(queue);
     }
 
     public string AddressableName => "Win";
