@@ -125,7 +125,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (var spawner in Spawners.Data)
             spawner.Recycle();
-        ProjectContexter.Instance.GameSceneLoader.TilesCounterLoader?.TilesCounter?.Reset();
+        //ProjectContexter.Instance.GameSceneLoader.TilesCounterLoader?.TilesCounter?.Reset();
         _isEndedGame = false;
         _isPaused = false;
         _gameBoard.Initialize(_size,_factory);
@@ -174,16 +174,16 @@ public class GameManager : MonoBehaviour
         if (typeOf == TypeOfTile.Empty)
         {
             Destroy(content.gameObject);
-            ProjectContexter.Instance.GameSceneLoader.TilesCounterLoader.TilesCounter.Replace(tile.Content.TileType);
+            //ProjectContexter.Instance.GameSceneLoader.TilesCounterLoader.TilesCounter.Replace(tile.Content.TileType);
         }
-        else if (!ProjectContexter.Instance.GameSceneLoader.TilesCounterLoader.TilesCounter.TryPlace(typeOf))
+        /*else if (!ProjectContexter.Instance.GameSceneLoader.TilesCounterLoader.TilesCounter.TryPlace(typeOf))
         {
             Destroy(content.gameObject);
             return false;
         }
-
+        */
         if (typeOf != TypeOfTile.Empty && typeOf != tile.Content.TileType && tile.Content.TileType != TypeOfTile.Empty)
-            ProjectContexter.Instance.GameSceneLoader.TilesCounterLoader.TilesCounter.Replace(tile.Content.TileType);
+            //ProjectContexter.Instance.GameSceneLoader.TilesCounterLoader.TilesCounter.Replace(tile.Content.TileType);
         content.enabled = true;
         _gameBoard.SetType(tile,typeOf);
         _gameBoard.SetContent(tile, typeOf == TypeOfTile.Empty ? _factory.GetContent(TypeOfTile.Empty) : content);

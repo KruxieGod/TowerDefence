@@ -8,6 +8,9 @@ public class SceneProvider : ILoadingOperation
 {
     private string _sceneName;
     public string Description => _sceneName + " loading...";
+
+    private GameObjectsProvider _gameObjectsProvider;
+    
     public virtual async UniTask Load(Action<float> onProcess)
     {
         var currentScene = SceneManager.GetActiveScene();
@@ -15,13 +18,15 @@ public class SceneProvider : ILoadingOperation
         var scene = SceneManager.LoadSceneAsync(_sceneName,
             LoadSceneMode.Additive);
         await scene;
-        await ProjectContexter.Instance.GameObjectsProvider.Load();
+        if (_gameObjectsProvider is not null)
+             await _gameObjectsProvider.Load();
         onProcess?.Invoke(1);
         SceneManager.UnloadSceneAsync(currentScene);
     }
 
-    public SceneProvider(string sceneName)
+    public SceneProvider(string sceneName,GameObjectsProvider gameObjectsProvider)
     {
         _sceneName = sceneName;
+        _gameObjectsProvider = gameObjectsProvider;
     }
 }

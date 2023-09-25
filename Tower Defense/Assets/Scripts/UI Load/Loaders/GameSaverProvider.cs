@@ -22,6 +22,9 @@ public class GameSaverProvider : ILoadingOperation,ISettable<LevelSettings>
         }
     }
     public string Description { get; }
+    
+    public GameSaverProvider(ScenariosProvider scenariosProvider) => _scenariosProvider = scenariosProvider;
+    
     public UniTask Load(Action<float> onProcess = null)
     {
         _gameSaveData = JsonExtension.GetClassFromJson<GameSaveData>(PathCollection.PATHTOSAVES);
@@ -50,9 +53,6 @@ public class GameSaverProvider : ILoadingOperation,ISettable<LevelSettings>
                 : _gameSaveData.CreatedGames[_lastGameUsed];
         Serialize();
     }
-
-    [Inject]
-    private void Construct(ScenariosProvider scenariosProvider) => _scenariosProvider = scenariosProvider;
 
     private void Serialize() => JsonExtension.SerializeClass(_gameSaveData,PathCollection.PATHTOSAVES);
     public LevelsSaveData GetLevels(int index) => _gameSaveData.CreatedGames[_lastGameUsed = index];

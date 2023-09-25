@@ -107,7 +107,7 @@ public class Enemy : MonoBehaviour,IDamagable,ICollector
             _enemyView.DieAnimation(this);
             GameManager.OnDestroy.AddListener(StartDestroy);
         }
-        ProjectContexter.Instance.GameSceneLoader.CounterMoneyLoader.CounterMoney.AddMoney((int)_behaviour.Price);
+        //ProjectContexter.Instance.GameSceneLoader.CounterMoneyLoader.CounterMoney.AddMoney((int)_behaviour.Price);
     }
 
     void IDamagable.TakeDamage(int damage)

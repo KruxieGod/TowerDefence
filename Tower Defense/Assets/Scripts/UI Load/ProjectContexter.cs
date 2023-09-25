@@ -13,7 +13,6 @@ public class ProjectContexter : MonoBehaviour
     public AppearingWindowLoader AppearingWindowLoader { get; private set; }
     public GameEvents GameEvents { get; private set; }
     public GameObjectsProvider GameObjectsProvider { get; private set; }
-    public GameSceneLoader GameSceneLoader { get; private set; }
 
     private void Start()
     {
@@ -24,7 +23,6 @@ public class ProjectContexter : MonoBehaviour
     {
         Instance = this;
         DontDestroyOnLoad(this);
-        GameSceneLoader = new GameSceneLoader();
         GameObjectsProvider = new GameObjectsProvider();
         AppearingWindowLoader = new AppearingWindowLoader();
         GameEvents = new GameEvents(value =>

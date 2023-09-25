@@ -9,7 +9,7 @@
         public SelectingTilesLoader SelectingTilesLoader { get; private set; }
         public CounterMoneyLoader CounterMoneyLoader { get; private set; }
         
-        public GameSceneLoader() : base(SceneData.GAMESCENE)
+        public GameSceneLoader(GameObjectsProvider gameObjectsProvider) : base(SceneData.GAMESCENE,gameObjectsProvider)
         {
         }
 

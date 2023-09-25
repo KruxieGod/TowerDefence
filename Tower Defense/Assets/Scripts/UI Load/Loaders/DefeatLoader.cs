@@ -13,7 +13,7 @@ public class DefeatLoader : IInterface
     public CanvasGroup GetCanvasGroup(GameResult gameResult) => (_prefab = gameResult).GetComponent<CanvasGroup>();
     public void ToNext()
     {
-        ProjectContexter.Instance.GameSceneLoader.CounterMoneyLoader.CounterMoney.Reset();
+        //ProjectContexter.Instance.GameSceneLoader.CounterMoneyLoader.CounterMoney.Reset();
         _prefab.gameObject.Destroy();
         Debug.Log("ToNext : "+_prefab.IsUnityNull());
         _gameManager.StartNewGame();

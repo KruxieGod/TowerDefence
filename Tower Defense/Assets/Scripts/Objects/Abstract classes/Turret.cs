@@ -26,7 +26,7 @@ public abstract class Turret<BehaviourT> :  Turret,IUpdatable
         _lastToShoot = _behaviourTower.SpeedFire;
         _upgradeTileUI.OnClick(UpgradeTower);
         //_upgradeTileUI.SetPrice(ProjectContext.Instance.GameProvider.TowerInfoLoader.GetPrice( name.Replace("(Clone)","") ));
-        _upgradeTileUI.SetEvent(ProjectContexter.Instance.GameSceneLoader.CounterMoneyLoader.CounterMoney.EnoughMoney);
+        //_upgradeTileUI.SetEvent(ProjectContexter.Instance.GameSceneLoader.CounterMoneyLoader.CounterMoney.EnoughMoney);
         return this;
     }
 

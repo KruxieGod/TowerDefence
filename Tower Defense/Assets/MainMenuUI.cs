@@ -9,17 +9,18 @@ using UnityEngine.UI;
 using Zenject;
 
 [RequireComponent(typeof(Canvas))]
-public class MenuTest : MonoBehaviour
+public class MainMenuUI : MonoBehaviour
 {
     private Canvas _canvas;
     [SerializeField] private List<Button> _buttons;
     [SerializeField] private Button _createNewGame;
     private LoadingScreenLoader _loadingScreenLoader;
     private GameSaverProvider _gameSaverProvider;
-    void Start()
+    private Camera _uiCamera;
+    void Awake()
     {
         _canvas = GetComponent<Canvas>();
-        _canvas.worldCamera = ProjectContexter.Instance.UiCamera;
+        _canvas.worldCamera = _uiCamera;
         int countGames = _gameSaverProvider.GetCurrentGames();
         _createNewGame.onClick.AddListener(() => CreateNewGame(countGames));
         Debug.Log("Games: "+ countGames);
@@ -33,10 +34,12 @@ public class MenuTest : MonoBehaviour
 
     [Inject]
     private void Construct(GameSaverProvider gameSaverProvider,
-        LoadingScreenLoader loadingScreenLoader)
+        LoadingScreenLoader loadingScreenLoader,
+        Camera uiCamera)
     {
         _loadingScreenLoader = loadingScreenLoader;
         _gameSaverProvider = gameSaverProvider;
+        _uiCamera = uiCamera;
     }
 
     private void CreateNewGame(int index)

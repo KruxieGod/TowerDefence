@@ -12,12 +12,13 @@ public class LevelsScreen : MonoBehaviour
 {
     private Canvas _canvas;
     private LoadingScreenLoader _loadingScreenLoader;
-    private GameProvider _gameProvider;
+    private GameSaverProvider _gameProvider;
+    private Camera _uiCamera;
     public void Initialize(int countCompletedLevels)
     {
         countCompletedLevels++;
         _canvas = GetComponent<Canvas>();
-        _canvas.worldCamera = ProjectContexter.Instance.UiCamera;
+        _canvas.worldCamera = _uiCamera;
         var settings = GetComponentsInChildren<LevelSettings>()
             .OrderBy(x => x.name)
             .ToArray();
@@ -37,9 +38,11 @@ public class LevelsScreen : MonoBehaviour
     }
 
     [Inject]
-    private void Construct(GameProvider gameProvider,
-        LoadingScreenLoader loadingScreenLoader)
+    private void Construct(GameSaverProvider gameProvider,
+        LoadingScreenLoader loadingScreenLoader,
+        Camera uiCamera)
     {
+        _uiCamera = uiCamera;
         _gameProvider = gameProvider;
         _loadingScreenLoader = loadingScreenLoader;
     }
@@ -49,7 +52,7 @@ public class LevelsScreen : MonoBehaviour
         Debug.Log(levelSettings.ScenarioNumber);
         var queue = new Queue<ILoadingOperation>();
         ((ISettable<LevelSettings>)_gameProvider).Set(levelSettings);
-        queue.Enqueue(ProjectContexter.Instance.GameSceneLoader);
+        //queue.Enqueue(ProjectContexter.Instance.GameSceneLoader);
         _loadingScreenLoader.LoadAndDestroy(queue);
     }
 }
