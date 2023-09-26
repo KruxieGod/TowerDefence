@@ -16,8 +16,8 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Button _createNewGame;
     private GameSaverProvider _gameSaverProvider;
     private Camera _uiCamera;
-    private LevelsScreenUI _levelsScreenUI;
-    void Awake()
+    private Lazy<LevelsScreenUI> _levelsScreenUI;
+    private async void  Awake()
     {
         _canvas = GetComponent<Canvas>();
         _canvas.worldCamera = _uiCamera;
@@ -35,7 +35,7 @@ public class MainMenuUI : MonoBehaviour
     [Inject]
     private void Construct(GameSaverProvider gameSaverProvider,
         Camera uiCamera,
-        LevelsScreenUI levelsScreenUI)
+        Lazy<LevelsScreenUI> levelsScreenUI)
     {
         _gameSaverProvider = gameSaverProvider;
         _uiCamera = uiCamera;
@@ -43,8 +43,8 @@ public class MainMenuUI : MonoBehaviour
     }
 
     private void CreateNewGame(int index) =>
-        _levelsScreenUI.Initialize(_gameSaverProvider.CreateNewGame(index).CompletedLevels);
+        _levelsScreenUI.Value.Initialize(_gameSaverProvider.CreateNewGame(index).CompletedLevels);
 
     private void LoadLevels(int index) =>
-        _levelsScreenUI.Initialize(_gameSaverProvider.GetLevels(index).CompletedLevels);
+        _levelsScreenUI.Value.Initialize(_gameSaverProvider.GetLevels(index).CompletedLevels);
 }

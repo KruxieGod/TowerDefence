@@ -19,7 +19,7 @@
         {
             CounterMoneyLoader = new CounterMoneyLoader();
             //SelectingTilesLoader = new SelectingTilesLoader();
-            TilesCounterLoader = new TilesCounterLoader();
+            //TilesCounterLoader = new TilesCounterLoader();
             await base.Load(onProcess);
             await CounterMoneyLoader.Load(onProcess);
             await TilesCounterLoader.Load(onProcess);

@@ -1,16 +1,16 @@
 
 using System;
 using Cysharp.Threading.Tasks;
+using Zenject;
 
-public class LevelsProvider : AssetLoader,ILoadingOperation
+public class LevelsProvider : AssetLoader
 {
     public LevelsScreenUI LevelsScreenUI { get; private set; }
-    public string Description => "Levels is loading...";
-    public async UniTask Load(Action<float> onProcess)
+    public async UniTask<LevelsScreenUI> Load(DiContainer container)
     {
-        onProcess?.Invoke(0.3f);
         LevelsScreenUI = await LoadAsync<LevelsScreenUI>(AddressableData.LEVELSCREEN);
         LevelsScreenUI.gameObject.SetActive(false);
-        onProcess?.Invoke(1);
+        container.Inject(LevelsScreenUI);
+        return LevelsScreenUI;
     }
 }

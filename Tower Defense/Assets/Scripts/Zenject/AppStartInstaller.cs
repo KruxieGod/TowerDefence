@@ -14,7 +14,7 @@ public class AppStartInstaller : MonoInstaller
         Container.Bind<FactoriesProvider>().ToSelf().AsSingle();
         Container.Bind<GameSaverProvider>().ToSelf().AsSingle();
         Container.Bind<TowerInfoLoader>().ToSelf().AsSingle();
-        var projectContexter = FindAnyObjectByType<ProjectContexter>();
-        Container.Bind<Camera>().FromInstance(projectContexter.UiCamera);
+        var projectContext = FindAnyObjectByType<ProjectContexter>();
+        Container.Bind<Camera>().FromInstance(projectContext.UiCamera);
     }
 }

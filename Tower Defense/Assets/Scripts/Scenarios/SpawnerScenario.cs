@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Zenject;
 
 [Serializable]
 public class SpawnerScenario
@@ -24,7 +25,7 @@ public class SpawnerScenarioJson
     [SerializeField] private Vector2Int _positionSpawner;
     [NonSerialized]private EnemySpawner _spawnerTile;
     [SerializeField] private List<WaveJson> _waves;
-
+    private GameFactories _gameFactories;
     public SpawnerScenarioJson(Vector2Int positionSpawner,
         List<WaveJson> waves)
     {
@@ -32,9 +33,10 @@ public class SpawnerScenarioJson
         _waves = waves;
     }
     
-    public State Initialize(GameBoard gameBoard)
+    public State Initialize(GameBoard gameBoard,GameTileFactory gameTileFactory,GameFactories gameFactories)
     {
-       // _spawnerTile = ProjectContext.Instance.GameProvider.FactoriesProvider.GameFactories.GameTileFactory.GetEnemySpawner().Initialize();
+        _gameFactories = gameFactories;
+        _spawnerTile = gameTileFactory.GetEnemySpawner().Initialize();
         ISetterTile tile = gameBoard[_positionSpawner.x, _positionSpawner.y];
         tile.SetContentTile(_spawnerTile);
         tile.SetTypeTile(TypeOfTile.SpawnerEnemy);
@@ -51,7 +53,7 @@ public class SpawnerScenarioJson
             _index = 0;
             _spawnerScenario = spawnerScenario;
             if (_spawnerScenario._waves.Count > 0)
-                _wave = _spawnerScenario._waves[_index++].GetScenario(_spawnerScenario._spawnerTile);
+                _wave = _spawnerScenario._waves[_index++].GetScenario(_spawnerScenario._spawnerTile,_spawnerScenario._gameFactories);
             else
                 _wave = new WaveJson.State();
         }
@@ -65,7 +67,7 @@ public class SpawnerScenarioJson
         {
             var res = _index < _spawnerScenario._waves.Count;
             if (res)
-                _wave = _spawnerScenario._waves[_index++].GetScenario(_spawnerScenario._spawnerTile);
+                _wave = _spawnerScenario._waves[_index++].GetScenario(_spawnerScenario._spawnerTile,_spawnerScenario._gameFactories);
             return res || !_spawnerScenario._spawnerTile.IsEnded;
         }
     }

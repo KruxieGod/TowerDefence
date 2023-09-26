@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Zenject;
 
 [CreateAssetMenu]
 public class GameScenario : ScriptableObject
@@ -37,7 +38,8 @@ public class GameScenarioJson
     [SerializeField] private List<SpawnerScenarioJson> _scenarios;
     [field : SerializeField] public string Name { get; private set; }
     [field: SerializeField] public CountTiles CountTiles { get; private set; }
-
+    [Inject] private GameTileFactory _gameTileFactory;
+    [Inject] private GameFactories _gameFactories;
     public GameScenarioJson(float timeBetweenWaves,
         List<SpawnerScenarioJson> scenarios,
         string name,
@@ -61,7 +63,7 @@ public class GameScenarioJson
             _gameScenario = gameScenario;
             _timeLast = gameScenario._timeBetweenWaves;
             _scenarios = _gameScenario._scenarios
-                ?.Select(scenario => scenario.Initialize(gameBoard))
+                ?.Select(scenario => scenario.Initialize(gameBoard,gameScenario._gameTileFactory,gameScenario._gameFactories))
                 ?.ToArray();
         }
 

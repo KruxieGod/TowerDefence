@@ -16,6 +16,7 @@ public class ProjectContexter : MonoBehaviour
 
     private void Start()
     {
+        Instance = this;
         DontDestroyOnLoad(this);
     }
 

@@ -38,9 +38,9 @@ public class WaveJson
         _recoverTimeEnemies = recoverTimeEnemies;
     }
     
-    public State GetScenario(EnemySpawner spawner)
+    public State GetScenario(EnemySpawner spawner,GameFactories gameFactories)
     {
-        //_enemyFactory = ProjectContext.Instance.GameProvider.FactoriesProvider.GameFactories.GetEnemyFactoryFrom(_factory);
+        _enemyFactory = gameFactories.GetEnemyFactoryFrom(_factory);
         return new State(this, spawner);
     }
 
