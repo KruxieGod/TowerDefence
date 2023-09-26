@@ -7,6 +7,9 @@ public class MainMenuObjectsInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {
-        Container.Instantiate<LevelsScreen>();
+        var levelsProvider = new LevelsProvider();
+        levelsProvider.Load(null);
+        Container.Bind<LevelsScreenUI>().FromInstance(levelsProvider.LevelsScreenUI);
+        Container.Inject(levelsProvider.LevelsScreenUI);
     }
 }

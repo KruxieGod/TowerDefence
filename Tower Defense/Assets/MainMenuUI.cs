@@ -14,9 +14,9 @@ public class MainMenuUI : MonoBehaviour
     private Canvas _canvas;
     [SerializeField] private List<Button> _buttons;
     [SerializeField] private Button _createNewGame;
-    private LoadingScreenLoader _loadingScreenLoader;
     private GameSaverProvider _gameSaverProvider;
     private Camera _uiCamera;
+    private LevelsScreenUI _levelsScreenUI;
     void Awake()
     {
         _canvas = GetComponent<Canvas>();
@@ -34,26 +34,17 @@ public class MainMenuUI : MonoBehaviour
 
     [Inject]
     private void Construct(GameSaverProvider gameSaverProvider,
-        LoadingScreenLoader loadingScreenLoader,
-        Camera uiCamera)
+        Camera uiCamera,
+        LevelsScreenUI levelsScreenUI)
     {
-        _loadingScreenLoader = loadingScreenLoader;
         _gameSaverProvider = gameSaverProvider;
         _uiCamera = uiCamera;
+        _levelsScreenUI = levelsScreenUI;
     }
 
-    private void CreateNewGame(int index)
-    {
-        var queue = new Queue<ILoadingOperation>();
-        queue.Enqueue(new LevelsProvider(_gameSaverProvider.CreateNewGame(index)));
-        _loadingScreenLoader.LoadAndDestroy(queue);
-    }
+    private void CreateNewGame(int index) =>
+        _levelsScreenUI.Initialize(_gameSaverProvider.CreateNewGame(index).CompletedLevels);
 
-    private void LoadLevels(int index)
-    {
-        Debug.Log("Load:" + index.ToString());
-        var queue = new Queue<ILoadingOperation>();
-        queue.Enqueue(new LevelsProvider( _gameSaverProvider.GetLevels(index)));
-        _loadingScreenLoader.LoadAndDestroy(queue);
-    }
+    private void LoadLevels(int index) =>
+        _levelsScreenUI.Initialize(_gameSaverProvider.GetLevels(index).CompletedLevels);
 }

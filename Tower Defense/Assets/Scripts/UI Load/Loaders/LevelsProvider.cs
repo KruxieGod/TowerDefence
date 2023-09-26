@@ -4,19 +4,13 @@ using Cysharp.Threading.Tasks;
 
 public class LevelsProvider : AssetLoader,ILoadingOperation
 {
-    private LevelsSaveData _levels;
-    public LevelsProvider(LevelsSaveData levels)
-    {
-        _levels = levels;
-    }
-    
+    public LevelsScreenUI LevelsScreenUI { get; private set; }
     public string Description => "Levels is loading...";
     public async UniTask Load(Action<float> onProcess)
     {
         onProcess?.Invoke(0.3f);
-        var levelsScreen = await LoadAsync<LevelsScreen>(AddressableData.LEVELSCREEN);
-        levelsScreen.gameObject.SetActive(true);
+        LevelsScreenUI = await LoadAsync<LevelsScreenUI>(AddressableData.LEVELSCREEN);
+        LevelsScreenUI.gameObject.SetActive(false);
         onProcess?.Invoke(1);
-        //levelsScreen.Initialize( _levels.CompletedLevels);
     }
 }

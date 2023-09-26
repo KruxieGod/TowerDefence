@@ -8,14 +8,16 @@ using UnityEngine.UI;
 using Zenject;
 
 [RequireComponent(typeof(Canvas))]
-public class LevelsScreen : MonoBehaviour
+public class LevelsScreenUI : MonoBehaviour
 {
     private Canvas _canvas;
     private LoadingScreenLoader _loadingScreenLoader;
     private GameSaverProvider _gameProvider;
     private Camera _uiCamera;
+    private GameSceneLoader _gameSceneLoader;
     public void Initialize(int countCompletedLevels)
     {
+        gameObject.SetActive(true);
         countCompletedLevels++;
         _canvas = GetComponent<Canvas>();
         _canvas.worldCamera = _uiCamera;
@@ -40,11 +42,13 @@ public class LevelsScreen : MonoBehaviour
     [Inject]
     private void Construct(GameSaverProvider gameProvider,
         LoadingScreenLoader loadingScreenLoader,
-        Camera uiCamera)
+        Camera uiCamera,
+        GameSceneLoader gameSceneLoader)
     {
         _uiCamera = uiCamera;
         _gameProvider = gameProvider;
         _loadingScreenLoader = loadingScreenLoader;
+        _gameSceneLoader = gameSceneLoader;
     }
 
     private void LoadLevel(LevelSettings levelSettings)
@@ -52,7 +56,7 @@ public class LevelsScreen : MonoBehaviour
         Debug.Log(levelSettings.ScenarioNumber);
         var queue = new Queue<ILoadingOperation>();
         ((ISettable<LevelSettings>)_gameProvider).Set(levelSettings);
-        //queue.Enqueue(ProjectContexter.Instance.GameSceneLoader);
+        queue.Enqueue(_gameSceneLoader);
         _loadingScreenLoader.LoadAndDestroy(queue);
     }
 }
