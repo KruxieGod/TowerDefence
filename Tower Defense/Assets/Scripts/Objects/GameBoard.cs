@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 
 public class GameBoard : MonoBehaviour
 {
-    [SerializeField] private LayerMask _layer;
+    [field: SerializeField] public LayerMask LayerFloor { get; private set; }
     [SerializeField] private Tile _prefabTile;
     public Vector2Int Size { get; private set; }
     private Tile[,] _board;
@@ -158,7 +158,7 @@ public class GameBoard : MonoBehaviour
 
     public Tile GetTile(Ray ray)
     {
-        if (Physics.Raycast(ray, out var hit, 2000,_layer))
+        if (Physics.Raycast(ray, out var hit, 2000,LayerFloor))
         {
             Debug.Log("Tile is gave");
             int x = (int)(hit.point.x/POSITIONMULTIPLIER + Size.x * 0.5f);

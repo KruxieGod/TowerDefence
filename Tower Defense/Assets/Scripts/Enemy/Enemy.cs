@@ -21,10 +21,13 @@ public class Enemy : MonoBehaviour,IDamagable,ICollector
     public int HealthPoints { get; private set; }
     private Action<Enemy> _onDestroy;
     public float Speed => _behaviour.Speed;
+    private Action<int> _addMoney;
     public void Initialize(
         Tile currentTile,
+        Action<int> addMoney,
         Action<Enemy> onDestroy)
     {
+        _addMoney = addMoney;
         _enemyView = GetComponentInChildren<EnemyView>();
         _onDestroy = onDestroy;
         PreviousDirection = currentTile.Direction;
@@ -107,7 +110,7 @@ public class Enemy : MonoBehaviour,IDamagable,ICollector
             _enemyView.DieAnimation(this);
             GameManager.OnDestroy.AddListener(StartDestroy);
         }
-        //ProjectContexter.Instance.GameSceneLoader.CounterMoneyLoader.CounterMoney.AddMoney((int)_behaviour.Price);
+        _addMoney((int)_behaviour.Price);
     }
 
     void IDamagable.TakeDamage(int damage)

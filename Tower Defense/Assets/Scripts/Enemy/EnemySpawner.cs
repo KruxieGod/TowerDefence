@@ -4,6 +4,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 using Object = UnityEngine.Object;
 
 public class EnemySpawner : TileContent, IUpdatable
@@ -12,25 +13,30 @@ public class EnemySpawner : TileContent, IUpdatable
     private HashSet<Enemy> _enemies = new ();
     private UnityEvent _moveOnEnemy = new ();
     public override bool IsEnded => _enemies.Count == 0;
-    
+    private CounterMoney _counterMoney;
     public void UpdateEntity()
     {
         _moveOnEnemy.Invoke();
     }
 
-    public void SpawnEnemy(EnemyInfo enemyInfo, GameEnemyFactory factory)
+    public void SpawnEnemy(EnemyInfo enemyInfo,
+        GameEnemyFactory factory)
     {
         var enemy = factory.GetPrefabEnemy(enemyInfo);
         GameManager.Enemies.Add(enemy);
         
         _enemies.Add(enemy);
         enemy.transform.position = transform.position;
-        enemy.Initialize(SpawnerTile,Remove);
+        enemy.Initialize(
+            SpawnerTile,
+            _counterMoney.AddMoney,
+            Remove);
         _moveOnEnemy.AddListener( enemy.UpdatePos);
     }
 
-    public EnemySpawner Initialize()
+    public EnemySpawner Initialize(CounterMoney counterMoney)
     {
+        _counterMoney = counterMoney;
         ((ICollectionEntities<EnemySpawner>)GameManager.Spawners).Add(this);
         return this;
     }

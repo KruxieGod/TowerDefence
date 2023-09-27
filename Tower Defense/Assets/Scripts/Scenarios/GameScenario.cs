@@ -40,6 +40,9 @@ public class GameScenarioJson
     [field: SerializeField] public CountTiles CountTiles { get; private set; }
     [Inject] private GameTileFactory _gameTileFactory;
     [Inject] private GameFactories _gameFactories;
+    [Inject] private CounterMoney _counterMoney;
+    [Inject] private AppearingWindowLoader _appearingWindowLoader;
+    [Inject] private WinLoader _winLoader;
     public GameScenarioJson(float timeBetweenWaves,
         List<SpawnerScenarioJson> scenarios,
         string name,
@@ -63,7 +66,7 @@ public class GameScenarioJson
             _gameScenario = gameScenario;
             _timeLast = gameScenario._timeBetweenWaves;
             _scenarios = _gameScenario._scenarios
-                ?.Select(scenario => scenario.Initialize(gameBoard,gameScenario._gameTileFactory,gameScenario._gameFactories))
+                ?.Select(scenario => scenario.Initialize(gameBoard,gameScenario._gameTileFactory,gameScenario._gameFactories,gameScenario._counterMoney))
                 ?.ToArray();
         }
 
@@ -75,7 +78,7 @@ public class GameScenarioJson
                 for (int i = 0; i < _scenarios.Length; i++)
                     isContinued = _scenarios[i].NextWave() || isContinued;
                 if (!isContinued)
-                    //ProjectContext.Instance.GameEvents.OnGameState(new WinLoader());
+                    _gameScenario._appearingWindowLoader.LoadState(_gameScenario._winLoader);
                 _timeLast = _gameScenario._timeBetweenWaves;
             }
 

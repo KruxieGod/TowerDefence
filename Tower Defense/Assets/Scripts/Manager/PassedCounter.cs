@@ -2,26 +2,25 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
-[Serializable]
 public class PassedCounter
 {
-    [SerializeField] private int _lives;
+    private int _lives = 1;
     private int _livesLast;
-    private GameManager _gameManager;
-    public static Action<int> NotifyCounterOn { get; protected set; }
-
-    public void Initialize(GameManager gameManager)
+    public static Action<int> NotifyCounterOn { get; private set; }
+    [Inject] private DefeatLoader _defeatLoader;
+    [Inject] private AppearingWindowLoader _loader;
+    public void Initialize()
     {
         _livesLast = _lives;
-        _gameManager = gameManager;
     }
 
     public void EnemyPassed(int hp)
     {
         Debug.Log("EnemyPassed");
         if ((_livesLast -= hp) <= 0)
-            ProjectContexter.Instance.GameEvents.OnGameState(new DefeatLoader(_gameManager));
+            _loader.LoadState( _defeatLoader.Initialize());
     }
 
     public void SetEvent()

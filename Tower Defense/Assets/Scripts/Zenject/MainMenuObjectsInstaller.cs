@@ -12,7 +12,5 @@ public class MainMenuObjectsInstaller : MonoInstaller
         var provider = new LevelsProvider();
         provider.Load(Container);
         Container.Bind<Lazy<LevelsScreenUI>>().FromInstance(new Lazy<LevelsScreenUI>(() => provider .LevelsScreenUI));
-        Container.Bind<GameSceneLoader>().ToSelf().AsSingle();
-        Container.Bind<GameObjectsProvider>().ToSelf().AsSingle();
     }
 }

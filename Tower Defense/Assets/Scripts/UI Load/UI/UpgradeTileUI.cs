@@ -12,7 +12,7 @@ public class UpgradeTileUI : MonoBehaviour
     private EventTriggerButton _button;
     [SerializeField] private EventTriggerButton _trigger;
     private Action _action;
-
+    
     private void Awake()
     {
         _trigger.OnClick.AddListener(() =>
@@ -29,9 +29,9 @@ public class UpgradeTileUI : MonoBehaviour
 
     private void Update()
     {
-        transform.localRotation = Quaternion.LookRotation(ProjectContexter.Instance.GameObjectsProvider.GameManager.Camera.transform.position - transform.position);
+        transform.localRotation = Quaternion.LookRotation(GameManager.Instance.Camera.transform.position - transform.position);
     }
-
+    
     public void OnClick(Action action) => _action = action;
     public void SetPrice(int price) => _price.SetText(price.ToString());
     public void SetEvent(Func<int,bool> pricer) =>

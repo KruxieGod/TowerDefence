@@ -33,10 +33,13 @@ public class SpawnerScenarioJson
         _waves = waves;
     }
     
-    public State Initialize(GameBoard gameBoard,GameTileFactory gameTileFactory,GameFactories gameFactories)
+    public State Initialize(GameBoard gameBoard,
+        GameTileFactory gameTileFactory,
+        GameFactories gameFactories,
+        CounterMoney counterMoney)
     {
         _gameFactories = gameFactories;
-        _spawnerTile = gameTileFactory.GetEnemySpawner().Initialize();
+        _spawnerTile = gameTileFactory.GetEnemySpawner().Initialize(counterMoney);
         ISetterTile tile = gameBoard[_positionSpawner.x, _positionSpawner.y];
         tile.SetContentTile(_spawnerTile);
         tile.SetTypeTile(TypeOfTile.SpawnerEnemy);

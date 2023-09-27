@@ -11,7 +11,6 @@ public class ProjectContexter : MonoBehaviour
     [SerializeField] private Camera _mainCamera;
     public Camera UiCamera => _mainCamera;
     public AppearingWindowLoader AppearingWindowLoader { get; private set; }
-    public GameEvents GameEvents { get; private set; }
     public GameObjectsProvider GameObjectsProvider { get; private set; }
 
     private void Start()
@@ -26,10 +25,5 @@ public class ProjectContexter : MonoBehaviour
         DontDestroyOnLoad(this);
         GameObjectsProvider = new GameObjectsProvider();
         AppearingWindowLoader = new AppearingWindowLoader();
-        GameEvents = new GameEvents(value =>
-        {
-            AppearingWindowLoader.LoadState(value);
-            GameObjectsProvider.GameManager.EndGame();
-        });
     }
 }

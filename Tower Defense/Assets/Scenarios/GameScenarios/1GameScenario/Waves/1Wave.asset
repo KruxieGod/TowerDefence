@@ -15,53 +15,13 @@ MonoBehaviour:
   _waveEnemy:
   - _enemyType: 0
     _speed:
-      min: 8
-      max: 10
+      min: 0.8
+      max: 0.8
     _hp:
       min: 20
       max: 40
     _cost:
       min: 8
       max: 12
-  - _enemyType: 0
-    _speed:
-      min: 8
-      max: 10
-    _hp:
-      min: 20
-      max: 40
-    _cost:
-      min: 8
-      max: 12
-  - _enemyType: 0
-    _speed:
-      min: 8
-      max: 10
-    _hp:
-      min: 20
-      max: 40
-    _cost:
-      min: 8
-      max: 12
-  - _enemyType: 0
-    _speed:
-      min: 8
-      max: 10
-    _hp:
-      min: 20
-      max: 40
-    _cost:
-      min: 8
-      max: 12
-  - _enemyType: 1
-    _speed:
-      min: 13
-      max: 15
-    _hp:
-      min: 10
-      max: 30
-    _cost:
-      min: 6
-      max: 10
   _recoverTimeEnemies: 3
-  _factory: {fileID: 11400000, guid: 62bfb03c8e822f8489b82ebe876b2bb9, type: 2}
+  _factory: {fileID: 11400000, guid: 3ea81be6d1e49144da4f9e0a498e165b, type: 2}

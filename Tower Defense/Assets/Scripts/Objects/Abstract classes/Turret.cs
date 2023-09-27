@@ -11,34 +11,34 @@ public abstract class Turret<BehaviourT> :  Turret,IUpdatable
     protected BehaviourT _behaviourTower;
     [SerializeField] private TurretController<BehaviourT> _turret;
     private float _lastToShoot;
-    protected GameTowerFactory _towerFactory;
+    private GameTowerFactory _towerFactory;
     protected ITowerUpgradeVisitor _visitor;
     [SerializeField]private UpgradeTileUI _upgradeTileUI;
+    private TowerInfoLoader _towerInfoLoader;
+    private Func<int, bool> _enoughMoney;
     public Turret<BehaviourT> Initialize(
         GameTowerFactory towerFactory,
+        TowerInfoLoader towerInfoLoader,
+        Func<int,bool> enoughMoney,
         ITowerUpgradeVisitor visitor)
     {
+        _enoughMoney = enoughMoney;
+        _towerInfoLoader = towerInfoLoader;
         towerFactory.Add(this);
         _visitor = visitor;
         _towerFactory = towerFactory;
-        //_behaviourTower = ProjectContext.Instance.GameProvider.TowerInfoLoader.GetBehaviour<BehaviourT>(name.Replace("(Clone)",""));
+        _behaviourTower = _towerInfoLoader.GetBehaviour<BehaviourT>(name.Replace("(Clone)",""));
         _turret.Initialize(this,_behaviourTower);
         _lastToShoot = _behaviourTower.SpeedFire;
         _upgradeTileUI.OnClick(UpgradeTower);
-        //_upgradeTileUI.SetPrice(ProjectContext.Instance.GameProvider.TowerInfoLoader.GetPrice( name.Replace("(Clone)","") ));
-        //_upgradeTileUI.SetEvent(ProjectContexter.Instance.GameSceneLoader.CounterMoneyLoader.CounterMoney.EnoughMoney);
+        _upgradeTileUI.SetPrice(_towerInfoLoader.GetPrice( name.Replace("(Clone)","") ));
+        _upgradeTileUI.SetEvent(enoughMoney);
         return this;
     }
 
     public Turret<BehaviourT> Initialize(Turret<BehaviourT> tower)
     {
-        Initialize(tower._towerFactory, _visitor);
-        return this;
-    }
-
-    public Turret<BehaviourT> SetBehaviour(BehaviourT behaviour)
-    {
-        _behaviourTower = behaviour;
+        Initialize(tower._towerFactory,tower._towerInfoLoader, tower._enoughMoney, _visitor);
         return this;
     }
 

@@ -2,7 +2,12 @@ public class CounterMoney
 {
     private CounterMoneyUI _counterMoneyUI;
     public int AmountMoney { get; private set; }
-    public CounterMoney(CounterMoneyUI counterMoneyUI) => _counterMoneyUI = counterMoneyUI;
+
+    public void SubscribeUI(CounterMoneyUI counterMoneyUI)
+    {
+        _counterMoneyUI = counterMoneyUI;
+        Reset();
+    }
 
     public void AddMoney(int money)
     {
@@ -22,6 +27,7 @@ public class CounterMoney
     public void Reset()
     {
         AmountMoney = 0;
-        _counterMoneyUI.SetMoney(AmountMoney);
+        if (_counterMoneyUI != null)
+            _counterMoneyUI.SetMoney(AmountMoney);
     }
 }

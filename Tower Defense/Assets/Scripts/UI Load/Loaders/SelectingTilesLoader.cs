@@ -1,12 +1,13 @@
 
 using System;
 using Cysharp.Threading.Tasks;
+using Zenject;
 
 public class SelectingTilesLoader : AssetLoader,ILoadingOperation
 {
     private GameTileFactory _gameTileFactory;
     private GameTowerFactory _gameTowerFactory;
-    public SelectingTiles SelectingTiles { get; private set; }
+    [field : Inject]public SelectingTiles SelectingTiles { get; private set; }
     public string Description => "Tiles UI is loading...";
 
     public SelectingTilesLoader(SelectingTiles selectingTiles) => SelectingTiles = selectingTiles;

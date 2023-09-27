@@ -6,10 +6,12 @@ public class SelectingTiles : ISettable<TypeOfTile>
 {
     private readonly GameTileFactory _gameTileFactory;
     private readonly GameTowerFactory _gameTowerFactory;
-    private GameManager _gameManager => ProjectContexter.Instance.GameObjectsProvider.GameManager;
+    private Lazy<GameManager> _gameManager;
     public SelectingTiles(GameTileFactory gameTileFactory,
-        GameTowerFactory gameTowerFactory)
+        GameTowerFactory gameTowerFactory,
+        Lazy<GameManager> gameManager)
     {
+        _gameManager = gameManager;
         _gameTileFactory = gameTileFactory;
         _gameTowerFactory = gameTowerFactory;
     }
@@ -20,19 +22,19 @@ public class SelectingTiles : ISettable<TypeOfTile>
         {
             case TypeOfTile.Wall:
             case TypeOfTile.Destination:
-                _gameManager.StartCoroutine(
+                _gameManager.Value.StartCoroutine(
                     WaitingForUnselect(_gameTileFactory.GetContent(type),
-                        content => _gameManager.SetTileOnPath(type,content)));
+                        content => _gameManager.Value.SetTileOnPath(type,content)));
                 break;
             case TypeOfTile.Mortar:
-                _gameManager.StartCoroutine(
+                _gameManager.Value.StartCoroutine(
                     WaitingForUnselect(_gameTowerFactory.GetBallista(),
-                        content => _gameManager.SetTileOnPath(type, content)));
+                        content => _gameManager.Value.SetTileOnPath(type, content)));
                 break;
             case TypeOfTile.Laser:
-                _gameManager.StartCoroutine(
+                _gameManager.Value.StartCoroutine(
                     WaitingForUnselect(_gameTowerFactory.GetLaserTurret(),
-                        content => _gameManager.SetTileOnPath(type,content)));
+                        content => _gameManager.Value.SetTileOnPath(type,content)));
                 break;
         }
     }
@@ -41,10 +43,12 @@ public class SelectingTiles : ISettable<TypeOfTile>
     {
         Debug.Log("Waiting for set tile");
         content.enabled = false;
-        content.transform.position = GameManager._ray.GetPoint(ProjectContexter.Instance.GameObjectsProvider.GameManager.DistanceFromCamera);
+        Physics.Raycast(GameManager._ray, out var hit,100,GameManager.Instance.FloorLayer);
+        content.transform.position =  hit.point;
         while (!Input.GetMouseButtonUp(0))
         {
-            content.transform.position = GameManager._ray.GetPoint(ProjectContexter.Instance.GameObjectsProvider.GameManager.DistanceFromCamera);
+            Physics.Raycast(GameManager._ray, out var hits,100,GameManager.Instance.FloorLayer);
+            content.transform.position = hits.point;
             yield return null;
         }
         action(content);

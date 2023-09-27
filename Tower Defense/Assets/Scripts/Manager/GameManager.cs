@@ -60,7 +60,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool _isJob = true;
     [field: SerializeField] public int DistanceFromCamera { get; private set; }
     public static UnityEvent OnDestroy { get; set; } = new UnityEvent();
-    [SerializeField] private PassedCounter _counter;
+    [Inject]
+    private PassedCounter _counter;
+    public static GameManager Instance;
     private GameTileFactory _factory;
     [SerializeField] private GameBoard _gameBoard;
     [SerializeField] private Vector2Int _size;
@@ -73,9 +75,13 @@ public class GameManager : MonoBehaviour
     private GameScenarioJson.State _currentScenario;
     private bool _isPaused;
     private bool _isEndedGame;
-    public static  Ray _ray =>ProjectContexter.Instance.GameObjectsProvider.GameManager.Camera.ScreenPointToRay(Input.mousePosition);
+    public static  Ray _ray =>Instance.Camera.ScreenPointToRay(Input.mousePosition);
+    public LayerMask FloorLayer => _gameBoard.LayerFloor;
+    [Inject] private TilesCounter _tilesCounter;
+    [Inject] private CounterMoney _counterMoney;
     void Start()
     {
+        Instance = this;
         _counter.SetEvent();
         StartNewGame();
     }
@@ -125,12 +131,13 @@ public class GameManager : MonoBehaviour
     {
         foreach (var spawner in Spawners.Data)
             spawner.Recycle();
-        //ProjectContexter.Instance.GameSceneLoader.TilesCounterLoader?.TilesCounter?.Reset();
+        _tilesCounter.Reset();
+        _counterMoney.Reset();
         _isEndedGame = false;
         _isPaused = false;
         _gameBoard.Initialize(_size,_factory);
         _currentScenario = _scenario.GetScenario(_gameBoard);
-        _counter.Initialize(this);
+        _counter.Initialize();
         _gameBoard.SetPathwayToDestinations();
         Debug.Log("GG");
     }
@@ -174,16 +181,16 @@ public class GameManager : MonoBehaviour
         if (typeOf == TypeOfTile.Empty)
         {
             Destroy(content.gameObject);
-            //ProjectContexter.Instance.GameSceneLoader.TilesCounterLoader.TilesCounter.Replace(tile.Content.TileType);
+            _tilesCounter.Replace(tile.Content.TileType);
         }
-        /*else if (!ProjectContexter.Instance.GameSceneLoader.TilesCounterLoader.TilesCounter.TryPlace(typeOf))
+        else if (!_tilesCounter.TryPlace(typeOf))
         {
             Destroy(content.gameObject);
             return false;
         }
-        */
+        
         if (typeOf != TypeOfTile.Empty && typeOf != tile.Content.TileType && tile.Content.TileType != TypeOfTile.Empty)
-            //ProjectContexter.Instance.GameSceneLoader.TilesCounterLoader.TilesCounter.Replace(tile.Content.TileType);
+            _tilesCounter.Replace(tile.Content.TileType);
         content.enabled = true;
         _gameBoard.SetType(tile,typeOf);
         _gameBoard.SetContent(tile, typeOf == TypeOfTile.Empty ? _factory.GetContent(TypeOfTile.Empty) : content);
